@@ -14,7 +14,7 @@ Seja bem-vindo ao meu perfil! 👋 Sou um estudante apaixonado pelo mundo da Eng
 
 ## Habilidades
 
-- **Linguagens de Programação:** Java, Python, C#
+- **Linguagens de Programação:** Java, Python, C, C#
 - **Desenvolvimento Web:** HTML, CSS, JavaScript, React
 - **Banco de Dados:** MySQL, MongoDB
 - **Metodologias:** Scrum, Kanban
@@ -38,6 +38,6 @@ Breve descrição do projeto e suas tecnologias principais.
 ## Contato
 
 - **E-mail:** iagoss949@gmail.com 
-- **LinkedIn:** 
+- **LinkedIn:** https://www.linkedin.com/in/iago-santana-45601230a/
 
 Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou sempre aberto a novas conexões e colaborações! 😊
