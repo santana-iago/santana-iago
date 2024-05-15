@@ -42,3 +42,25 @@ Breve descrição do projeto e suas tecnologias principais.
 - **Instagram:** https://www.instagram.com/santana_iago_
 
 Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou sempre aberto a novas conexões e colaborações! 😊
+
+
+-----
+
+<div>
+<div>
+<details>
+<summary><img height="20" alt="GIF" src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/spotify.gif?raw=true"/> Aramuni's Spotify Data</summary>
+<img src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=iopboqrqqheb8whvogbzsox8s" alt="Data Card for Spotify">
+</details>
+</div>
+<div>
+<!-- <a href="https://twitter.com/joaoaramuni" target="_blank"><img align="right" width="400px" height="270px" alt="tweets" src="https://github-readme-twitter.gazf.vercel.app/api?id=joaoaramuni"/></a> -->
+<a href="https://www.last.fm/pt/user/iagoooooo" target="_blank"><img align="right" width="400px" height="270px" alt="lastfm" src="https://lastfm-recently-played.vercel.app/api?user=iagoooooo&width=400"/></a>
+</div>
+<div>
+<img alt="Spotify" width="200px" height="270px" src="https://spotify-github-profile.vercel.app/api/view?uid=iopboqrqqheb8whvogbzsox8s&cover_image=true&theme=default"/> &nbsp; &nbsp; 
+<img alt="Spotify list" width="200px" height="270px" src="https://spotify-recently-played-readme.vercel.app/api?user=iopboqrqqheb8whvogbzsox8s&count=10"/>
+</div>
+</div>
+
+-----
