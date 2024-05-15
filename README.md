@@ -1,4 +1,4 @@
-# Perfil do Estudante de Engenharia de Software - PUC Minas
+# Iago Santana - Full Stack Developer
 
 Seja bem-vindo ao meu perfil! 👋 Sou um estudante apaixonado pelo mundo da Engenharia de Software na PUC Minas, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
 
@@ -39,5 +39,6 @@ Breve descrição do projeto e suas tecnologias principais.
 
 - **E-mail:** iagoss949@gmail.com 
 - **LinkedIn:** https://www.linkedin.com/in/iago-santana-45601230a/
+- **Instagram:** https://www.instagram.com/santana_iago_
 
 Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou sempre aberto a novas conexões e colaborações! 😊
