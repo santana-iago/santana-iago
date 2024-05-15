@@ -3,7 +3,7 @@
 Seja bem-vindo ao meu perfil! 👋 Sou um estudante apaixonado pelo mundo da Engenharia de Software na PUC Minas, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
 
 <div>
-<img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner?raw=true"/>
+<img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
 </div>
 
 -----
