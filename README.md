@@ -1,6 +1,6 @@
 # Iago Santana - Full Stack Developer
 
-Seja bem-vindo ao meu perfil! 👋 Sou um estudante apaixonado pelo mundo da Engenharia de Software na PUC Minas, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
+Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação pelo CEFET-MG, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
 
 <div>
 <img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
@@ -38,21 +38,21 @@ Seja bem-vindo ao meu perfil! 👋 Sou um estudante apaixonado pelo mundo da Eng
 
 </div>
 <div align="justify">
-<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 18 anos, moro em BH e sou programador. Atualmente sou <code>aluno</code> no curso de Engenharia de Software, da <a href="https://www.pucminas.br/" target="_blank">PUC Minas</a>.</i> :man_teacher:<br />
+<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 18 anos, moro em BH e sou programador. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MGc</a>.</i> :man_teacher:<br />
 </div>
 
 -----
 
 ## Sobre Mim
 
-- 👨‍🎓 **Graduação**: Engenharia de Software na PUC Minas.
+- 👨‍🎓 **Graduação**: Graduando de Engenharia de Computação no CEFET-MG
 - 🌱 **Atividades Atuais**: Foco em aprimorar meus conhecimentos em desenvolvimento de software, design de sistemas e metodologias ágeis.
 - 💼 **Experiência Profissional**: [Detalhes sobre experiências anteriores ou projetos relevantes, se aplicável]
 
 ## Habilidades
 
-- **Linguagens de Programação:** Java, Python, C, C#
-- **Desenvolvimento Web:** HTML, CSS, JavaScript, React
+- **Linguagens de Programação:** C, C#, Java
+- **Desenvolvimento Web:** HTML, CSS, JavaScript, React, NodeJs, Tailwind.
 - **Banco de Dados:** MySQL, MongoDB
 - **Metodologias:** Scrum, Kanban
 - **Ferramentas:** Git, VS Code, Eclipse
