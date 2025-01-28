@@ -1,6 +1,6 @@
 # Iago Santana - Full Stack Developer
 
-Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação pelo CEFET-MG, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
+Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação pelo CEFET-MG,além de ter completado 1 semestre de Engenharia de Software, na PUC MINAS, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
 
 <div>
 <img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
@@ -38,7 +38,7 @@ Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação p
 
 </div>
 <div align="justify">
-<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 18 anos, moro em BH e sou programador. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MGc</a>.</i> :man_teacher:<br />
+<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 19 anos, moro em BH e sou programador. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MGc</a>.</i> :man_teacher:<br />
 </div>
 
 -----
@@ -56,7 +56,6 @@ Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação p
 - **Banco de Dados:** MySQL, MongoDB
 - **Metodologias:** Scrum, Kanban
 - **Ferramentas:** Git, VS Code, Eclipse
-- *[Adicione outras habilidades relevantes]*
 
 ## Projetos Destacados
 
