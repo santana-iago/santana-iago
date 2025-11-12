@@ -39,7 +39,7 @@ Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experim
 
 </div>
 <div align="justify">
-<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 19 anos, moro em BH e sou programador. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MGc</a>.</i> :man_teacher:<br />
+<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 19 anos, moro em BH e sou desenvolvedor. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MG</a>.</i> :man_teacher:<br />
 </div>
 
 -----
