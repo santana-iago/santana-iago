@@ -54,7 +54,7 @@ Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experim
 
 - **Linguagens de Programação:** C, Java
 - **Linguagens de Baixo Nível e Hardware:** Assembly (MIPS), Verilog HDL
-- **Desenvolvimento Web:** HTML, CSS, JavaScript, React, NodeJs, Tailwind
+- **Desenvolvimento Web:** HTML, CSS, JavaScript, React, NodeJs, Tailwind, Bootstrap
 - **Banco de Dados:** PostgreSQL
 - **Metodologias:** Scrum, Kanban
 
