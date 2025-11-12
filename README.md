@@ -1,4 +1,4 @@
-# Iago Santana - Full Stack Developer
+# Iago Santana - Desenvolvedor Fullstack
 
 Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação pelo CEFET-MG,além de ter completado 1 semestre de Engenharia de Software, na PUC MINAS, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
 
@@ -47,29 +47,14 @@ Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação p
 
 - 👨‍🎓 **Graduação**: Graduando de Engenharia de Computação no CEFET-MG
 - 🌱 **Atividades Atuais**: Foco em aprimorar meus conhecimentos em desenvolvimento de software, design de sistemas e metodologias ágeis.
-- 💼 **Experiência Profissional**: [Detalhes sobre experiências anteriores ou projetos relevantes, se aplicável]
+- 💼 **Experiência Profissional**:
 
 ## Habilidades
 
-- **Linguagens de Programação:** C, C#, Java
+- **Linguagens de Programação:** C, Java
 - **Desenvolvimento Web:** HTML, CSS, JavaScript, React, NodeJs, Tailwind.
-- **Banco de Dados:** MySQL, MongoDB
+- **Banco de Dados:** PostgreSQL
 - **Metodologias:** Scrum, Kanban
-- **Ferramentas:** Git, VS Code, Eclipse
-
-## Projetos Destacados
-
-### [Nome do Projeto]
-
-Breve descrição do projeto e suas tecnologias principais.
-
-### [Nome do Projeto]
-
-Breve descrição do projeto e suas tecnologias principais.
-
-## Contribuições
-
-- [Nome do Projeto/Open Source]: Breve descrição da contribuição.
 
 ## Contato
 
