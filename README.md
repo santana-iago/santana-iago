@@ -62,7 +62,7 @@ Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experim
 
 - **E-mail:** iagoss949@gmail.com 
 - **LinkedIn:** https://www.linkedin.com/in/iago-santana-45601230a/
-- **Instagram:** https://www.instagram.com/santana_iago_
+- **Instagram:** https://www.instagram.com/santana_iago_/
 
 Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou sempre aberto a novas conexões e colaborações! 😊
 
