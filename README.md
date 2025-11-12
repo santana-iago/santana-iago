@@ -1,6 +1,6 @@
 # Iago Santana - Desenvolvedor Fullstack
 
-Olá!👋 Sou estudante de Engenharia de Computação no CEFET-MG, com passagem por Engenharia de Software, onde iniciei minha jornada na área de tecnologia. Sou movido pelo desejo de aprender e contribuir com a comunidade de desenvolvimento. Tenho grande interesse por aplicações web, além de desenvolvimento de sistemas e soluções computacionais, unindo conceitos de hardware e software.
+Olá!👋 Sou estudante de Engenharia de Computação no CEFET-MG, com passagem por Engenharia de Software, onde iniciei minha jornada na área de tecnologia. Tenho grande interesse por aplicações web, além de desenvolvimento de sistemas e soluções computacionais, unindo conceitos de hardware e software.
 Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experimentos e aprendizados que refletem meu interesse por engenharia, inovação e desenvolvimento.
 
 <div>
