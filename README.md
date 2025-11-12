@@ -1,6 +1,9 @@
 # Iago Santana - Desenvolvedor Fullstack
 
-Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação pelo CEFET-MG,além de ter completado 1 semestre de Engenharia de Software, na PUC MINAS, buscando constantemente aprender e contribuir para a comunidade de desenvolvimento. Abaixo, compartilho um pouco sobre mim e meu percurso acadêmico.
+Olá!👋 Sou estudante de Engenharia de Computação no CEFET-MG, com passagem por Engenharia de Software, onde iniciei minha jornada na área de tecnologia.
+Sou movido pela curiosidade de entender como a tecnologia funciona por dentro — desde o hardware até o desenvolvimento de sistemas e aplicações.
+Tenho grande interesse por tecnologia, desenvolvimento de sistemas e soluções computacionais, unindo conceitos de hardware e software.
+Aqui compartilho um pouco da minha trajetória: projetos, experimentos e aprendizados que refletem meu interesse por engenharia, inovação e desenvolvimento.
 
 <div>
 <img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
@@ -45,7 +48,7 @@ Seja bem-vindo ao meu perfil! 👋 Sou estudante de Engenharia de Computação p
 
 ## Sobre Mim
 
-- 👨‍🎓 **Graduação**: Graduando de Engenharia de Computação no CEFET-MG
+- 👨‍🎓 **Graduação**: Graduando de Engenharia de Computação no CEFET-MG. 
 - 🌱 **Atividades Atuais**: Foco em aprimorar meus conhecimentos em desenvolvimento de software, design de sistemas e metodologias ágeis.
 - 💼 **Experiência Profissional**:
 
@@ -83,10 +86,6 @@ Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou 
 <summary><img height="20" alt="GIF" src="https://github.com/santana-iago/santana-iago/blob/main/img/spotify.gif?raw=true"/> Iago's Spotify Data</summary>
 <img src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=iopboqrqqheb8whvogbzsox8s" alt="Data Card for Spotify">
 </details>
-</div>
-<div>
-<!-- <a href="https://twitter.com/joaoaramuni" target="_blank"><img align="right" width="400px" height="270px" alt="tweets" src="https://github-readme-twitter.gazf.vercel.app/api?id=joaoaramuni"/></a> -->
-<a href="https://www.last.fm/pt/user/iagoooooo" target="_blank"><img align="right" width="400px" height="270px" alt="lastfm" src="https://lastfm-recently-played.vercel.app/api?user=iagoooooo&width=400"/></a>
 </div>
 <div>
 <img alt="Spotify" width="200px" height="270px" src="https://spotify-github-profile.vercel.app/api/view?uid=iopboqrqqheb8whvogbzsox8s&cover_image=true&theme=default"/> &nbsp; &nbsp; 
