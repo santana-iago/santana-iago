@@ -17,10 +17,6 @@ My background combines software engineering, web development, and low-level comp
 </table>
 </div>
 
-<div align="justify">
-I'm <b>Iago</b>, based in Belo Horizonte (Brazil), currently pursuing a degree in <b>Computer Engineering</b> at <a href="https://www.eng-computacao.bh.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at <a href="https://www.pucminas.br/campus/coracao-eucaristico/ensino/graduacao/Paginas/Engenharia-de-Software.aspx" target="_blank">PUC-MG</a>.</i><br />
-</div>
-
 -----
 
 ## 🧠 About Me
