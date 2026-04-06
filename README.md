@@ -43,28 +43,68 @@ My background combines software engineering, web development, and low-level comp
 
 -----
 
-## 🔐 Security Experience
+## 💼 Experience
 
-### 📄 WordPress Application Security Assessment
+### 🔐 Application Security Assessment (WordPress)
 
-Performed a practical security assessment on a WordPress-based web application, focusing on attack surface analysis and real-world vulnerability validation.
+Performed a security assessment on a WordPress-based web application, focusing on attack surface analysis and real-world vulnerability validation.
 
-**Scope:**
-- Authentication mechanisms  
-- XML-RPC endpoint  
-- WordPress REST API  
-- User enumeration vectors  
-- Rate limiting and WAF behavior  
+**Activities:**
+- Analysis of authentication mechanisms  
+- Evaluation of XML-RPC exposure  
+- Inspection of WordPress REST API endpoints  
+- User enumeration and reconnaissance  
+- Rate limiting and WAF behavior analysis  
 - Validation of known vulnerabilities (CVEs)
 
-**Key Results:**
+**Results:**
 - Identification of user enumeration via public endpoints  
 - XML-RPC exposure mitigated by WAF  
 - Effective rate limiting against brute-force attempts  
 - CVEs identified without practical exploitability  
 
-📂 Full technical report available in this repository.
+---
 
+### 🔬 Undergraduate Research — Cryptography (CEFET-MG)
+
+Research project focused on elliptic curve cryptography and isogenies, with emphasis on post-quantum cryptographic approaches.
+
+**Topics:**
+- Elliptic Curves over finite fields  
+- Isogenies between elliptic curves  
+- Discrete Logarithm Problem (ECDLP)  
+- Post-Quantum Cryptography concepts  
+- Algebraic structures applied to cryptography  
+
+**Tools & Approach:**
+- SageMath for mathematical modeling and experimentation  
+- Theoretical and computational analysis of cryptographic systems  
+
+---
+
+### 💻 Interdisciplinary Project — Web Application Development (PUC-MG)
+
+Development of web applications as part of academic coursework, focusing on system design, frontend/backend integration, and real-world application structure.
+
+**Activities:**
+- Fullstack application development  
+- API integration and data handling  
+- Frontend interface design  
+- Backend logic implementation  
+
+---
+
+### 🚀 Personal Projects
+
+Development of personal projects involving web applications, system design, and security-oriented analysis.
+
+**Focus:**
+- Fullstack development (React, Node.js)  
+- API design and integration  
+- Practical application of security concepts  
+- Exploration of vulnerabilities and system behavior  
+
+📂 Projects available in my git page.
 -----
 
 ## 🛠️ Technical Stack
