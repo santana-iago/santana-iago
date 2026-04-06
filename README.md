@@ -23,7 +23,7 @@ My background combines software engineering, web development, and low-level comp
 
 - 👨‍🎓 **Education**
   - Computer Engineering — CEFET-MG  
-  - Software Engineering (1 semester — PUC-MG  
+  - Software Engineering (1 semester) — PUC-MG  
 
 - 🔐 **Focus**
   - Application Security (AppSec)  
