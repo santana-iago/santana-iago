@@ -4,10 +4,6 @@ Hello! 👋 I'm a Computer Engineering student at CEFET-MG, focused on Applicati
 
 My background combines software engineering, web development, and low-level computing, allowing me to approach systems from both a development and security perspective. I have experience analyzing application behavior, identifying vulnerabilities, and evaluating real-world exploitability in modern web environments.
 
-<div>
-<img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
-</div>
-
 -----
 
 <div align="center">
@@ -22,7 +18,7 @@ My background combines software engineering, web development, and low-level comp
 </div>
 
 <div align="justify">
-<i><b>Hello</b> :wave:, I'm <b>Iago</b>, based in Belo Horizonte (Brazil), currently pursuing a degree in <b>Computer Engineering</b> at <a href="https://www.eng-computacao.bh.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at <a href="https://www.pucminas.br/campus/coracao-eucaristico/ensino/graduacao/Paginas/Engenharia-de-Software.aspx" target="_blank">PUC-MG</a>.</i><br />
+I'm <b>Iago</b>, based in Belo Horizonte (Brazil), currently pursuing a degree in <b>Computer Engineering</b> at <a href="https://www.eng-computacao.bh.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at <a href="https://www.pucminas.br/campus/coracao-eucaristico/ensino/graduacao/Paginas/Engenharia-de-Software.aspx" target="_blank">PUC-MG</a>.</i><br />
 </div>
 
 -----
@@ -77,15 +73,13 @@ Performed a practical security assessment on a WordPress-based web application, 
 
 ## 🛠️ Technical Stack
 
-- **Languages:** C, Java, JavaScript, TypeScript  
-- **Web Development:** React, Node.js, HTML, CSS, Tailwind  
-- **Security:** OWASP Top 10, vulnerability analysis, authentication flows, attack surface analysis  
-- **Tools:** WPScan, curl, Burp Suite, DevTools  
-- **Systems:** Linux (CLI), networking fundamentals  
-- **Databases:** PostgreSQL  
-- **Low-Level:** Assembly (MIPS), Verilog HDL  
-- **Mathematics & Cryptography:** SageMath  
-- **Workflow:** Git, GitHub, API testing tools  
+- **Languages:** C, Java, Python, JavaScript, TypeScript  
+- **Web Development:** Node.js, React, Next.js, APIRest, JWT, OAuth2
+- **Security:** OWASP TOP 10, Docker, Kubernetes, CI/CD, Cloud (AWS, Azure)
+- **Tools:** WPScan, curl, Burp Suite, Nmap, Gobuster, Bash scripting, Kali Linux
+- **Databases:** PostgreSQL, MongoDB, Supabase
+- **Low-Level:** Assembly (MIPS), Verilog HDL
+- **Mathematics & Cryptography:** Post-Quantum Criptography, ECC, RSA, ECDSA, SHA, SageMath
 - **Methodologies:** Scrum, Kanban  
 
 -----
