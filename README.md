@@ -22,7 +22,7 @@ My background combines software engineering, web development, and low-level comp
 </div>
 
 <div align="justify">
-<i><b>Hello</b> :wave:, I'm <code>Iago</code>, based in Belo Horizonte (Brazil), currently pursuing a degree in <code>Computer Engineering</code> at <a href="https://www.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at PUC-MG.</i><br />
+<i><b>Hello</b> :wave:, I'm <b>Iago</b>, based in Belo Horizonte (Brazil), currently pursuing a degree in <b>Computer Engineering</b> at <a href="https://www.eng-computacao.bh.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at <a href="https://www.pucminas.br/campus/coracao-eucaristico/ensino/graduacao/Paginas/Engenharia-de-Software.aspx" target="_blank">PUC-MG</a>.</i><br />
 </div>
 
 -----
@@ -31,7 +31,7 @@ My background combines software engineering, web development, and low-level comp
 
 - 👨‍🎓 **Education**
   - Computer Engineering — CEFET-MG  
-  - Software Engineering (1 semester) — PUC-MG  
+  - Software Engineering (1 semester — PUC-MG  
 
 - 🔐 **Focus**
   - Application Security (AppSec)  
