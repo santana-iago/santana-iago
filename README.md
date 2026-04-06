@@ -1,7 +1,8 @@
-# Iago Santana - Desenvolvedor Fullstack
+# Iago Santana - Application Security | Cybersecurity
 
-Olá!👋 Sou estudante de Engenharia de Computação no CEFET-MG, com passagem por Engenharia de Software, onde iniciei minha jornada na área de tecnologia. Tenho grande interesse por aplicações web, além de desenvolvimento de sistemas e soluções computacionais, unindo conceitos de hardware e software.
-Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experimentos e aprendizados que refletem meu interesse por engenharia, inovação e desenvolvimento.
+Hello! 👋 I'm a Computer Engineering student at CEFET-MG, focused on Application Security (AppSec), Cybersecurity, and secure software development.
+
+My background combines software engineering, web development, and low-level computing, allowing me to approach systems from both a development and security perspective. I have experience analyzing application behavior, identifying vulnerabilities, and evaluating real-world exploitability in modern web environments.
 
 <div>
 <img align="center" alt="Header" src="https://github.com/santana-iago/santana-iago/blob/main/img/github_banner.png?raw=true"/>
@@ -12,84 +13,96 @@ Aqui compartilho um pouco sobre mim e sobre minha trajetória: projetos, experim
 <div align="center">
 <table>
 <tr>
- <td align="center" colspan="11"></td>
-</tr> 
-<tr>
-<td><a href="https://github.com/santana-iago" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/github5.png?raw=true" width="50px" height="50px"/></a>
-</td>
-<td><a href="https://replit.com/@iagosantana10"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/replit3.svg?raw=true" width="50px" height="50px"/></a>
-</td>
-<td><a href="mailto:iagoss949@gmail.com" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/gmail3.png?raw=true" width="50px" height="50px"/></a>
-</td>
-<td><a href="https://wa.me/5537999084706" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/wpp2.png?raw=true" width="50px" height="50px"/></a>
-</td>
-<td><a href="https://www.instagram.com/santana_iago/" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/insta2.png?raw=true" width="50px" height="50px"/></a>
-</td>
-<td><a href="https://www.linkedin.com/in/iagosantana10/" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/linkedin2.png?raw=true" width="50px" height="50px"/></a>
-</td>
-<!--<td><a href="https://slack.com/app_redirect?channel=UVD9N6VCL"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/slack.png?raw=true" width="50px" height="50px"/></a>
-</td>-->
-<td><a href="https://discordapp.com/users/959151773728251914" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/discord2.png?raw=true" width="50px" height="50px"/></a>
-</td>
+<td><a href="https://github.com/santana-iago" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/github5.png?raw=true" width="50px" height="50px"/></a></td>
+<td><a href="mailto:iagoss949@gmail.com" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/gmail3.png?raw=true" width="50px" height="50px"/></a></td>
+<td><a href="https://www.linkedin.com/in/iagosantana10/" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/linkedin2.png?raw=true" width="50px" height="50px"/></a></td>
+<td><a href="https://discordapp.com/users/959151773728251914" target="_blank"><img src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/discord2.png?raw=true" width="50px" height="50px"/></a></td>
 </tr>
-<tr>
- <td align="center" colspan="11"></td>
-</tr> 
 </table>
-
 </div>
+
 <div align="justify">
-<i><b>Olá</b> :wave:, sou o <code>Iago</code>, tenho 19 anos, moro em BH e sou desenvolvedor. Atualmente sou <code>aluno</code> no curso de Engenharia da Computação, pelo <a href="https://www.cefetmg.br/" target="_blank">CEFET-MG</a>.</i> :man_teacher:<br />
+<i><b>Hello</b> :wave:, I'm <code>Iago</code>, based in Belo Horizonte (Brazil), currently pursuing a degree in <code>Computer Engineering</code> at <a href="https://www.cefetmg.br/" target="_blank">CEFET-MG</a>, with prior academic experience in Software Engineering at PUC-MG.</i><br />
 </div>
 
 -----
 
-## Sobre Mim
+## 🧠 About Me
 
-- 👨‍🎓 **Graduação**: Graduando de Engenharia de Computação no CEFET-MG. 
-- 🌱 **Atividades Atuais**: Foco em aprimorar meus conhecimentos em desenvolvimento de software, design de sistemas e metodologias ágeis.
-- 💼 **Experiência Profissional**:
+- 👨‍🎓 **Education**
+  - Computer Engineering — CEFET-MG  
+  - Software Engineering (1 semester) — PUC-MG  
 
-## Habilidades
+- 🔐 **Focus**
+  - Application Security (AppSec)  
+  - Web Security  
+  - Vulnerability Analysis  
+  - Secure Systems  
 
-- **Linguagens de Programação:** C, Java
-- **Linguagens de Baixo Nível e Hardware:** Assembly (MIPS), Verilog HDL
-- **Desenvolvimento Web:** HTML, CSS, JavaScript, React, NodeJs, Tailwind, Bootstrap
-- **Banco de Dados:** PostgreSQL
-- **Metodologias:** Scrum, Kanban
+- 🔬 **Research**
+  - Cryptography research focused on elliptic curves and isogenies (Post-Quantum Cryptography)
 
-## Contato
+- 💻 **Technical Background**
+  - Fullstack development  
+  - Low-level systems and computer architecture  
 
-- **E-mail:** iagoss949@gmail.com 
-- **LinkedIn:** https://www.linkedin.com/in/iago-santana-45601230a/
-- **Instagram:** https://www.instagram.com/santana_iago_/
-
-Sinta-se à vontade para explorar meus repositórios e entrar em contato. Estou sempre aberto a novas conexões e colaborações! 😊
+- 🎯 **Objective**
+  - Work with application security, vulnerability assessment, and secure system design  
 
 -----
 
-<img height="20" alt="GIF" src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/graphic.gif?raw=true"/>GitHub Stats:
+## 🔐 Security Experience
+
+### 📄 WordPress Application Security Assessment
+
+Performed a practical security assessment on a WordPress-based web application, focusing on attack surface analysis and real-world vulnerability validation.
+
+**Scope:**
+- Authentication mechanisms  
+- XML-RPC endpoint  
+- WordPress REST API  
+- User enumeration vectors  
+- Rate limiting and WAF behavior  
+- Validation of known vulnerabilities (CVEs)
+
+**Key Results:**
+- Identification of user enumeration via public endpoints  
+- XML-RPC exposure mitigated by WAF  
+- Effective rate limiting against brute-force attempts  
+- CVEs identified without practical exploitability  
+
+📂 Full technical report available in this repository.
+
+-----
+
+## 🛠️ Technical Stack
+
+- **Languages:** C, Java, JavaScript, TypeScript  
+- **Web Development:** React, Node.js, HTML, CSS, Tailwind  
+- **Security:** OWASP Top 10, vulnerability analysis, authentication flows, attack surface analysis  
+- **Tools:** WPScan, curl, Burp Suite, DevTools  
+- **Systems:** Linux (CLI), networking fundamentals  
+- **Databases:** PostgreSQL  
+- **Low-Level:** Assembly (MIPS), Verilog HDL  
+- **Mathematics & Cryptography:** SageMath  
+- **Workflow:** Git, GitHub, API testing tools  
+- **Methodologies:** Scrum, Kanban  
+
+-----
+
+## 📫 Contact
+
+- **Email:** iagoss949@gmail.com  
+- **LinkedIn:** https://www.linkedin.com/in/santana-iago/
+
+I'm open to opportunities, collaboration, and discussions in cybersecurity and application security.
+
+-----
+
+<img height="20" alt="GIF" src="https://github.com/joaopauloaramuni/joaopauloaramuni/blob/main/img/graphic.gif?raw=true"/> GitHub Stats:
 
 <div>
 <img align="right" alt="GitHub Details" width="420px" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=santana-iago&theme=github_dark"/>
-<!--- <img alt="GitHub Commits" width="200px" src="http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=joaopauloaramuni&theme=github_dark"/> -->
 <img alt="GitHub Stats" width="200px" src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=santana-iago&theme=github_dark"/>
 <img alt="GitHub Top Langs" width="200px" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=santana-iago&theme=github_dark"/>
 </div>
-
------
-
-<div>
-<div>
-<details>
-<summary><img height="20" alt="GIF" src="https://github.com/santana-iago/santana-iago/blob/main/img/spotify.gif?raw=true"/> Iago's Spotify Data</summary>
-<img src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=iopboqrqqheb8whvogbzsox8s" alt="Data Card for Spotify">
-</details>
-</div>
-<div>
-<img alt="Spotify" width="200px" height="270px" src="https://spotify-github-profile.vercel.app/api/view?uid=iopboqrqqheb8whvogbzsox8s&cover_image=true&theme=default"/> &nbsp; &nbsp; 
-<img alt="Spotify list" width="200px" height="270px" src="https://spotify-recently-played-readme.vercel.app/api?user=iopboqrqqheb8whvogbzsox8s&count=10"/>
-</div>
-</div>
-
------
