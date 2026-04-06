@@ -1,6 +1,6 @@
-# Iago Santana - Application Security | Cybersecurity
+# Iago Santana - Application Security Engineer
 
-Hello! 👋 I'm a Computer Engineering student at CEFET-MG, focused on Application Security (AppSec), Cybersecurity, and secure software development.
+Hello! 👋 I'm a Computer Engineering student at CEFET-MG, focused on Application Security (AppSec), Criptography, and secure software development.
 
 My background combines software engineering, web development, and low-level computing, allowing me to approach systems from both a development and security perspective. I have experience analyzing application behavior, identifying vulnerabilities, and evaluating real-world exploitability in modern web environments.
 
