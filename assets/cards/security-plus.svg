@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="174" viewBox="0 0 620 174" role="img" aria-label="CompTIA Security+ certification goal">
+<style>
+.title{font:600 23px Inter,Segoe UI,Arial,sans-serif;fill:#F1F6FF}
+.subtitle{font:500 14px Inter,Segoe UI,Arial,sans-serif;fill:#4E91FF}
+.detail{font:400 14px Inter,Segoe UI,Arial,sans-serif;fill:#B5C5DF}
+.status{font:600 12px Inter,Segoe UI,Arial,sans-serif;fill:#52D69A}
+</style>
+<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#071530"/><stop offset="1" stop-color="#030A1D"/></linearGradient></defs>
+<rect x="8" y="8" width="604" height="158" rx="18" fill="url(#bg)" stroke="#1C467F"/>
+<circle cx="52" cy="48" r="23" fill="#0B2148" stroke="#4E91FF" stroke-width="2"/>
+<path d="M42 48l7 7 14-16" fill="none" stroke="#4E91FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="90" y="43" class="title">CompTIA Security+</text>
+<text x="90" y="66" class="subtitle">SY0-701 · Target: 2026/2</text>
+<text x="32" y="106" class="detail">Security concepts, architecture and operations</text>
+<text x="32" y="131" class="detail">Threats, vulnerabilities, governance and risk</text>
+<rect x="492" y="123" width="92" height="25" rx="12" fill="#0B2148" stroke="#1C467F"/>
+<text x="538" y="140" text-anchor="middle" class="status">PREPARING</text>
+</svg>
