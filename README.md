@@ -37,9 +37,9 @@
 
 ### Current academic and professional activities
 
+- **SOC / CTI internship:** event investigation, detection analysis, rule tuning, MITRE ATT&CK mapping and technical documentation.
 - **Undergraduate research:** security risks and attack surfaces in Large Language Models.
 - **Post-Quantum Cryptography:** ECC foundations, cryptographic attacks and quantum-resistant approaches.
-- **SOC / CTI internship:** event investigation, detection analysis, rule tuning, MITRE ATT&CK mapping and technical documentation.
 - **PET / COMPET:** participation in academic activities, collaborative initiatives and events at CEFET-MG.
 
 ---
@@ -48,11 +48,11 @@
 
 | Period | Experience |
 |---|---|
-| **2024 — present** | Computer Engineering undergraduate at **CEFET-MG** |
+| **2024 — 2024/02** | Software Engineering undergraduate at **PUC-MG** |
+| **2024/2 — present** | Computer Engineering undergraduate at **CEFET-MG** |
 | **2026 — present** | Cybersecurity Intern in a **SOC / CTI** environment |
-| **2026 — present** | Member of the **PET / COMPET** academic program |
+| **2026 — 2026/2** | Undergraduate researcher in **Post-Quantum Cryptography** |
 | **2026 — present** | Undergraduate researcher in **Large Language Model Security** |
-| **2026 — present** | Post-Quantum Cryptography study and extension activities |
 
 ### Experience developed so far
 
@@ -75,13 +75,6 @@
 - RSA/OAEP security and oracle attacks such as **Bleichenbacher** and **ROBOT**.
 - Post-quantum cryptography and the impact of quantum computing on public-key systems.
 - Security risks involving LLMs, prompt injection, data leakage and unsafe integrations.
-
-### Computer engineering
-
-- Design of a simplified **8-bit single-cycle processor** with a custom ISA.
-- Implementation of registers, ALU, control unit, memory access and conditional branches.
-- Development of a Fibonacci program to validate processor execution.
-- Academic study connecting quantum computing, physics and information theory.
 
 ---
 
