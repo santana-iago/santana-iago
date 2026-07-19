@@ -48,11 +48,11 @@
 
 | Period | Experience |
 |---|---|
-| **2024 — 2024/02** | Software Engineering undergraduate at **PUC-MG** |
+| **2024/1 — 2024/2** | Software Engineering undergraduate at **PUC-MG** |
 | **2024/2 — present** | Computer Engineering undergraduate at **CEFET-MG** |
-| **2026 — present** | Cybersecurity Intern in a **SOC / CTI** environment |
-| **2026 — 2026/2** | Undergraduate researcher in **Post-Quantum Cryptography** |
-| **2026 — present** | Undergraduate researcher in **Large Language Model Security** |
+| **2026/1 — present** | Cybersecurity Intern in a **SOC / CTI** environment |
+| **2026/1 — 2026/2** | Undergraduate researcher in **Post-Quantum Cryptography** |
+| **2026/2 — present** | Undergraduate researcher in **Large Language Model Security** |
 
 ### Experience developed so far
 
