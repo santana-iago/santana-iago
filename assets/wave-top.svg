@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 280" role="img" aria-label="Decorative navy blue waves">
+  <rect width="1440" height="280" fill="#030A1D"/>
+  <path d="M0,210 C210,112 385,268 620,166 C855,64 1055,204 1440,82 L1440,0 L0,0 Z" fill="#0B2148" opacity="0.85"/><path d="M0,166 C230,72 430,226 680,126 C930,26 1120,168 1440,48 L1440,0 L0,0 Z" fill="#102E62" opacity="0.74"/><path d="M0,118 C270,26 470,164 760,82 C1030,4 1230,102 1440,24 L1440,0 L0,0 Z" fill="#4E91FF" opacity="0.38"/>
+</svg>
