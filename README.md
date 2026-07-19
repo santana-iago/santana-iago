@@ -18,12 +18,9 @@
 
 ## About me
 
-I am a Computer Engineering undergraduate at **CEFET-MG** and a **Cybersecurity Intern** working in a SOC/CTI environment. My experience combines security-event investigation, SIEM detection work, threat-oriented analysis and academic research.
+I work in cybersecurity across SOC, CTI, Threat Hunting, Detection Engineering and security operations, supporting the investigation of events, analysis of adversary behavior and continuous improvement of detection capabilities. In parallel, I also work as a developer, building secure applications and technical solutions for real clients while applying software engineering and AppSec practices throughout the development lifecycle.
 
-My current direction is to develop strong technical depth at the intersection of **Threat Hunting, Detection Engineering, Cyber Threat Intelligence and Security Research**, while building public projects that document the methodology, experiments and lessons behind the work.
-
-> All public security projects use synthetic, sanitized or public data. Client names, proprietary rules, internal indicators and confidential environments are not published.
-
+Alongside my professional experience, I participate in scientific research, academic development projects and multidisciplinary initiatives in computing and security. My long-term goal is to build a career that combines cybersecurity, secure software development and security research, with increasing depth in Threat Hunting, Cyber Threat Intelligence, Detection Engineering and emerging technologies.
 ---
 
 ## What I am working on
