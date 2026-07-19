@@ -18,9 +18,10 @@
 
 ## About me
 
-I work in cybersecurity across SOC, CTI, Threat Hunting, Detection Engineering and security operations, supporting the investigation of events, analysis of adversary behavior and continuous improvement of detection capabilities. In parallel, I also work as a developer, building secure applications and technical solutions for real clients while applying software engineering and AppSec practices throughout the development lifecycle.
+  I'm Iago Santana, a Computer Engineering undergraduate at CEFET-MG with experience in cybersecurity and secure software development. I work across SOC, CTI, Threat Hunting, Detection Engineering and AppSec, while also developing applications and technical solutions for real clients. 
 
-Alongside my professional experience, I participate in scientific research, academic development projects and multidisciplinary initiatives in computing and security. My long-term goal is to build a career that combines cybersecurity, secure software development and security research, with increasing depth in Threat Hunting, Cyber Threat Intelligence, Detection Engineering and emerging technologies.
+  I also take part in scientific research and academic projects in computing, security and emerging technologies, building a career at the intersection of cyber defense, secure development and security research.
+
 ---
 
 ## What I am working on
