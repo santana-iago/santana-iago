@@ -18,25 +18,6 @@
 
 ## About me
 
-```python
-class IagoSantana:
-    education = "Computer Engineering @ CEFET-MG"
-    role = "Cybersecurity Intern — SOC / CTI"
-
-    focus = [
-        "Threat Hunting",
-        "Detection Engineering",
-        "Cyber Threat Intelligence",
-        "Security Operations",
-    ]
-
-    research = [
-        "Large Language Model Security",
-        "Post-Quantum Cryptography",
-        "Applied Cryptography",
-    ]
-```
-
 I am a Computer Engineering undergraduate at **CEFET-MG** and a **Cybersecurity Intern** working in a SOC/CTI environment. My experience combines security-event investigation, SIEM detection work, threat-oriented analysis and academic research.
 
 My current direction is to develop strong technical depth at the intersection of **Threat Hunting, Detection Engineering, Cyber Threat Intelligence and Security Research**, while building public projects that document the methodology, experiments and lessons behind the work.
