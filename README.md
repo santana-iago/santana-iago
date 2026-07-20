@@ -1,5 +1,3 @@
-<img src="./assets/wave-top.svg" width="100%" alt="Decorative navy blue waves"/>
-
 <div align="center">
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=38&duration=2600&pause=1300&color=4E91FF&center=true&vCenter=true&repeat=true&width=950&height=70&lines=Hi%2C+I%27m+Iago+Santana;Cybersecurity+%7C+Threat+Hunting+%7C+CTI;Security+Research+%7C+Computer+Engineering)](https://git.io/typing-svg)
@@ -115,5 +113,3 @@
 <sub>Engineering systems, investigating threats and documenting what I learn.</sub>
 
 </div>
-
-<img src="./assets/wave-bottom.svg" width="100%" alt="Decorative navy blue waves"/>
