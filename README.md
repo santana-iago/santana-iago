@@ -24,17 +24,6 @@
 
 ---
 
-## What I am working on
-
-<p align="center">
-  <a href="https://github.com/santana-iago/llm-security-research"><img src="./assets/cards/llm-security.svg" width="49%" alt="LLM Security Research"/></a>
-  <a href="https://github.com/santana-iago/post-quantum-cryptography-lab"><img src="./assets/cards/pqc-lab.svg" width="49%" alt="Post-Quantum Cryptography Lab"/></a>
-</p>
-<p align="center">
-  <a href="https://github.com/santana-iago/threat-hunting-labs"><img src="./assets/cards/hunting-detection.svg" width="49%" alt="Threat Hunting and Detection Labs"/></a>
-  <a href="https://github.com/santana-iago/nrisc-8bit-processor"><img src="./assets/cards/nrisc.svg" width="49%" alt="nRISC 8-bit Processor"/></a>
-</p>
-
 ### Current academic and professional activities
 
 - **SOC / CTI internship:** event investigation, detection analysis, rule tuning, MITRE ATT&CK mapping and technical documentation.
@@ -54,29 +43,7 @@
 | **2026/1 — 2026/2** | Undergraduate researcher in **Post-Quantum Cryptography** |
 | **2026/2 — present** | Undergraduate researcher in **Large Language Model Security** |
 
-### Experience developed so far
-
-- Security-event triage and investigation using SIEM, endpoint and network telemetry.
-- Detection-rule analysis, modeling, validation and false-positive tuning.
-- Threat-hunting workflows based on hypotheses, adversary behavior and available telemetry.
-- Mapping detections, techniques and security findings to **MITRE ATT&CK**.
-- Technical documentation for detection use cases, changes and investigation findings.
-- Study of Threat Intelligence, adversary behavior and security operations processes.
-- Research-oriented experimentation, implementation and scientific writing.
-
----
-
 ## Academic and technical projects
-
-### Security and cryptography
-
-- Elliptic-curve cryptography concepts, including **ECDH** and **ECDSA**.
-- Invalid-curve attack concepts and experiments involving small-order points.
-- RSA/OAEP security and oracle attacks such as **Bleichenbacher** and **ROBOT**.
-- Post-quantum cryptography and the impact of quantum computing on public-key systems.
-- Security risks involving LLMs, prompt injection, data leakage and unsafe integrations.
-
----
 
 ## Technical focus
 
@@ -113,17 +80,6 @@
   <a href="https://www.comptia.org/certifications/security"><img src="./assets/cards/security-plus.svg" width="49%" alt="CompTIA Security Plus goal"/></a>
   <a href="https://www.cambridgeenglish.org/exams-and-tests/first/"><img src="./assets/cards/cambridge.svg" width="49%" alt="Cambridge B2 First C1 target"/></a>
 </p>
-
-### Later roadmap
-
-<div align="center">
-
-![CySA+](https://img.shields.io/badge/CompTIA%20CySA%2B-Future%20Goal-223A5E?style=flat-square)
-![eJPT](https://img.shields.io/badge/eJPT-Future%20Goal-223A5E?style=flat-square)
-![Advanced CTI](https://img.shields.io/badge/Advanced%20CTI-Long--term-223A5E?style=flat-square)
-![Security Research](https://img.shields.io/badge/Security%20Research-Long--term-223A5E?style=flat-square)
-
-</div>
 
 ---
 
