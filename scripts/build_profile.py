@@ -15,6 +15,10 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "assets" / "generated"
+# Below this viewport width, the mobile SVG variant is served. Kept well under
+# typical desktop widths (even scaled down by OS display scaling) so a real
+# computer window never accidentally matches it — only phones should.
+MOBILE_BREAKPOINT = 480
 DOCS = ROOT / "docs"
 
 THEMES = {
@@ -179,21 +183,31 @@ def section_header(parts: list[str], title: str, width: int, mobile: bool) -> No
 
 
 def generate_hero(profile: dict[str, Any], mobile: bool, theme: str) -> str:
+    # The introduction is rendered in a monospace stack that GitHub's own renderer
+    # substitutes per-OS (e.g. Consolas/Courier New on Windows), which can be
+    # noticeably wider than the font used to preview this locally. Wrapping with a
+    # generous safety margin avoids relying on exact cross-platform glyph widths.
     meta = profile["meta"]
     if mobile:
-        width, height = 360, 110
+        width, base_height = 360, 110
+        line_height = 12
+        lines = wrap_words(meta["introduction"], max_chars=24, max_lines=4)
+        height = base_height + line_height * (len(lines) - 1)
         parts = svg_open(width, height, theme)
         add_line(parts, 16, 4, 344, 4)
         add_text(parts, 16, 46, meta["headline"], "hero-headline-mobile")
-        add_text(parts, 16, 76, meta["introduction"], "hero-copy-mobile")
-        add_line(parts, 16, 105, 344, 105)
+        add_multiline(parts, 16, 76, lines, "hero-copy-mobile", line_height)
+        add_line(parts, 16, height - 5, 344, height - 5)
         return svg_close(parts)
-    width, height = 880, 154
+    width, base_height = 880, 154
+    line_height = 20
+    lines = wrap_words(meta["introduction"], max_chars=42, max_lines=2)
+    height = base_height + line_height * (len(lines) - 1)
     parts = svg_open(width, height, theme)
     add_line(parts, 2, 8, 878, 8)
     add_text(parts, 2, 72, meta["headline"], "hero-headline")
-    add_text(parts, 4, 114, meta["introduction"], "hero-copy")
-    add_line(parts, 2, 145, 878, 145)
+    add_multiline(parts, 4, 114, lines, "hero-copy", line_height)
+    add_line(parts, 2, height - 9, 878, height - 9)
     return svg_close(parts)
 
 
@@ -339,8 +353,8 @@ def responsive_picture(name: str, alt: str) -> str:
     base = "./assets/generated"
     return (
         '<picture>\n'
-        f'  <source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-mobile-dark.svg">\n'
-        f'  <source media="(max-width: 640px)" srcset="{base}/{name}-mobile-light.svg">\n'
+        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-mobile-dark.svg">\n'
+        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{name}-mobile-light.svg">\n'
         f'  <source media="(prefers-color-scheme: dark)" srcset="{base}/{name}-desktop-dark.svg">\n'
         f'  <img src="{base}/{name}-desktop-light.svg" width="100%" alt="{esc(alt)}">\n'
         '</picture>'
@@ -351,8 +365,8 @@ def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
     base = "./assets/generated"
     picture = (
         '<picture>'
-        f'<source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-mobile-dark.svg">'
-        f'<source media="(max-width: 640px)" srcset="{base}/{path_base}-mobile-light.svg">'
+        f'<source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-mobile-dark.svg">'
+        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile-light.svg">'
         f'<source media="(prefers-color-scheme: dark)" srcset="{base}/{path_base}-desktop-dark.svg">'
         f'<img src="{base}/{path_base}-desktop-light.svg" alt="{esc(alt)}">'
         '</picture>'
