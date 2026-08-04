@@ -284,7 +284,10 @@ def generate_status(profile: dict[str, Any], mobile: bool, theme: str | None) ->
 
 
 def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
-    width, height = (360, 78) if mobile else (280, 76)
+    # Desktop is narrower than before (280 -> 265) so 3 cards reliably share one
+    # row without an HTML width attribute (see responsive_linked_picture). The
+    # value wraps defensively instead of assuming it always fits one line.
+    width, height = (360, 78) if mobile else (265, 76)
     parts = svg_open(width, height, theme)
     parts.append(f'<rect class="card-bg card-border" x=".5" y=".5" width="{width-1}" height="{height-1}" rx="10"/>')
     cy = height / 2
@@ -296,7 +299,12 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
         parts.append(f'<rect class="icon-disc" x="20" y="{cy-14}" width="28" height="28" rx="7"/>')
         add_image(parts, 26, cy-8, 16, 16, item["icon"], theme)
     add_text(parts, 60, cy-9, label, "contact-label")
-    add_text(parts, 60, cy+14, item["value"], "contact-value-mobile" if mobile else "contact-value")
+    value_cls = "contact-value-mobile" if mobile else "contact-value"
+    value_lines = wrap_words(item["value"], max_chars=30 if mobile else 22, max_lines=2)
+    if len(value_lines) == 1:
+        add_text(parts, 60, cy+14, value_lines[0], value_cls)
+    else:
+        add_multiline(parts, 60, cy+8, value_lines, value_cls, 14)
     add_arrow(parts, width-20, cy)
     return svg_close(parts)
 
@@ -336,31 +344,48 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
 
 def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
     if mobile:
-        width, height = 360, 142
+        width = 360
+        title_lines = wrap_words(item["title"], 34, 2)
+        category_y = 68 if len(title_lines) == 2 else 53
+        category_lines = wrap_words(item["category"], 34, 2)
+        desc_y = category_y + 11 * (len(category_lines) - 1) + 25
+        desc_lines = wrap_words(item["description"], 38, 3)
+        bottom_y = desc_y + 17 * (len(desc_lines) - 1) + 22
+        height = bottom_y + 5
         parts = svg_open(width, height, theme)
         add_image(parts, 16, 29, item["logo_width"] + 4, item["logo_height"] + 4, item["logo"], theme)
         text_x = 92
-        title_lines = wrap_words(item["title"], 34, 2)
         add_multiline(parts, text_x, 28, title_lines, "ui current-title-mobile", 18)
-        category_y = 68 if len(title_lines) == 2 else 53
-        add_text(parts, text_x, category_y, item["category"], "category-mobile")
-        add_multiline(parts, text_x, category_y + 25, wrap_words(item["description"], 38, 3), "ui description-mobile", 17)
+        add_multiline(parts, text_x, category_y, category_lines, "category-mobile", 11)
+        add_multiline(parts, text_x, desc_y, desc_lines, "ui description-mobile", 17)
         if item.get("url"):
             add_arrow(parts, 337, 18)
-        add_line(parts, 16, 139, 344, 139)
+        add_line(parts, 16, bottom_y, 344, bottom_y)
         return svg_close(parts)
-    width, height = 425, 108
+    # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
+    # row without an HTML width attribute (see responsive_linked_picture). The
+    # description now wraps across up to 3 (tighter) lines instead of 2 wider
+    # ones, so per-line width doesn't have to shrink as much. Category and
+    # description position/height are both computed from actual line counts
+    # rather than assumed to always be 1 and 3 lines respectively.
+    width = 390
+    category_lines = wrap_words(item["category"], 32, 2)
+    desc_y = 54 + 11 * len(category_lines) + 11
+    desc_lines = wrap_words(item["description"], 38, 3)
+    desc_line_height = 15
+    bottom_y = desc_y + desc_line_height * (len(desc_lines) - 1) + 13
+    height = bottom_y + 9
     parts = svg_open(width, height, theme)
     add_image(parts, 10, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
     text_x = 84
-    title_lines = wrap_words(item["title"], 44, 2)
+    title_lines = wrap_words(item["title"], 39, 2)
     title_y = 31 if len(title_lines) == 1 else 23
     add_multiline(parts, text_x, title_y, title_lines, "ui current-title", 16)
-    add_text(parts, text_x, 54, item["category"], "category")
-    add_multiline(parts, text_x, 76, wrap_words(item["description"], 51, 2), "ui description", 16)
+    add_multiline(parts, text_x, 54, category_lines, "category", 11)
+    add_multiline(parts, text_x, desc_y, desc_lines, "ui description", desc_line_height)
     if item.get("url"):
-        add_arrow(parts, 406, 18)
-    add_line(parts, 0, 105, 425, 105)
+        add_arrow(parts, 371, 18)
+    add_line(parts, 0, bottom_y, width, bottom_y)
     return svg_close(parts)
 
 
@@ -376,15 +401,17 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) ->
         add_text(parts, text_x, 76, item["status"], "cert-status")
         add_arrow(parts, 337, 20)
         return svg_close(parts)
-    width, height = 425, 84
+    # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
+    # row without an HTML width attribute (see responsive_linked_picture).
+    width, height = 390, 84
     parts = svg_open(width, height, theme)
-    parts.append('<rect class="card-bg card-border" x="1" y="5" width="423" height="74" rx="9"/>')
+    parts.append(f'<rect class="card-bg card-border" x="1" y="5" width="{width-2}" height="74" rx="9"/>')
     add_image(parts, 15, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
     text_x = 130
-    add_text(parts, text_x, 32, item["title"], "ui cert-title")
-    add_text(parts, text_x, 53, item["subtitle"], "ui cert-subtitle")
+    add_text(parts, text_x, 32, wrap_words(item["title"], 26, 1)[0], "ui cert-title")
+    add_text(parts, text_x, 53, wrap_words(item["subtitle"], 38, 1)[0], "ui cert-subtitle")
     add_text(parts, text_x, 71, item["status"], "cert-status")
-    add_arrow(parts, 405, 21)
+    add_arrow(parts, width - 20, 21)
     return svg_close(parts)
 
 
@@ -415,21 +442,20 @@ def responsive_picture(name: str, alt: str) -> str:
     )
 
 
-def responsive_linked_picture(path_base: str, alt: str, url: str | None, desktop_width: str | None = None) -> str:
-    # desktop_width (e.g. "31%") lets several cards share one row regardless of
-    # GitHub's exact content-column width, instead of relying on their native
-    # pixel size adding up under some assumed container width — which is what
-    # silently broke the 3-across contact row and the 2-across current/cert
-    # rows (each card rendered at native size, and the actual column turned out
-    # narrower than that math assumed). Mobile is left with no width so it keeps
-    # rendering at native size, single column, capped by GitHub's own
-    # `.markdown-body img { max-width: 100% }`.
+def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
+    # Deliberately no width attribute on the desktop <img> — setting one
+    # (tried as a percentage, to get 3 contact cards / 2 current-cert cards
+    # sharing a row regardless of GitHub's exact content-column width) broke
+    # mobile source selection: confirmed live, in both the GitHub app and
+    # mobile Safari, the mobile <source> stopped being picked and the desktop
+    # image rendered instead, scaled down. Row-fit on desktop is handled by
+    # sizing each card's own SVG small enough to fit, not by an HTML width
+    # attribute on the <picture>.
     base = "./assets/generated"
-    width_attr = f' width="{desktop_width}"' if desktop_width else ""
     picture = (
         '<picture>'
         f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile.svg">'
-        f'<img src="{base}/{path_base}-desktop.svg"{width_attr} alt="{esc(alt)}">'
+        f'<img src="{base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
         '</picture>'
     )
     return f'<a href="{esc(url)}">{picture}</a>' if url else picture
@@ -448,7 +474,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     ]
 
     contact_pictures = [
-        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"], desktop_width="31%")
+        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"])
         for item in profile["contacts"]
     ]
     lines.append("".join(contact_pictures))
@@ -457,14 +483,14 @@ def generate_readme(profile: dict[str, Any]) -> str:
     lines.append(responsive_picture("current-header", "Currently working on."))
     lines.append('<p align="center">')
     current_pictures = [
-        responsive_linked_picture(f"current-{item_index}", item["title"], item.get("url"), desktop_width="48%")
+        responsive_linked_picture(f"current-{item_index}", item["title"], item.get("url"))
         for item_index, item in enumerate(profile["current"])
     ]
     lines.append("".join(current_pictures))
     lines.extend(['</p>', '', responsive_picture("certifications-header", "Certifications."), '<p align="center">'])
 
     cert_pictures = [
-        responsive_linked_picture(f"cert-{i}", item["title"], item["url"], desktop_width="48%")
+        responsive_linked_picture(f"cert-{i}", item["title"], item["url"])
         for i, item in enumerate(profile["certifications"])
     ]
     lines.append("".join(cert_pictures))
@@ -532,24 +558,24 @@ def generate_previews(profile: dict[str, Any]) -> None:
             render_svg_string(generate_status(profile, False, theme), 880, bg),
         ]
         contact_row = Image.new("RGB", (880, 76), bg)
-        for x, item in zip((0, 300, 600), profile["contacts"]):
-            contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 280, bg), (x, 0))
+        for x, item in zip((0, 285, 570), profile["contacts"]):
+            contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 265, bg), (x, 0))
         desktop += [
             contact_row,
             render_svg_string(generate_featured(profile, False, theme), 880, bg),
             render_svg_string(generate_header("currently working on", False, theme), 880, bg),
         ]
-        current_cards = [render_svg_string(generate_current_card(item, False, theme), 425, bg) for item in profile["current"]]
+        current_cards = [render_svg_string(generate_current_card(item, False, theme), 390, bg) for item in profile["current"]]
         for i in range(0, len(current_cards), 2):
-            row = Image.new("RGB", (880, 108), bg)
+            row = Image.new("RGB", (880, 139), bg)
             row.paste(current_cards[i], (0, 0))
             if i + 1 < len(current_cards):
-                row.paste(current_cards[i + 1], (455, 0))
+                row.paste(current_cards[i + 1], (410, 0))
             desktop.append(row)
         desktop.append(render_svg_string(generate_header("certifications", False, theme), 880, bg))
         cert_row = Image.new("RGB", (880, 84), bg)
-        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][0], False, theme), 425, bg), (0, 0))
-        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][1], False, theme), 425, bg), (455, 0))
+        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][0], False, theme), 390, bg), (0, 0))
+        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][1], False, theme), 390, bg), (410, 0))
         desktop.append(cert_row)
         desktop.append(render_svg_string(generate_header("github profile statistics", False, theme), 880, bg))
         desktop.append(render_svg_file(ROOT/profile["statistics"]["path"], 880, bg))
