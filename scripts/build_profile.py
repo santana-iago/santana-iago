@@ -244,7 +244,7 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> s
         return svg_close(parts)
     width = 880
     headline_line_height, copy_line_height = 34, 16
-    headline_lines = wrap_words(meta["headline"], max_chars=25, max_lines=2)
+    headline_lines = wrap_words(meta["headline"], max_chars=50, max_lines=2)
     copy_lines = wrap_words(meta["introduction"], max_chars=90, max_lines=2)
     headline_y = 58
     copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 34
