@@ -360,12 +360,17 @@ def generate_header(title: str, mobile: bool, theme: str) -> str:
 
 
 def responsive_picture(name: str, alt: str) -> str:
+    # Every source fully qualifies BOTH conditions (width and color-scheme).
+    # GitHub wraps README <picture> elements in its own <themed-picture> custom
+    # element to drive dark/light switching from the site's theme setting rather
+    # than the OS; it does not reliably fall through an under-qualified source
+    # (e.g. one missing an explicit width bound) the way a plain browser would.
     base = "./assets/generated"
     return (
         '<picture>\n'
         f'  <source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-mobile-dark.svg">\n'
-        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{name}-mobile-light.svg">\n'
-        f'  <source media="(prefers-color-scheme: dark)" srcset="{base}/{name}-desktop-dark.svg">\n'
+        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: light)" srcset="{base}/{name}-mobile-light.svg">\n'
+        f'  <source media="(min-width: {MOBILE_BREAKPOINT + 1}px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-desktop-dark.svg">\n'
         f'  <img src="{base}/{name}-desktop-light.svg" width="100%" alt="{esc(alt)}">\n'
         '</picture>'
     )
@@ -376,8 +381,8 @@ def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
     picture = (
         '<picture>'
         f'<source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-mobile-dark.svg">'
-        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile-light.svg">'
-        f'<source media="(prefers-color-scheme: dark)" srcset="{base}/{path_base}-desktop-dark.svg">'
+        f'<source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: light)" srcset="{base}/{path_base}-mobile-light.svg">'
+        f'<source media="(min-width: {MOBILE_BREAKPOINT + 1}px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-desktop-dark.svg">'
         f'<img src="{base}/{path_base}-desktop-light.svg" alt="{esc(alt)}">'
         '</picture>'
     )
