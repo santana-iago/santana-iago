@@ -76,8 +76,7 @@ def data_uri(relative: str, theme: str) -> str:
     return f"data:{mime};base64,{base64.b64encode(raw).decode('ascii')}"
 
 
-def style(theme: str) -> str:
-    c = THEMES[theme]
+def _theme_rules(c: dict[str, str]) -> str:
     return f"""
 .card-bg{{fill:{c['card']}}}
 .card-border{{stroke:{c['card_border']}}}
@@ -114,7 +113,25 @@ def style(theme: str) -> str:
 """
 
 
-def svg_open(width: int, height: int, theme: str) -> list[str]:
+def style(theme: str | None) -> str:
+    # theme="light"/"dark" renders a single fixed palette, unconditionally — used
+    # only to rasterize the local preview PNGs (docs/), where nothing evaluates
+    # `prefers-color-scheme` for us.
+    #
+    # theme=None (the real, shipped files) embeds BOTH palettes in one file: light
+    # values are the default rules, dark values live inside a native
+    # `@media (prefers-color-scheme: dark)` block. This is evaluated by the
+    # browser while it rasterizes the SVG image itself, so it works regardless of
+    # how GitHub's own theme-switching machinery treats the <picture>/<source>
+    # elements around it — that machinery is only ever given a single, theme-
+    # agnostic image URL per breakpoint (see responsive_picture()).
+    if theme in ("light", "dark"):
+        return _theme_rules(THEMES[theme])
+    dark_block = _theme_rules(THEMES["dark"]) + ".theme-light-only{display:none}.theme-dark-only{display:block}"
+    return _theme_rules(THEMES["light"]) + ".theme-dark-only{display:none}" + f"@media (prefers-color-scheme: dark){{{dark_block}}}"
+
+
+def svg_open(width: int, height: int, theme: str | None) -> list[str]:
     return [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         f'<style>{style(theme)}</style>',
@@ -138,11 +155,18 @@ def add_multiline(parts: list[str], x: float, y: float, lines: list[str], cls: s
     parts.append("</text>")
 
 
-def add_image(parts: list[str], x: float, y: float, width: float, height: float, relative: str, theme: str) -> None:
-    parts.append(
-        f'<image href="{data_uri(relative, theme)}" x="{x}" y="{y}" width="{width}" height="{height}" '
-        'preserveAspectRatio="xMidYMid meet"/>'
-    )
+def add_image(parts: list[str], x: float, y: float, width: float, height: float, relative: str, theme: str | None) -> None:
+    path = ROOT / relative
+    has_dark = path.with_name(f"{path.stem}-dark{path.suffix}").exists()
+    attrs = f'x="{x}" y="{y}" width="{width}" height="{height}" preserveAspectRatio="xMidYMid meet"'
+    if theme in ("light", "dark") or not has_dark:
+        pick = "dark" if (theme == "dark" and has_dark) else "light"
+        parts.append(f'<image href="{data_uri(relative, pick)}" {attrs}/>')
+        return
+    # Theme-agnostic file: embed both, toggled by the same native media query
+    # used for the rest of the palette (see style()).
+    parts.append(f'<g class="theme-light-only"><image href="{data_uri(relative, "light")}" {attrs}/></g>')
+    parts.append(f'<g class="theme-dark-only"><image href="{data_uri(relative, "dark")}" {attrs}/></g>')
 
 
 def add_line(parts: list[str], x1: float, y1: float, x2: float, y2: float, soft: bool = False) -> None:
@@ -182,7 +206,7 @@ def section_header(parts: list[str], title: str, width: int, mobile: bool) -> No
     add_line(parts, left, 43 if mobile else 35, right, 43 if mobile else 35)
 
 
-def generate_hero(profile: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     # Both lines are rendered in fonts that GitHub's real renderer substitutes per-OS
     # (e.g. Consolas/Courier New on Windows for the monospace stack, or a wider
     # Georgia fallback for the headline) — measurably wider than what the font used
@@ -221,7 +245,7 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     return svg_close(parts)
 
 
-def generate_status(profile: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_status(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["status"]
     if mobile:
         width, height = 360, 188
@@ -246,7 +270,7 @@ def generate_status(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     return svg_close(parts)
 
 
-def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
     width, height = (360, 78) if mobile else (280, 76)
     parts = svg_open(width, height, theme)
     parts.append(f'<rect class="card-bg card-border" x=".5" y=".5" width="{width-1}" height="{height-1}" rx="10"/>')
@@ -264,7 +288,7 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str) -> str
     return svg_close(parts)
 
 
-def generate_featured(profile: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["featured"]
     if mobile:
         width, height = 360, 500
@@ -297,7 +321,7 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     return svg_close(parts)
 
 
-def generate_current_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
     if mobile:
         width, height = 360, 142
         parts = svg_open(width, height, theme)
@@ -327,7 +351,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str) -> str
     return svg_close(parts)
 
 
-def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
+def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
     if mobile:
         width, height = 360, 92
         parts = svg_open(width, height, theme)
@@ -351,7 +375,7 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
     return svg_close(parts)
 
 
-def generate_header(title: str, mobile: bool, theme: str) -> str:
+def generate_header(title: str, mobile: bool, theme: str | None) -> str:
     width = 360 if mobile else 880
     height = 52 if mobile else 42
     parts = svg_open(width, height, theme)
@@ -360,18 +384,20 @@ def generate_header(title: str, mobile: bool, theme: str) -> str:
 
 
 def responsive_picture(name: str, alt: str) -> str:
-    # Every source fully qualifies BOTH conditions (width and color-scheme).
-    # GitHub wraps README <picture> elements in its own <themed-picture> custom
-    # element to drive dark/light switching from the site's theme setting rather
-    # than the OS; it does not reliably fall through an under-qualified source
-    # (e.g. one missing an explicit width bound) the way a plain browser would.
+    # Only ever gated on width. Theme is handled *inside* each SVG via a native
+    # prefers-color-scheme media query (see style()) — not here. GitHub wraps
+    # README <picture> elements in its own <themed-picture> custom element to
+    # drive dark/light from the site's theme setting; empirically (checked via
+    # a live browser: window.innerWidth confirmed at 1920px, yet it still served
+    # the mobile-breakpoint source) it does not reliably honour a width bound
+    # combined with a color-scheme condition on the same <source>, regardless of
+    # how explicitly both are qualified. Giving it nothing color-scheme-related
+    # to look at sidesteps that entirely.
     base = "./assets/generated"
     return (
         '<picture>\n'
-        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-mobile-dark.svg">\n'
-        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: light)" srcset="{base}/{name}-mobile-light.svg">\n'
-        f'  <source media="(min-width: {MOBILE_BREAKPOINT + 1}px) and (prefers-color-scheme: dark)" srcset="{base}/{name}-desktop-dark.svg">\n'
-        f'  <img src="{base}/{name}-desktop-light.svg" width="100%" alt="{esc(alt)}">\n'
+        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{name}-mobile.svg">\n'
+        f'  <img src="{base}/{name}-desktop.svg" width="100%" alt="{esc(alt)}">\n'
         '</picture>'
     )
 
@@ -380,10 +406,8 @@ def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
     base = "./assets/generated"
     picture = (
         '<picture>'
-        f'<source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-mobile-dark.svg">'
-        f'<source media="(max-width: {MOBILE_BREAKPOINT}px) and (prefers-color-scheme: light)" srcset="{base}/{path_base}-mobile-light.svg">'
-        f'<source media="(min-width: {MOBILE_BREAKPOINT + 1}px) and (prefers-color-scheme: dark)" srcset="{base}/{path_base}-desktop-dark.svg">'
-        f'<img src="{base}/{path_base}-desktop-light.svg" alt="{esc(alt)}">'
+        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile.svg">'
+        f'<img src="{base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
         '</picture>'
     )
     return f'<a href="{esc(url)}">{picture}</a>' if url else picture
@@ -437,17 +461,21 @@ def generate_readme(profile: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def render_svg(path: Path, width: int, background: str) -> Image.Image:
+def render_svg_string(svg_text: str, width: int, background: str) -> Image.Image:
     # cairosvg's text antialiasing produces color-fringed glyph edges (a subpixel/LCD
     # artifact) when rasterized directly at the target size. Supersampling and
     # downscaling with a quality filter blends those fringes back into neutral gray.
     supersample = 6
-    raw_png = cairosvg.svg2png(url=str(path), output_width=width * supersample)
+    raw_png = cairosvg.svg2png(bytestring=svg_text.encode("utf-8"), output_width=width * supersample)
     rendered = Image.open(io.BytesIO(raw_png)).convert("RGBA")
     rendered = rendered.resize((width, round(rendered.height / supersample)), Image.LANCZOS)
     bg = Image.new("RGBA", rendered.size, background)
     bg.alpha_composite(rendered)
     return bg.convert("RGB")
+
+
+def render_svg_file(path: Path, width: int, background: str) -> Image.Image:
+    return render_svg_string(path.read_text(encoding="utf-8"), width, background)
 
 
 def stack_images(images: list[Image.Image], width: int, margin: int, gap: int, output: Path, background: str) -> None:
@@ -461,49 +489,59 @@ def stack_images(images: list[Image.Image], width: int, margin: int, gap: int, o
 
 
 def generate_previews(profile: dict[str, Any]) -> None:
+    # Previews render each theme explicitly (cairosvg doesn't evaluate
+    # prefers-color-scheme), by calling the generators directly with a fixed
+    # theme rather than reading the theme-agnostic files written by
+    # save_generated().
     DOCS.mkdir(parents=True, exist_ok=True)
     for theme in ("light", "dark"):
         bg = THEMES[theme]["preview_bg"]
         desktop: list[Image.Image] = [
-            render_svg(GENERATED/f"hero-desktop-{theme}.svg", 880, bg),
-            render_svg(GENERATED/f"status-desktop-{theme}.svg", 880, bg),
+            render_svg_string(generate_hero(profile, False, theme), 880, bg),
+            render_svg_string(generate_status(profile, False, theme), 880, bg),
         ]
         contact_row = Image.new("RGB", (880, 76), bg)
         for x, item in zip((0, 300, 600), profile["contacts"]):
-            contact_row.paste(render_svg(GENERATED/f'contact-{item["label"].lower()}-desktop-{theme}.svg', 280, bg), (x, 0))
-        desktop += [contact_row, render_svg(GENERATED/f"featured-desktop-{theme}.svg", 880, bg), render_svg(GENERATED/f"current-header-desktop-{theme}.svg", 880, bg)]
-        current_cards = [render_svg(GENERATED/f"current-{i}-desktop-{theme}.svg", 425, bg) for i in range(len(profile["current"]))]
+            contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 280, bg), (x, 0))
+        desktop += [
+            contact_row,
+            render_svg_string(generate_featured(profile, False, theme), 880, bg),
+            render_svg_string(generate_header("currently working on", False, theme), 880, bg),
+        ]
+        current_cards = [render_svg_string(generate_current_card(item, False, theme), 425, bg) for item in profile["current"]]
         for i in range(0, len(current_cards), 2):
             row = Image.new("RGB", (880, 108), bg)
             row.paste(current_cards[i], (0, 0))
             if i + 1 < len(current_cards):
                 row.paste(current_cards[i + 1], (455, 0))
             desktop.append(row)
-        desktop.append(render_svg(GENERATED/f"certifications-header-desktop-{theme}.svg", 880, bg))
+        desktop.append(render_svg_string(generate_header("certifications", False, theme), 880, bg))
         cert_row = Image.new("RGB", (880, 84), bg)
-        cert_row.paste(render_svg(GENERATED/f"cert-0-desktop-{theme}.svg", 425, bg), (0, 0))
-        cert_row.paste(render_svg(GENERATED/f"cert-1-desktop-{theme}.svg", 425, bg), (455, 0))
+        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][0], False, theme), 425, bg), (0, 0))
+        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][1], False, theme), 425, bg), (455, 0))
         desktop.append(cert_row)
-        desktop.append(render_svg(GENERATED/f"statistics-header-desktop-{theme}.svg", 880, bg))
-        desktop.append(render_svg(ROOT/profile["statistics"]["path"], 880, bg))
+        desktop.append(render_svg_string(generate_header("github profile statistics", False, theme), 880, bg))
+        desktop.append(render_svg_file(ROOT/profile["statistics"]["path"], 880, bg))
         stack_images(desktop, 880, 24, 12, DOCS/f"preview-desktop-{theme}.png", bg)
 
         mobile: list[Image.Image] = [
-            render_svg(GENERATED/f"hero-mobile-{theme}.svg", 360, bg),
-            render_svg(GENERATED/f"status-mobile-{theme}.svg", 360, bg),
+            render_svg_string(generate_hero(profile, True, theme), 360, bg),
+            render_svg_string(generate_status(profile, True, theme), 360, bg),
         ]
         for item in profile["contacts"]:
-            mobile.append(render_svg(GENERATED/f'contact-{item["label"].lower()}-mobile-{theme}.svg', 360, bg))
-        mobile += [render_svg(GENERATED/f"featured-mobile-{theme}.svg", 360, bg), render_svg(GENERATED/f"current-header-mobile-{theme}.svg", 360, bg)]
-        for i in range(len(profile["current"])):
-            mobile.append(render_svg(GENERATED/f"current-{i}-mobile-{theme}.svg", 360, bg))
-        mobile.append(render_svg(GENERATED/f"certifications-header-mobile-{theme}.svg", 360, bg))
-        for i in range(len(profile["certifications"])):
-            mobile.append(render_svg(GENERATED/f"cert-{i}-mobile-{theme}.svg", 360, bg))
-        mobile.append(render_svg(GENERATED/f"statistics-header-mobile-{theme}.svg", 360, bg))
-        mobile.append(render_svg(ROOT/profile["statistics"]["path"], 360, bg))
+            mobile.append(render_svg_string(generate_contact_card(item, True, theme), 360, bg))
+        mobile += [
+            render_svg_string(generate_featured(profile, True, theme), 360, bg),
+            render_svg_string(generate_header("currently working on", True, theme), 360, bg),
+        ]
+        for item in profile["current"]:
+            mobile.append(render_svg_string(generate_current_card(item, True, theme), 360, bg))
+        mobile.append(render_svg_string(generate_header("certifications", True, theme), 360, bg))
+        for item in profile["certifications"]:
+            mobile.append(render_svg_string(generate_cert_card(item, True, theme), 360, bg))
+        mobile.append(render_svg_string(generate_header("github profile statistics", True, theme), 360, bg))
+        mobile.append(render_svg_file(ROOT/profile["statistics"]["path"], 360, bg))
         stack_images(mobile, 360, 15, 10, DOCS/f"preview-mobile-{theme}.png", bg)
-
 
 
 def update_contents() -> None:
@@ -515,24 +553,23 @@ def save_generated(profile: dict[str, Any]) -> None:
     if GENERATED.exists():
         shutil.rmtree(GENERATED)
     GENERATED.mkdir(parents=True, exist_ok=True)
-    for theme in ("light", "dark"):
-        for mobile, layout in ((False, "desktop"), (True, "mobile")):
-            outputs = {
-                f"hero-{layout}-{theme}.svg": generate_hero(profile, mobile, theme),
-                f"status-{layout}-{theme}.svg": generate_status(profile, mobile, theme),
-                f"featured-{layout}-{theme}.svg": generate_featured(profile, mobile, theme),
-                f"current-header-{layout}-{theme}.svg": generate_header("currently working on", mobile, theme),
-                f"certifications-header-{layout}-{theme}.svg": generate_header("certifications", mobile, theme),
-                f"statistics-header-{layout}-{theme}.svg": generate_header("github profile statistics", mobile, theme),
-            }
-            for item in profile["contacts"]:
-                outputs[f'contact-{item["label"].lower()}-{layout}-{theme}.svg'] = generate_contact_card(item, mobile, theme)
-            for i, item in enumerate(profile["current"]):
-                outputs[f"current-{i}-{layout}-{theme}.svg"] = generate_current_card(item, mobile, theme)
-            for i, item in enumerate(profile["certifications"]):
-                outputs[f"cert-{i}-{layout}-{theme}.svg"] = generate_cert_card(item, mobile, theme)
-            for name, content in outputs.items():
-                (GENERATED / name).write_text(content, encoding="utf-8")
+    for mobile, layout in ((False, "desktop"), (True, "mobile")):
+        outputs = {
+            f"hero-{layout}.svg": generate_hero(profile, mobile, None),
+            f"status-{layout}.svg": generate_status(profile, mobile, None),
+            f"featured-{layout}.svg": generate_featured(profile, mobile, None),
+            f"current-header-{layout}.svg": generate_header("currently working on", mobile, None),
+            f"certifications-header-{layout}.svg": generate_header("certifications", mobile, None),
+            f"statistics-header-{layout}.svg": generate_header("github profile statistics", mobile, None),
+        }
+        for item in profile["contacts"]:
+            outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
+        for i, item in enumerate(profile["current"]):
+            outputs[f"current-{i}-{layout}.svg"] = generate_current_card(item, mobile, None)
+        for i, item in enumerate(profile["certifications"]):
+            outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
+        for name, content in outputs.items():
+            (GENERATED / name).write_text(content, encoding="utf-8")
 
     (ROOT / "README.md").write_text(generate_readme(profile), encoding="utf-8")
 

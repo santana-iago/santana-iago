@@ -46,20 +46,16 @@ def main() -> int:
         required += [
             ROOT / f"docs/preview-desktop-{theme}.png",
             ROOT / f"docs/preview-mobile-{theme}.png",
-            GENERATED / f"hero-desktop-{theme}.svg",
-            GENERATED / f"hero-mobile-{theme}.svg",
-            GENERATED / f"status-desktop-{theme}.svg",
-            GENERATED / f"status-mobile-{theme}.svg",
-            GENERATED / f"featured-desktop-{theme}.svg",
-            GENERATED / f"featured-mobile-{theme}.svg",
-            GENERATED / f"current-header-desktop-{theme}.svg",
-            GENERATED / f"current-header-mobile-{theme}.svg",
-            GENERATED / f"contact-linkedin-desktop-{theme}.svg",
-            GENERATED / f"contact-linkedin-mobile-{theme}.svg",
-            GENERATED / f"current-0-desktop-{theme}.svg",
-            GENERATED / f"current-0-mobile-{theme}.svg",
-            GENERATED / f"cert-0-desktop-{theme}.svg",
-            GENERATED / f"cert-0-mobile-{theme}.svg",
+        ]
+    for layout in ("desktop", "mobile"):
+        required += [
+            GENERATED / f"hero-{layout}.svg",
+            GENERATED / f"status-{layout}.svg",
+            GENERATED / f"featured-{layout}.svg",
+            GENERATED / f"current-header-{layout}.svg",
+            GENERATED / f"contact-linkedin-{layout}.svg",
+            GENERATED / f"current-0-{layout}.svg",
+            GENERATED / f"cert-0-{layout}.svg",
         ]
     for path in required:
         if not path.exists():
@@ -84,8 +80,21 @@ def main() -> int:
     if "generated-v" in readme:
         error("README references a legacy versioned generated directory")
     for name in ("hero", "status", "featured", "current-header", "certifications-header", "statistics-header"):
-        if f"{name}-mobile-dark.svg" not in readme:
-            error(f"README is missing explicit mobile dark source for {name}")
+        if f"{name}-mobile.svg" not in readme or f"{name}-desktop.svg" not in readme:
+            error(f"README is missing an explicit mobile/desktop <picture> source for {name}")
+
+    # GitHub wraps README <picture> elements in its own theme-switching custom
+    # element, which (confirmed against a live page) does not reliably honour a
+    # <source media="..."> that combines a width bound with prefers-color-scheme
+    # — it must never reappear in the generated markup. Theme instead lives
+    # inside each SVG file as a native prefers-color-scheme media query, which
+    # the browser evaluates itself while rendering the image.
+    if "prefers-color-scheme" in readme:
+        error("README <picture> markup must not combine width and prefers-color-scheme in the same source")
+    for svg in GENERATED.glob("*.svg"):
+        content = svg.read_text(encoding="utf-8")
+        if "prefers-color-scheme" not in content:
+            error(f"Generated SVG is missing an embedded prefers-color-scheme rule: {svg.relative_to(ROOT)}")
 
     legacy = [p for p in (ROOT / "assets").glob("generated-v*") if p.is_dir()]
     if legacy:
