@@ -85,9 +85,9 @@ def style(theme: str) -> str:
 .soft-line{{stroke:{c['soft_line']}}}
 .icon-disc{{fill:{c['icon_disc']};stroke:{c['card_border']}}}
 .arrow{{stroke:{c['arrow']};fill:{c['arrow']}}}
-.hero-headline{{font:italic 600 38px Georgia,'Times New Roman',serif;fill:{c['text']}}}
-.hero-headline-mobile{{font:italic 600 15px Georgia,'Times New Roman',serif;letter-spacing:-.16px;fill:{c['text']}}}
-.hero-copy{{font:400 16px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
+.hero-headline{{font:italic 600 30px Georgia,'Times New Roman',serif;fill:{c['text']}}}
+.hero-headline-mobile{{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:{c['text']}}}
+.hero-copy{{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
 .hero-copy-mobile{{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:{c['muted']}}}
 .status-label{{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:{c['label']}}}
 .status-value{{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:{c['text']}}}
@@ -183,31 +183,41 @@ def section_header(parts: list[str], title: str, width: int, mobile: bool) -> No
 
 
 def generate_hero(profile: dict[str, Any], mobile: bool, theme: str) -> str:
-    # The introduction is rendered in a monospace stack that GitHub's own renderer
-    # substitutes per-OS (e.g. Consolas/Courier New on Windows), which can be
-    # noticeably wider than the font used to preview this locally. Wrapping with a
-    # generous safety margin avoids relying on exact cross-platform glyph widths.
+    # Both lines are rendered in fonts that GitHub's real renderer substitutes per-OS
+    # (e.g. Consolas/Courier New on Windows for the monospace stack, or a wider
+    # Georgia fallback for the headline) — measurably wider than what the font used
+    # to preview this locally. Font sizes carry a real safety margin (calibrated
+    # from an actual overflow seen in a browser, not a local render), and both
+    # lines wrap defensively instead of relying on an exact single-line fit.
     meta = profile["meta"]
     if mobile:
-        width, base_height = 360, 110
-        line_height = 12
-        lines = wrap_words(meta["introduction"], max_chars=24, max_lines=4)
-        height = base_height + line_height * (len(lines) - 1)
+        width = 360
+        headline_line_height, copy_line_height = 15, 12
+        headline_lines = wrap_words(meta["headline"], max_chars=46, max_lines=2)
+        copy_lines = wrap_words(meta["introduction"], max_chars=24, max_lines=4)
+        headline_y = 30
+        copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 20
+        bottom_y = copy_y + copy_line_height * (len(copy_lines) - 1) + 16
+        height = bottom_y + 5
         parts = svg_open(width, height, theme)
         add_line(parts, 16, 4, 344, 4)
-        add_text(parts, 16, 46, meta["headline"], "hero-headline-mobile")
-        add_multiline(parts, 16, 76, lines, "hero-copy-mobile", line_height)
-        add_line(parts, 16, height - 5, 344, height - 5)
+        add_multiline(parts, 16, headline_y, headline_lines, "hero-headline-mobile", headline_line_height)
+        add_multiline(parts, 16, copy_y, copy_lines, "hero-copy-mobile", copy_line_height)
+        add_line(parts, 16, bottom_y, 344, bottom_y)
         return svg_close(parts)
-    width, base_height = 880, 154
-    line_height = 20
-    lines = wrap_words(meta["introduction"], max_chars=42, max_lines=2)
-    height = base_height + line_height * (len(lines) - 1)
+    width = 880
+    headline_line_height, copy_line_height = 34, 16
+    headline_lines = wrap_words(meta["headline"], max_chars=48, max_lines=2)
+    copy_lines = wrap_words(meta["introduction"], max_chars=90, max_lines=2)
+    headline_y = 58
+    copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 34
+    bottom_y = copy_y + copy_line_height * (len(copy_lines) - 1) + 22
+    height = bottom_y + 9
     parts = svg_open(width, height, theme)
     add_line(parts, 2, 8, 878, 8)
-    add_text(parts, 2, 72, meta["headline"], "hero-headline")
-    add_multiline(parts, 4, 114, lines, "hero-copy", line_height)
-    add_line(parts, 2, height - 9, 878, height - 9)
+    add_multiline(parts, 2, headline_y, headline_lines, "hero-headline", headline_line_height)
+    add_multiline(parts, 4, copy_y, copy_lines, "hero-copy", copy_line_height)
+    add_line(parts, 2, bottom_y, 878, bottom_y)
     return svg_close(parts)
 
 

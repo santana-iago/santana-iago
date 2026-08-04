@@ -5,9 +5,9 @@
 .soft-line{stroke:#eaeef2}
 .icon-disc{fill:#ffffff;stroke:#d0d7de}
 .arrow{stroke:#656d76;fill:#656d76}
-.hero-headline{font:italic 600 38px Georgia,'Times New Roman',serif;fill:#1f2328}
-.hero-headline-mobile{font:italic 600 15px Georgia,'Times New Roman',serif;letter-spacing:-.16px;fill:#1f2328}
-.hero-copy{font:400 16px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#57606a}
+.hero-headline{font:italic 600 30px Georgia,'Times New Roman',serif;fill:#1f2328}
+.hero-headline-mobile{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:#1f2328}
+.hero-copy{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#57606a}
 .hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#57606a}
 .status-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#656d76}
 .status-value{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
