@@ -402,12 +402,21 @@ def responsive_picture(name: str, alt: str) -> str:
     )
 
 
-def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
+def responsive_linked_picture(path_base: str, alt: str, url: str | None, desktop_width: str | None = None) -> str:
+    # desktop_width (e.g. "31%") lets several cards share one row regardless of
+    # GitHub's exact content-column width, instead of relying on their native
+    # pixel size adding up under some assumed container width — which is what
+    # silently broke the 3-across contact row and the 2-across current/cert
+    # rows (each card rendered at native size, and the actual column turned out
+    # narrower than that math assumed). Mobile is left with no width so it keeps
+    # rendering at native size, single column, capped by GitHub's own
+    # `.markdown-body img { max-width: 100% }`.
     base = "./assets/generated"
+    width_attr = f' width="{desktop_width}"' if desktop_width else ""
     picture = (
         '<picture>'
         f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile.svg">'
-        f'<img src="{base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
+        f'<img src="{base}/{path_base}-desktop.svg"{width_attr} alt="{esc(alt)}">'
         '</picture>'
     )
     return f'<a href="{esc(url)}">{picture}</a>' if url else picture
@@ -425,18 +434,27 @@ def generate_readme(profile: dict[str, Any]) -> str:
         '<p align="center">',
     ]
 
-    for item in profile["contacts"]:
-        lines.append(responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"]))
+    contact_pictures = [
+        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"], desktop_width="31%")
+        for item in profile["contacts"]
+    ]
+    lines.append("".join(contact_pictures))
     lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '</div>', ''])
 
     lines.append(responsive_picture("current-header", "Currently working on."))
     lines.append('<p align="center">')
-    for item_index, item in enumerate(profile["current"]):
-        lines.append(responsive_linked_picture(f"current-{item_index}", item["title"], item.get("url")))
+    current_pictures = [
+        responsive_linked_picture(f"current-{item_index}", item["title"], item.get("url"), desktop_width="48%")
+        for item_index, item in enumerate(profile["current"])
+    ]
+    lines.append("".join(current_pictures))
     lines.extend(['</p>', '', responsive_picture("certifications-header", "Certifications."), '<p align="center">'])
 
-    for i, item in enumerate(profile["certifications"]):
-        lines.append(responsive_linked_picture(f"cert-{i}", item["title"], item["url"]))
+    cert_pictures = [
+        responsive_linked_picture(f"cert-{i}", item["title"], item["url"], desktop_width="48%")
+        for i, item in enumerate(profile["certifications"])
+    ]
+    lines.append("".join(cert_pictures))
     lines.extend([
         '</p>',
         '',

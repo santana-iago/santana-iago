@@ -12,9 +12,7 @@
 <br>
 
 <p align="center">
-<a href="https://www.linkedin.com/in/santana-iago/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-linkedin-mobile.svg"><img src="./assets/generated/contact-linkedin-desktop.svg" alt="Linkedin"></picture></a>
-<a href="mailto:iagoss949@gmail.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-email-mobile.svg"><img src="./assets/generated/contact-email-desktop.svg" alt="Email"></picture></a>
-<a href="https://github.com/santana-iago"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-github-mobile.svg"><img src="./assets/generated/contact-github-desktop.svg" alt="Github"></picture></a>
+<a href="https://www.linkedin.com/in/santana-iago/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-linkedin-mobile.svg"><img src="./assets/generated/contact-linkedin-desktop.svg" width="31%" alt="Linkedin"></picture></a><a href="mailto:iagoss949@gmail.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-email-mobile.svg"><img src="./assets/generated/contact-email-desktop.svg" width="31%" alt="Email"></picture></a><a href="https://github.com/santana-iago"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-github-mobile.svg"><img src="./assets/generated/contact-github-desktop.svg" width="31%" alt="Github"></picture></a>
 </p>
 
 <div align="center">
@@ -29,13 +27,7 @@
   <img src="./assets/generated/current-header-desktop.svg" width="100%" alt="Currently working on.">
 </picture>
 <p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Cybersecurity @ iT.EAM"></picture>
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture>
-<a href="https://github.com/santana-iago/criptoescape"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="ECC Education &amp; Outreach"></picture></a>
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Chemical Products Platform"></picture>
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" alt="TMB Scan"></picture>
-<a href="https://github.com/santana-iago/custodio-veiculos-site"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a>
-<a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="PET / COMPET"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" width="48%" alt="Cybersecurity @ iT.EAM"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" width="48%" alt="LLM Security Undergraduate Research"></picture><a href="https://github.com/santana-iago/criptoescape"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" width="48%" alt="ECC Education &amp; Outreach"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" width="48%" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" width="48%" alt="TMB Scan"></picture><a href="https://github.com/santana-iago/custodio-veiculos-site"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" width="48%" alt="Custódio Veículos"></picture></a><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" width="48%" alt="PET / COMPET"></picture></a>
 </p>
 
 <picture>
@@ -43,8 +35,7 @@
   <img src="./assets/generated/certifications-header-desktop.svg" width="100%" alt="Certifications.">
 </picture>
 <p align="center">
-<a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" alt="CompTIA Security+"></picture></a>
-<a href="https://www.cambridgeenglish.org/br/exams-and-tests/first/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" alt="Cambridge B2 First"></picture></a>
+<a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" width="48%" alt="CompTIA Security+"></picture></a><a href="https://www.cambridgeenglish.org/br/exams-and-tests/first/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" width="48%" alt="Cambridge B2 First"></picture></a>
 </p>
 
 <picture>
