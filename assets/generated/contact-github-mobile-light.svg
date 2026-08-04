@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="78" viewBox="0 0 360 78"><style>
+.card-bg{fill:#f6f8fa}
+.card-border{stroke:#d0d7de}
+.line{stroke:#d0d7de}
+.soft-line{stroke:#eaeef2}
+.icon-disc{fill:#ffffff;stroke:#d0d7de}
+.arrow{stroke:#656d76;fill:#656d76}
+.hero-headline{font:italic 600 38px Georgia,'Times New Roman',serif;fill:#1f2328}
+.hero-headline-mobile{font:italic 600 15px Georgia,'Times New Roman',serif;letter-spacing:-.16px;fill:#1f2328}
+.hero-copy{font:400 16px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#57606a}
+.hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#57606a}
+.status-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#656d76}
+.status-value{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.status-value-mobile{font:500 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.contact-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.45px;fill:#656d76}
+.contact-value{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.contact-value-mobile{font:600 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#1f2328}
+.section{font-size:15px;font-weight:500;letter-spacing:-.1px}
+.section-mobile{font-size:18px;font-weight:600;letter-spacing:-.2px}
+.title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.title-mobile{font-size:16px;font-weight:700;letter-spacing:-.12px}
+.current-title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.current-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.1px}
+.category{font:700 7.3px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:#656d76}
+.category-mobile{font:700 7.8px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.15px;fill:#656d76}
+.description{font-size:11.3px;font-weight:400;fill:#57606a}
+.description-mobile{font-size:12.6px;font-weight:400;fill:#57606a}
+.cert-title{font-size:15px;font-weight:700;letter-spacing:-.12px}
+.cert-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.12px}
+.cert-subtitle{font-size:10.5px;font-weight:400;fill:#57606a}
+.cert-subtitle-mobile{font-size:11px;font-weight:400;fill:#57606a}
+.cert-status{font:700 7.4px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.4px;fill:#656d76}
+</style><rect class="card-bg card-border" x=".5" y=".5" width="359" height="77" rx="10"/><rect class="icon-disc" x="20" y="25.0" width="28" height="28" rx="7"/><image href="data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48c3R5bGU+cGF0aHtmaWxsOiMxZjIzMjh9QG1lZGlhKHByZWZlcnMtY29sb3Itc2NoZW1lOmRhcmspe3BhdGh7ZmlsbDojZjBmNmZjfX08L3N0eWxlPjxwYXRoIGQ9Ik0xMiAuMjk3Yy02LjYzIDAtMTIgNS4zNzMtMTIgMTIgMCA1LjMwMyAzLjQzOCA5LjggOC4yMDUgMTEuMzg1LjYuMTEzLjgyLS4yNTguODItLjU3NyAwLS4yODUtLjAxLTEuMDQtLjAxNS0yLjA0LTMuMzM4LjcyNC00LjA0Mi0xLjYxLTQuMDQyLTEuNjFDNC40MjIgMTguMDcgMy42MzMgMTcuNyAzLjYzMyAxNy43Yy0xLjA4Ny0uNzQ0LjA4NC0uNzI5LjA4NC0uNzI5IDEuMjA1LjA4NCAxLjgzOCAxLjIzNiAxLjgzOCAxLjIzNiAxLjA3IDEuODM1IDIuODA5IDEuMzA1IDMuNDk1Ljk5OC4xMDgtLjc3Ni40MTctMS4zMDUuNzYtMS42MDUtMi42NjUtLjMtNS40NjYtMS4zMzItNS40NjYtNS45MyAwLTEuMzEuNDY1LTIuMzggMS4yMzUtMy4yMi0uMTM1LS4zMDMtLjU0LTEuNTIzLjEwNS0zLjE3NiAwIDAgMS4wMDUtLjMyMiAzLjMgMS4yMy45Ni0uMjY3IDEuOTgtLjM5OSAzLS40MDUgMS4wMi4wMDYgMi4wNC4xMzggMyAuNDA1IDIuMjgtMS41NTIgMy4yODUtMS4yMyAzLjI4NS0xLjIzLjY0NSAxLjY1My4yNCAyLjg3My4xMiAzLjE3Ni43NjUuODQgMS4yMyAxLjkxIDEuMjMgMy4yMiAwIDQuNjEtMi44MDUgNS42MjUtNS40NzUgNS45Mi40Mi4zNi44MSAxLjA5Ni44MSAyLjIyIDAgMS42MDYtLjAxNSAyLjg5Ni0uMDE1IDMuMjg2IDAgLjMxNS4yMS42OS44MjUuNTdDMjAuNTY1IDIyLjA5MiAyNCAxNy41OTIgMjQgMTIuMjk3YzAtNi42MjctNS4zNzMtMTItMTItMTIiLz48L3N2Zz4=" x="26" y="31.0" width="16" height="16" preserveAspectRatio="xMidYMid meet"/><text x="60" y="30.0" class="contact-label">GITHUB</text><text x="60" y="53.0" class="contact-value-mobile">santana-iago</text><path d="M336 43.0 L344 35.0 M339 35.0 H344 V40.0" fill="none" class="arrow" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>

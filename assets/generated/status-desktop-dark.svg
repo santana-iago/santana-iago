@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="72" viewBox="0 0 880 72"><style>
+.card-bg{fill:#161b22}
+.card-border{stroke:#30363d}
+.line{stroke:#30363d}
+.soft-line{stroke:#21262d}
+.icon-disc{fill:#161b22;stroke:#30363d}
+.arrow{stroke:#8b949e;fill:#8b949e}
+.hero-headline{font:italic 600 38px Georgia,'Times New Roman',serif;fill:#f0f6fc}
+.hero-headline-mobile{font:italic 600 15px Georgia,'Times New Roman',serif;letter-spacing:-.16px;fill:#f0f6fc}
+.hero-copy{font:400 16px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#9aa4b2}
+.hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#9aa4b2}
+.status-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#8b949e}
+.status-value{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.status-value-mobile{font:500 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.contact-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.45px;fill:#8b949e}
+.contact-value{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.contact-value-mobile{font:600 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f0f6fc}
+.section{font-size:15px;font-weight:500;letter-spacing:-.1px}
+.section-mobile{font-size:18px;font-weight:600;letter-spacing:-.2px}
+.title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.title-mobile{font-size:16px;font-weight:700;letter-spacing:-.12px}
+.current-title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.current-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.1px}
+.category{font:700 7.3px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:#8b949e}
+.category-mobile{font:700 7.8px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.15px;fill:#8b949e}
+.description{font-size:11.3px;font-weight:400;fill:#9aa4b2}
+.description-mobile{font-size:12.6px;font-weight:400;fill:#9aa4b2}
+.cert-title{font-size:15px;font-weight:700;letter-spacing:-.12px}
+.cert-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.12px}
+.cert-subtitle{font-size:10.5px;font-weight:400;fill:#9aa4b2}
+.cert-subtitle-mobile{font-size:11px;font-weight:400;fill:#9aa4b2}
+.cert-status{font:700 7.4px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.4px;fill:#8b949e}
+</style><line class="line" x1="0" y1="0.5" x2="880" y2="0.5"/><line class="line" x1="294" y1="16" x2="294" y2="56"/><line class="line" x1="587" y1="16" x2="587" y2="56"/><text x="12" y="28" class="status-label">WORKING</text><text x="12" y="49" class="status-value">SOC | CTI @ iT.EAM</text><text x="318" y="28" class="status-label">RESEARCHING</text><text x="318" y="49" class="status-value">LLM Security</text><text x="611" y="28" class="status-label">STUDYING</text><text x="611" y="49" class="status-value">Computer Engineering @ CEFET-MG</text><line class="line" x1="0" y1="71.5" x2="880" y2="71.5"/></svg>

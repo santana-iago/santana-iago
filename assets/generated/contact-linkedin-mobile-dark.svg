@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="78" viewBox="0 0 360 78"><style>
+.card-bg{fill:#161b22}
+.card-border{stroke:#30363d}
+.line{stroke:#30363d}
+.soft-line{stroke:#21262d}
+.icon-disc{fill:#161b22;stroke:#30363d}
+.arrow{stroke:#8b949e;fill:#8b949e}
+.hero-headline{font:italic 600 38px Georgia,'Times New Roman',serif;fill:#f0f6fc}
+.hero-headline-mobile{font:italic 600 15px Georgia,'Times New Roman',serif;letter-spacing:-.16px;fill:#f0f6fc}
+.hero-copy{font:400 16px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#9aa4b2}
+.hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#9aa4b2}
+.status-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#8b949e}
+.status-value{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.status-value-mobile{font:500 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.contact-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.45px;fill:#8b949e}
+.contact-value{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.contact-value-mobile{font:600 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#f0f6fc}
+.ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f0f6fc}
+.section{font-size:15px;font-weight:500;letter-spacing:-.1px}
+.section-mobile{font-size:18px;font-weight:600;letter-spacing:-.2px}
+.title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.title-mobile{font-size:16px;font-weight:700;letter-spacing:-.12px}
+.current-title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.current-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.1px}
+.category{font:700 7.3px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:#8b949e}
+.category-mobile{font:700 7.8px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.15px;fill:#8b949e}
+.description{font-size:11.3px;font-weight:400;fill:#9aa4b2}
+.description-mobile{font-size:12.6px;font-weight:400;fill:#9aa4b2}
+.cert-title{font-size:15px;font-weight:700;letter-spacing:-.12px}
+.cert-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.12px}
+.cert-subtitle{font-size:10.5px;font-weight:400;fill:#9aa4b2}
+.cert-subtitle-mobile{font-size:11px;font-weight:400;fill:#9aa4b2}
+.cert-status{font:700 7.4px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.4px;fill:#8b949e}
+</style><rect class="card-bg card-border" x=".5" y=".5" width="359" height="77" rx="10"/><rect x="20" y="25.0" width="28" height="28" rx="7" fill="#0A66C2"/><text x="27" y="45.0" font-family="Arial" font-size="16" font-weight="700" fill="#ffffff">in</text><text x="60" y="30.0" class="contact-label">LINKEDIN</text><text x="60" y="53.0" class="contact-value-mobile">santana-iago</text><path d="M336 43.0 L344 35.0 M339 35.0 H344 V40.0" fill="none" class="arrow" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>

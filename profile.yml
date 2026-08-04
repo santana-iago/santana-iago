@@ -1,0 +1,126 @@
+meta:
+  name: Iago Santana
+  username: santana-iago
+  headline: Investigating threats. Solving real problems.
+  introduction: CTI, Detection Engineering, LLM Security research, and practical software.
+status:
+- label: WORKING
+  value: SOC | CTI @ iT.EAM
+- label: RESEARCHING
+  value: LLM Security
+- label: STUDYING
+  value: Computer Engineering @ CEFET-MG
+contacts:
+- label: LINKEDIN
+  value: santana-iago
+  url: https://www.linkedin.com/in/santana-iago/
+  icon: assets/icons/linkedin.svg
+- label: EMAIL
+  value: iagoss949@gmail.com
+  url: mailto:iagoss949@gmail.com
+  icon: assets/icons/email.svg
+- label: GITHUB
+  value: santana-iago
+  url: https://github.com/santana-iago
+  icon: assets/icons/github.svg
+featured:
+- title: SOC / CTI & Detection
+  category: SECURITY OPERATIONS · iT.EAM
+  description: Security operations spanning detection engineering, threat hunting
+    and applied CTI.
+  logo: assets/brands/iteam-symbol.svg
+  logo_width: 44
+  logo_height: 44
+  title_lines:
+  - SOC / CTI & Detection
+  - Engineering
+- title: LLM Security Undergraduate Research
+  category: AI SECURITY · CEFET-MG
+  description: Undergraduate research into attack surfaces and safer design for
+    LLM-based agents.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+  title_lines:
+  - LLM Security
+  - Undergraduate Research
+- title: Post-Quantum Cryptography Undergraduate Research
+  category: CRYPTOGRAPHY · CEFET-MG
+  description: Exploring elliptic-curve systems, real attacks and quantum-resistant approaches
+    for emerging security.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+  title_lines:
+  - Post-Quantum Cryptography
+  - Undergraduate Research
+current:
+- title: Cybersecurity @ iT.EAM
+  category: CTI · THREAT HUNTING · DETECTION ENGINEERING
+  description: Improving detections and investigations through threat hunting, SIEM engineering
+    and intelligence.
+  logo: assets/brands/iteam-symbol.svg
+  logo_width: 44
+  logo_height: 44
+- title: LLM Security Undergraduate Research
+  category: AI SECURITY · CEFET-MG
+  description: Studying attack surfaces and defensive patterns for LLM agents, tools and MCP-based
+    systems.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+- title: ECC Education & Outreach
+  category: CRYPTOGRAPHY EDUCATION · CEFET-MG
+  description: Making elliptic-curve cryptography accessible through demonstrations and educational
+    material.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+  url: https://github.com/santana-iago/criptoescape
+- title: Chemical Products Platform
+  category: LABORATORY MANAGEMENT · CEFET-MG
+  description: Centralizing chemical inventory and laboratory operations across CEFET-MG campuses.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+- title: TMB Scan
+  category: PHYSICAL ASSESSMENT TECHNOLOGY
+  description: Turning physical assessments and progress data into structured analysis and professional
+    reports.
+  logo: assets/brands/tmb-scan.svg
+  logo_width: 42
+  logo_height: 42
+- title: Custódio Veículos
+  category: AUTOMOTIVE SALES TECHNOLOGY
+  description: Managing vehicle sales, marketplace publishing and commercial performance in
+    one platform.
+  logo: assets/brands/custodio-veiculos.svg
+  logo_width: 62
+  logo_height: 42
+  url: https://github.com/santana-iago/custodio-veiculos-site
+- title: PET / COMPET
+  category: TECHNOLOGY · EDUCATION · COMMUNITY
+  description: Creating technical events, educational initiatives and collaborative engineering
+    projects.
+  logo: assets/brands/compet.svg
+  logo_width: 46
+  logo_height: 46
+  url: https://compet.vercel.app/
+certifications:
+- title: CompTIA Security+
+  subtitle: 'SY0-701 · Target: 2026/2'
+  status: PREPARING
+  logo: assets/brands/comptia.svg
+  logo_width: 96
+  logo_height: 28
+  url: https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf
+- title: Cambridge B2 First
+  subtitle: Grade A · CEFR C1 target · 2026/2
+  status: PREPARING
+  logo: assets/brands/cambridge-b2-first.svg
+  logo_width: 96
+  logo_height: 24
+  url: https://www.cambridgeenglish.org/br/exams-and-tests/first/
+statistics:
+  theme: github_dark
+  path: profile-summary-card-output/github_dark/0-profile-details.svg
