@@ -63,6 +63,19 @@ def data_uri(relative: str, theme: str) -> str:
         candidate = path.with_name(f"{path.stem}-dark{path.suffix}")
         if candidate.exists():
             path = candidate
+    if path.suffix.lower() == ".svg":
+        raw_text = path.read_text(encoding="utf-8")
+        if "<image" not in raw_text:
+            # Real vector artwork (not one of the brand marks, which are already a
+            # raster wrapped in an <image>): rasterize it so it's embedded the same
+            # proven way as everything else. A real vector SVG nested two levels
+            # deep (data-uri SVG inside a data-uri SVG inside an <img>) with its own
+            # prefers-color-scheme rule isn't reliably themed by real browsers —
+            # confirmed live: the email/GitHub icons vanished in light mode despite
+            # rendering correctly wherever this project uses a plain raster nested
+            # image instead.
+            png_bytes = cairosvg.svg2png(bytestring=raw_text.encode("utf-8"), output_width=144)
+            return f"data:image/png;base64,{base64.b64encode(png_bytes).decode('ascii')}"
     raw = path.read_bytes()
     mime = {
         ".svg": "image/svg+xml",
@@ -84,7 +97,7 @@ def _theme_rules(c: dict[str, str]) -> str:
 .soft-line{{stroke:{c['soft_line']}}}
 .icon-disc{{fill:{c['icon_disc']};stroke:{c['card_border']}}}
 .arrow{{stroke:{c['arrow']};fill:{c['arrow']}}}
-.hero-headline{{font:italic 600 30px Georgia,'Times New Roman',serif;fill:{c['text']}}}
+.hero-headline{{font:italic 600 34px Georgia,'Times New Roman',serif;fill:{c['text']}}}
 .hero-headline-mobile{{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:{c['text']}}}
 .hero-copy{{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
 .hero-copy-mobile{{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:{c['muted']}}}
@@ -231,7 +244,7 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> s
         return svg_close(parts)
     width = 880
     headline_line_height, copy_line_height = 34, 16
-    headline_lines = wrap_words(meta["headline"], max_chars=48, max_lines=2)
+    headline_lines = wrap_words(meta["headline"], max_chars=25, max_lines=2)
     copy_lines = wrap_words(meta["introduction"], max_chars=90, max_lines=2)
     headline_y = 58
     copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 34

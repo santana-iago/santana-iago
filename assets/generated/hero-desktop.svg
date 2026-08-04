@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="123" viewBox="0 0 880 123"><style>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="157" viewBox="0 0 880 157"><style>
 .card-bg{fill:#f6f8fa}
 .card-border{stroke:#d0d7de}
 .line{stroke:#d0d7de}
 .soft-line{stroke:#eaeef2}
 .icon-disc{fill:#ffffff;stroke:#d0d7de}
 .arrow{stroke:#656d76;fill:#656d76}
-.hero-headline{font:italic 600 30px Georgia,'Times New Roman',serif;fill:#1f2328}
+.hero-headline{font:italic 600 34px Georgia,'Times New Roman',serif;fill:#1f2328}
 .hero-headline-mobile{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:#1f2328}
 .hero-copy{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#57606a}
 .hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#57606a}
@@ -38,7 +38,7 @@
 .soft-line{stroke:#21262d}
 .icon-disc{fill:#161b22;stroke:#30363d}
 .arrow{stroke:#8b949e;fill:#8b949e}
-.hero-headline{font:italic 600 30px Georgia,'Times New Roman',serif;fill:#f0f6fc}
+.hero-headline{font:italic 600 34px Georgia,'Times New Roman',serif;fill:#f0f6fc}
 .hero-headline-mobile{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:#f0f6fc}
 .hero-copy{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#9aa4b2}
 .hero-copy-mobile{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#9aa4b2}
@@ -64,4 +64,4 @@
 .cert-subtitle{font-size:10.5px;font-weight:400;fill:#9aa4b2}
 .cert-subtitle-mobile{font-size:11px;font-weight:400;fill:#9aa4b2}
 .cert-status{font:700 7.4px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.4px;fill:#8b949e}
-.theme-light-only{display:none}.theme-dark-only{display:block}}</style><line class="line" x1="2" y1="8" x2="878" y2="8"/><text x="2" y="58" class="hero-headline"><tspan x="2" dy="0">Investigating threats. Solving real problems.</tspan></text><text x="4" y="92" class="hero-copy"><tspan x="4" dy="0">CTI, Detection Engineering, LLM Security research, and practical software.</tspan></text><line class="line" x1="2" y1="114" x2="878" y2="114"/></svg>
+.theme-light-only{display:none}.theme-dark-only{display:block}}</style><line class="line" x1="2" y1="8" x2="878" y2="8"/><text x="2" y="58" class="hero-headline"><tspan x="2" dy="0">Investigating threats.</tspan><tspan x="2" dy="34">Solving real problems.</tspan></text><text x="4" y="126" class="hero-copy"><tspan x="4" dy="0">CTI, Detection Engineering, LLM Security research, and practical software.</tspan></text><line class="line" x1="2" y1="148" x2="878" y2="148"/></svg>
