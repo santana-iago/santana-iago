@@ -19,10 +19,6 @@ contacts:
   value: iagoss949@gmail.com
   url: mailto:iagoss949@gmail.com
   icon: assets/icons/email.svg
-- label: GITHUB
-  value: santana-iago
-  url: https://github.com/santana-iago
-  icon: assets/icons/github.svg
 featured:
 - title: SOC / CTI & Detection
   category: SECURITY OPERATIONS · iT.EAM

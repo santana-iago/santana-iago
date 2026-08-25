@@ -523,7 +523,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
         responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"])
         for item in profile["contacts"]
     ]
-    lines.append("".join(contact_pictures))
+    lines.append("&#8195;&#8195;".join(contact_pictures))
     lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '<p align="center">'])
     featured_pictures = [
         responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
@@ -610,7 +610,11 @@ def generate_previews(profile: dict[str, Any]) -> None:
             render_svg_string(generate_status(profile, False, theme), 880, bg),
         ]
         contact_row = Image.new("RGB", (880, 76), bg)
-        for x, item in zip((0, 285, 570), profile["contacts"]):
+        contact_gap = 20
+        contact_width = 265
+        contact_start = (880 - (len(profile["contacts"]) * contact_width + max(0, len(profile["contacts"]) - 1) * contact_gap)) // 2
+        for index, item in enumerate(profile["contacts"]):
+            x = contact_start + index * (contact_width + contact_gap)
             contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 265, bg), (x, 0))
         featured_row = Image.new("RGB", (880, 164), bg)
         featured_x = 0

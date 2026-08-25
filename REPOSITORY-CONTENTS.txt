@@ -57,8 +57,6 @@ assets/generated/certifications-header-desktop.svg
 assets/generated/certifications-header-mobile.svg
 assets/generated/contact-email-desktop.svg
 assets/generated/contact-email-mobile.svg
-assets/generated/contact-github-desktop.svg
-assets/generated/contact-github-mobile.svg
 assets/generated/contact-linkedin-desktop.svg
 assets/generated/contact-linkedin-mobile.svg
 assets/generated/current-0-desktop.svg

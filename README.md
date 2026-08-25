@@ -12,7 +12,7 @@
 <br>
 
 <p align="center">
-<a href="https://www.linkedin.com/in/santana-iago/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-linkedin-mobile.svg"><img src="./assets/generated/contact-linkedin-desktop.svg" alt="Linkedin"></picture></a><a href="mailto:iagoss949@gmail.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-email-mobile.svg"><img src="./assets/generated/contact-email-desktop.svg" alt="Email"></picture></a><a href="https://github.com/santana-iago"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-github-mobile.svg"><img src="./assets/generated/contact-github-desktop.svg" alt="Github"></picture></a>
+<a href="https://www.linkedin.com/in/santana-iago/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-linkedin-mobile.svg"><img src="./assets/generated/contact-linkedin-desktop.svg" alt="Linkedin"></picture></a>&#8195;&#8195;<a href="mailto:iagoss949@gmail.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/contact-email-mobile.svg"><img src="./assets/generated/contact-email-desktop.svg" alt="Email"></picture></a>
 </p>
 
 <div align="center">
