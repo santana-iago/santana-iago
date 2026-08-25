@@ -535,7 +535,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     lines.append(responsive_picture("current-header", "Currently working on."))
     lines.append('<p align="center">')
     current_pictures = [
-        responsive_linked_picture(f"current-{item_index}", item["title"], item.get("url"))
+        responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
         for item_index, item in enumerate(profile["current"])
     ]
     lines.append("".join(current_pictures))
@@ -688,7 +688,8 @@ def save_generated(profile: dict[str, Any]) -> None:
         for item in profile["contacts"]:
             outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
         for i, item in enumerate(profile["current"]):
-            outputs[f"current-{i}-{layout}.svg"] = generate_current_card(item, mobile, None)
+            current_name = item.get("generated_name", f"current-{i}")
+            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None)
         for i, item in enumerate(profile["certifications"]):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():

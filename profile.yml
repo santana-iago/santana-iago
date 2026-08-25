@@ -87,6 +87,7 @@ current:
   category: PHYSICAL ASSESSMENT TECHNOLOGY
   description: Turning physical assessments and progress data into structured analysis and professional
     reports.
+  generated_name: current-tmb-scan
   logo: assets/illustrations/tmb-scan.png
   logo_width: 42
   logo_height: 42

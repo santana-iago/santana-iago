@@ -67,14 +67,14 @@ assets/generated/current-2-desktop.svg
 assets/generated/current-2-mobile.svg
 assets/generated/current-3-desktop.svg
 assets/generated/current-3-mobile.svg
-assets/generated/current-4-desktop.svg
-assets/generated/current-4-mobile.svg
 assets/generated/current-5-desktop.svg
 assets/generated/current-5-mobile.svg
 assets/generated/current-6-desktop.svg
 assets/generated/current-6-mobile.svg
 assets/generated/current-header-desktop.svg
 assets/generated/current-header-mobile.svg
+assets/generated/current-tmb-scan-desktop.svg
+assets/generated/current-tmb-scan-mobile.svg
 assets/generated/featured-card-0-desktop.svg
 assets/generated/featured-card-0-mobile.svg
 assets/generated/featured-card-1-desktop.svg
