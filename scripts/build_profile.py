@@ -312,17 +312,23 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
 def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["featured"]
     if mobile:
-        width, height = 360, 500
+        width = 360
+        start = 57
+        row_heights = [int(item.get("row_height", 146)) for item in items]
+        height = start + sum(row_heights) + 5
         parts = svg_open(width, height, theme)
         section_header(parts, "featured work", width, True)
-        start, row_h = 57, 146
+        y = start
         for i, item in enumerate(items):
-            y = start + i * row_h
+            row_h = row_heights[i]
             add_image(parts, 18, y + 19, item["logo_width"] + 6, item["logo_height"] + 6, item["logo"], theme)
             add_multiline(parts, 92, y + 29, item["title_lines"], "ui title-mobile", 20)
-            add_text(parts, 92, y + 73, item["category"], "category-mobile")
-            add_multiline(parts, 92, y + 98, wrap_words(item["description"], 35, 3), "ui description-mobile", 17)
+            category_lines = item.get("category_lines", [item["category"]])
+            add_multiline(parts, 92, y + 73, category_lines, "category-mobile", 11)
+            description_lines = wrap_words(item["description"], 35, int(item.get("description_max_lines", 3)))
+            add_multiline(parts, 92, y + 98 + 11 * (len(category_lines) - 1), description_lines, "ui description-mobile", 17)
             add_line(parts, 16, y + row_h - 4, 344, y + row_h - 4)
+            y += row_h
         return svg_close(parts)
     width, height = 880, 232
     parts = svg_open(width, height, theme)
@@ -336,8 +342,9 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
             add_line(parts, x - gap/2, 54, x - gap/2, 218, True)
         add_image(parts, x + 8, top + 10, item["logo_width"], item["logo_height"], item["logo"], theme)
         add_multiline(parts, x + 72, top + 20, item["title_lines"], "ui title", 18)
-        add_text(parts, x + 72, top + 62, item["category"], "category")
-        add_multiline(parts, x + 8, top + 91, wrap_words(item["description"], 38, 3), "ui description", 17)
+        category_lines = item.get("category_lines", [item["category"]])
+        add_multiline(parts, x + 72, top + 62, category_lines, "category", 11)
+        add_multiline(parts, x + 8, top + 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], 38, 3), "ui description", 17)
         add_line(parts, x, 218, x + col_w, 218)
     return svg_close(parts)
 

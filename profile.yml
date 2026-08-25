@@ -44,16 +44,21 @@ featured:
   title_lines:
   - LLM Security
   - Undergraduate Research
-- title: Post-Quantum Cryptography Undergraduate Research
-  category: CRYPTOGRAPHY · CEFET-MG
-  description: Exploring elliptic-curve systems, real attacks and quantum-resistant approaches
-    for emerging security.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+- title: CriptoEscape
+  category: CRYPTOGRAPHY EDUCATION · ESCAPE ROOM · CEFET-MG
+  category_lines:
+  - CRYPTOGRAPHY EDUCATION ·
+  - ESCAPE ROOM · CEFET-MG
+  description: Educational cryptography escape room project designed to teach cryptographic
+    concepts through puzzles and challenges.
+  logo: assets/illustrations/criptoescape-door.png
+  logo_width: 44
+  logo_height: 44
+  url: https://github.com/santana-iago/criptoescape
+  row_height: 180
+  description_max_lines: 4
   title_lines:
-  - Post-Quantum Cryptography
-  - Undergraduate Research
+  - CriptoEscape
 current:
 - title: Cybersecurity @ iT.EAM
   category: CTI · THREAT HUNTING · DETECTION ENGINEERING
@@ -69,14 +74,13 @@ current:
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
-- title: ECC Education & Outreach
-  category: CRYPTOGRAPHY EDUCATION · CEFET-MG
-  description: Making elliptic-curve cryptography accessible through demonstrations and educational
-    material.
+- title: Post-Quantum Cryptography Undergraduate Research
+  category: CRYPTOGRAPHY · CEFET-MG
+  description: Exploring elliptic-curve systems, real attacks and quantum-resistant approaches
+    for emerging security.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
-  url: https://github.com/santana-iago/criptoescape
 - title: Chemical Products Platform
   category: LABORATORY MANAGEMENT · CEFET-MG
   description: Centralizing chemical inventory and laboratory operations across CEFET-MG campuses.

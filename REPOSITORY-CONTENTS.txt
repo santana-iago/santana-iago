@@ -49,6 +49,7 @@ assets/brands/custodio-veiculos.svg
 assets/brands/iteam-symbol.svg
 assets/brands/tmb-scan-dark.svg
 assets/brands/tmb-scan.svg
+assets/illustrations/criptoescape-door.png
 assets/generated/cert-0-desktop.svg
 assets/generated/cert-0-mobile.svg
 assets/generated/cert-1-desktop.svg

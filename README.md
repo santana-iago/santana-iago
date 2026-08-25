@@ -18,7 +18,7 @@
 <div align="center">
 <picture>
   <source media="(max-width: 480px)" srcset="./assets/generated/featured-mobile.svg">
-  <img src="./assets/generated/featured-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.">
+  <img src="./assets/generated/featured-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and cryptography education.">
 </picture>
 </div>
 
@@ -27,7 +27,7 @@
   <img src="./assets/generated/current-header-desktop.svg" width="100%" alt="Currently working on.">
 </picture>
 <p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Cybersecurity @ iT.EAM"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><a href="https://github.com/santana-iago/criptoescape"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="ECC Education &amp; Outreach"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" alt="TMB Scan"></picture><a href="https://github.com/santana-iago/custodio-veiculos-site"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="PET / COMPET"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Cybersecurity @ iT.EAM"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" alt="TMB Scan"></picture><a href="https://github.com/santana-iago/custodio-veiculos-site"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="PET / COMPET"></picture></a>
 </p>
 
 <picture>
@@ -58,10 +58,10 @@ Security operations spanning detection engineering, threat hunting and applied C
 
 Undergraduate research into attack surfaces and safer design for LLM-based agents.
 
-### Post-Quantum Cryptography Undergraduate Research
-*CRYPTOGRAPHY · CEFET-MG*
+### CriptoEscape
+*CRYPTOGRAPHY EDUCATION · ESCAPE ROOM · CEFET-MG*
 
-Exploring elliptic-curve systems, real attacks and quantum-resistant approaches for emerging security.
+Educational cryptography escape room project designed to teach cryptographic concepts through puzzles and challenges.
 
 ## Currently working on
 ### Cybersecurity @ iT.EAM
@@ -74,10 +74,10 @@ Improving detections and investigations through threat hunting, SIEM engineering
 
 Studying attack surfaces and defensive patterns for LLM agents, tools and MCP-based systems.
 
-### [ECC Education & Outreach](https://github.com/santana-iago/criptoescape)
-*CRYPTOGRAPHY EDUCATION · CEFET-MG*
+### Post-Quantum Cryptography Undergraduate Research
+*CRYPTOGRAPHY · CEFET-MG*
 
-Making elliptic-curve cryptography accessible through demonstrations and educational material.
+Exploring elliptic-curve systems, real attacks and quantum-resistant approaches for emerging security.
 
 ### Chemical Products Platform
 *LABORATORY MANAGEMENT · CEFET-MG*
