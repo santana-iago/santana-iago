@@ -64,7 +64,7 @@ Undergraduate research into attack surfaces and safer design for LLM-based agent
 ### CriptoEscape
 *ESCAPE ROOM · CEFET-MG*
 
-Educational cryptography escape room project designed to teach cryptographic concepts through puzzles and challenges.
+Educational, cryptography-themed escape room platform designed to teach cryptographic concepts through puzzles.
 
 ## Currently working on
 ### Cybersecurity @ iT.EAM

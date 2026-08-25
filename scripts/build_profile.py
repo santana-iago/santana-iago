@@ -346,7 +346,7 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
         add_multiline(parts, x + 72, top + 20, item["title_lines"], "ui title", 18)
         category_lines = item.get("category_lines", [item["category"]])
         add_multiline(parts, x + 72, top + 62, category_lines, "category", 11)
-        add_multiline(parts, x + 8, top + 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], 38, 3), "ui description", 17)
+        add_multiline(parts, x + 8, top + 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], int(item.get("description_max_chars", 38)), int(item.get("description_max_lines", 3))), "ui description", 17)
         if item.get("url"):
             add_arrow(parts, x + col_w - 20, top + 18)
         add_line(parts, x, 218, x + col_w, 218)
@@ -370,21 +370,23 @@ def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme
         add_line(parts, 16, row_h - 4, 344, row_h - 4)
         return svg_close(parts)
 
-    gap = 24
-    col_w = (880 - 2 * gap) / 3
-    width = col_w + gap if index < 2 else col_w
+    col_w = (880 - 48) / 3
+    # Keep all three linked images on one line in GitHub's rendered README.
+    # Separators remain inside the first two cards, so the row still reads as a
+    # three-column layout without relying on extra inline-image width.
+    width = col_w
     height = 164
     parts = svg_open(width, height, theme)
     add_image(parts, 8, 10, item["logo_width"], item["logo_height"], item["logo"], theme)
     add_multiline(parts, 72, 20, item["title_lines"], "ui title", 18)
     category_lines = item.get("category_lines", [item["category"]])
     add_multiline(parts, 72, 62, category_lines, "category", 11)
-    add_multiline(parts, 8, 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], 38, 3), "ui description", 17)
+    add_multiline(parts, 8, 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], int(item.get("description_max_chars", 38)), int(item.get("description_max_lines", 3))), "ui description", 17)
     if item.get("url"):
         add_arrow(parts, width - 20, 18)
     add_line(parts, 0, height, col_w, height)
     if index < 2:
-        add_line(parts, col_w + gap / 2, 0, col_w + gap / 2, height, True)
+        add_line(parts, width - 1, 0, width - 1, height, True)
     return svg_close(parts)
 
 
@@ -617,9 +619,10 @@ def generate_previews(profile: dict[str, Any]) -> None:
             x = contact_start + index * (contact_width + contact_gap)
             contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 265, bg), (x, 0))
         featured_row = Image.new("RGB", (880, 164), bg)
-        featured_x = 0
+        featured_width = round((880 - 48) / 3)
+        featured_x = (880 - featured_width * len(profile["featured"])) // 2
         for i, item in enumerate(profile["featured"]):
-            card = render_svg_string(generate_featured_card(item, i, False, theme), round(301.333333 if i < 2 else 277.333333), bg)
+            card = render_svg_string(generate_featured_card(item, i, False, theme), featured_width, bg)
             featured_row.paste(card, (featured_x, 0))
             featured_x += card.width
         desktop += [
