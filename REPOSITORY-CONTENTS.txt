@@ -77,7 +77,15 @@ assets/generated/current-6-desktop.svg
 assets/generated/current-6-mobile.svg
 assets/generated/current-header-desktop.svg
 assets/generated/current-header-mobile.svg
+assets/generated/featured-card-0-desktop.svg
+assets/generated/featured-card-0-mobile.svg
+assets/generated/featured-card-1-desktop.svg
+assets/generated/featured-card-1-mobile.svg
+assets/generated/featured-card-2-desktop.svg
+assets/generated/featured-card-2-mobile.svg
 assets/generated/featured-desktop.svg
+assets/generated/featured-header-desktop.svg
+assets/generated/featured-header-mobile.svg
 assets/generated/featured-mobile.svg
 assets/generated/hero-desktop.svg
 assets/generated/hero-mobile.svg

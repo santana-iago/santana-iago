@@ -79,9 +79,14 @@ def main() -> int:
 
     if "generated-v" in readme:
         error("README references a legacy versioned generated directory")
-    for name in ("hero", "status", "featured", "current-header", "certifications-header", "statistics-header"):
+    for name in ("hero", "status", "current-header", "certifications-header", "statistics-header"):
         if f"{name}-mobile.svg" not in readme or f"{name}-desktop.svg" not in readme:
             error(f"README is missing an explicit mobile/desktop <picture> source for {name}")
+    if "featured-header-mobile.svg" not in readme or "featured-header-desktop.svg" not in readme:
+        error("README is missing an explicit mobile/desktop <picture> source for featured-header")
+    for index in range(len(profile.get("featured", []))):
+        if f"featured-card-{index}-mobile.svg" not in readme or f"featured-card-{index}-desktop.svg" not in readme:
+            error(f"README is missing an explicit mobile/desktop <picture> source for featured-card-{index}")
 
     # GitHub wraps README <picture> elements in its own theme-switching custom
     # element, which (confirmed against a live page) does not reliably honour a

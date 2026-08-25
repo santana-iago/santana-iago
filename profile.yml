@@ -45,20 +45,20 @@ featured:
   - LLM Security
   - Undergraduate Research
 - title: CriptoEscape
-  category: CRYPTOGRAPHY EDUCATION · ESCAPE ROOM · CEFET-MG
+  category: ESCAPE ROOM · CEFET-MG
   category_lines:
-  - CRYPTOGRAPHY EDUCATION ·
   - ESCAPE ROOM · CEFET-MG
   description: Educational cryptography escape room project designed to teach cryptographic
     concepts through puzzles and challenges.
   logo: assets/illustrations/criptoescape-door.png
   logo_width: 44
   logo_height: 44
-  url: https://github.com/santana-iago/criptoescape
+  url: https://criptoescape.com
   row_height: 180
   description_max_lines: 4
   title_lines:
   - CriptoEscape
+  - Cryptography Education
 current:
 - title: Cybersecurity @ iT.EAM
   category: CTI · THREAT HUNTING · DETECTION ENGINEERING

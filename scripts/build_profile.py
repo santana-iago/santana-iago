@@ -327,6 +327,8 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
             add_multiline(parts, 92, y + 73, category_lines, "category-mobile", 11)
             description_lines = wrap_words(item["description"], 35, int(item.get("description_max_lines", 3)))
             add_multiline(parts, 92, y + 98 + 11 * (len(category_lines) - 1), description_lines, "ui description-mobile", 17)
+            if item.get("url"):
+                add_arrow(parts, 337, y + 18)
             add_line(parts, 16, y + row_h - 4, 344, y + row_h - 4)
             y += row_h
         return svg_close(parts)
@@ -345,7 +347,44 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
         category_lines = item.get("category_lines", [item["category"]])
         add_multiline(parts, x + 72, top + 62, category_lines, "category", 11)
         add_multiline(parts, x + 8, top + 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], 38, 3), "ui description", 17)
+        if item.get("url"):
+            add_arrow(parts, x + col_w - 20, top + 18)
         add_line(parts, x, 218, x + col_w, 218)
+    return svg_close(parts)
+
+
+def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme: str | None) -> str:
+    """Render one featured-work card so it can be wrapped in its own link."""
+    if mobile:
+        width = 360
+        row_h = int(item.get("row_height", 146))
+        parts = svg_open(width, row_h, theme)
+        add_image(parts, 18, 19, item["logo_width"] + 6, item["logo_height"] + 6, item["logo"], theme)
+        add_multiline(parts, 92, 29, item["title_lines"], "ui title-mobile", 20)
+        category_lines = item.get("category_lines", [item["category"]])
+        add_multiline(parts, 92, 73, category_lines, "category-mobile", 11)
+        description_lines = wrap_words(item["description"], 35, int(item.get("description_max_lines", 3)))
+        add_multiline(parts, 92, 98 + 11 * (len(category_lines) - 1), description_lines, "ui description-mobile", 17)
+        if item.get("url"):
+            add_arrow(parts, 337, 18)
+        add_line(parts, 16, row_h - 4, 344, row_h - 4)
+        return svg_close(parts)
+
+    gap = 24
+    col_w = (880 - 2 * gap) / 3
+    width = col_w + gap if index < 2 else col_w
+    height = 164
+    parts = svg_open(width, height, theme)
+    add_image(parts, 8, 10, item["logo_width"], item["logo_height"], item["logo"], theme)
+    add_multiline(parts, 72, 20, item["title_lines"], "ui title", 18)
+    category_lines = item.get("category_lines", [item["category"]])
+    add_multiline(parts, 72, 62, category_lines, "category", 11)
+    add_multiline(parts, 8, 91 + 11 * (len(category_lines) - 1), wrap_words(item["description"], 38, 3), "ui description", 17)
+    if item.get("url"):
+        add_arrow(parts, width - 20, 18)
+    add_line(parts, 0, height, col_w, height)
+    if index < 2:
+        add_line(parts, col_w + gap / 2, 0, col_w + gap / 2, height, True)
     return svg_close(parts)
 
 
@@ -485,7 +524,13 @@ def generate_readme(profile: dict[str, Any]) -> str:
         for item in profile["contacts"]
     ]
     lines.append("".join(contact_pictures))
-    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '</div>', ''])
+    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '<p align="center">'])
+    featured_pictures = [
+        responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
+        for item_index, item in enumerate(profile["featured"])
+    ]
+    lines.append("".join(featured_pictures))
+    lines.extend(['</p>', '</div>', ''])
 
     lines.append(responsive_picture("current-header", "Currently working on."))
     lines.append('<p align="center">')
@@ -567,9 +612,16 @@ def generate_previews(profile: dict[str, Any]) -> None:
         contact_row = Image.new("RGB", (880, 76), bg)
         for x, item in zip((0, 285, 570), profile["contacts"]):
             contact_row.paste(render_svg_string(generate_contact_card(item, False, theme), 265, bg), (x, 0))
+        featured_row = Image.new("RGB", (880, 164), bg)
+        featured_x = 0
+        for i, item in enumerate(profile["featured"]):
+            card = render_svg_string(generate_featured_card(item, i, False, theme), round(301.333333 if i < 2 else 277.333333), bg)
+            featured_row.paste(card, (featured_x, 0))
+            featured_x += card.width
         desktop += [
             contact_row,
-            render_svg_string(generate_featured(profile, False, theme), 880, bg),
+            render_svg_string(generate_header("featured work", False, theme), 880, bg),
+            featured_row,
             render_svg_string(generate_header("currently working on", False, theme), 880, bg),
         ]
         current_cards = [render_svg_string(generate_current_card(item, False, theme), 390, bg) for item in profile["current"]]
@@ -594,10 +646,10 @@ def generate_previews(profile: dict[str, Any]) -> None:
         ]
         for item in profile["contacts"]:
             mobile.append(render_svg_string(generate_contact_card(item, True, theme), 360, bg))
-        mobile += [
-            render_svg_string(generate_featured(profile, True, theme), 360, bg),
-            render_svg_string(generate_header("currently working on", True, theme), 360, bg),
-        ]
+        mobile.append(render_svg_string(generate_header("featured work", True, theme), 360, bg))
+        for i, item in enumerate(profile["featured"]):
+            mobile.append(render_svg_string(generate_featured_card(item, i, True, theme), 360, bg))
+        mobile.append(render_svg_string(generate_header("currently working on", True, theme), 360, bg))
         for item in profile["current"]:
             mobile.append(render_svg_string(generate_current_card(item, True, theme), 360, bg))
         mobile.append(render_svg_string(generate_header("certifications", True, theme), 360, bg))
@@ -622,10 +674,13 @@ def save_generated(profile: dict[str, Any]) -> None:
             f"hero-{layout}.svg": generate_hero(profile, mobile, None),
             f"status-{layout}.svg": generate_status(profile, mobile, None),
             f"featured-{layout}.svg": generate_featured(profile, mobile, None),
+            f"featured-header-{layout}.svg": generate_header("featured work", mobile, None),
             f"current-header-{layout}.svg": generate_header("currently working on", mobile, None),
             f"certifications-header-{layout}.svg": generate_header("certifications", mobile, None),
             f"statistics-header-{layout}.svg": generate_header("github profile statistics", mobile, None),
         }
+        for i, item in enumerate(profile["featured"]):
+            outputs[f"featured-card-{i}-{layout}.svg"] = generate_featured_card(item, i, mobile, None)
         for item in profile["contacts"]:
             outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
         for i, item in enumerate(profile["current"]):

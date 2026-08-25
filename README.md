@@ -17,9 +17,12 @@
 
 <div align="center">
 <picture>
-  <source media="(max-width: 480px)" srcset="./assets/generated/featured-mobile.svg">
-  <img src="./assets/generated/featured-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.">
+  <source media="(max-width: 480px)" srcset="./assets/generated/featured-header-mobile.svg">
+  <img src="./assets/generated/featured-header-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.">
 </picture>
+<p align="center">
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-0-mobile.svg"><img src="./assets/generated/featured-card-0-desktop.svg" alt="SOC / CTI &amp; Detection"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-1-mobile.svg"><img src="./assets/generated/featured-card-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><a href="https://criptoescape.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-2-mobile.svg"><img src="./assets/generated/featured-card-2-desktop.svg" alt="CriptoEscape"></picture></a>
+</p>
 </div>
 
 <picture>
@@ -59,7 +62,7 @@ Security operations spanning detection engineering, threat hunting and applied C
 Undergraduate research into attack surfaces and safer design for LLM-based agents.
 
 ### CriptoEscape
-*CRYPTOGRAPHY EDUCATION · ESCAPE ROOM · CEFET-MG*
+*ESCAPE ROOM · CEFET-MG*
 
 Educational cryptography escape room project designed to teach cryptographic concepts through puzzles and challenges.
 
