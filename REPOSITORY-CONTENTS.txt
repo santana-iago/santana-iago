@@ -23,9 +23,9 @@
 .git/logs/HEAD
 .git/logs/refs/heads/main
 .git/logs/refs/remotes/origin/main
-.git/objects/pack/pack-61e21377d0b2da09da8d3500adf62cb2dd74b272.idx
-.git/objects/pack/pack-61e21377d0b2da09da8d3500adf62cb2dd74b272.pack
-.git/objects/pack/pack-61e21377d0b2da09da8d3500adf62cb2dd74b272.rev
+.git/objects/pack/pack-5d6ced2e1acbe9b5c1409d878e33301a4a9b1330.idx
+.git/objects/pack/pack-5d6ced2e1acbe9b5c1409d878e33301a4a9b1330.pack
+.git/objects/pack/pack-5d6ced2e1acbe9b5c1409d878e33301a4a9b1330.rev
 .git/refs/heads/main
 .git/refs/remotes/origin/main
 .gitattributes
@@ -49,7 +49,6 @@ assets/brands/custodio-veiculos.svg
 assets/brands/iteam-symbol.svg
 assets/brands/tmb-scan-dark.svg
 assets/brands/tmb-scan.svg
-assets/illustrations/criptoescape-door.png
 assets/generated/cert-0-desktop.svg
 assets/generated/cert-0-mobile.svg
 assets/generated/cert-1-desktop.svg
@@ -91,6 +90,7 @@ assets/icons/email.svg
 assets/icons/github-dark.svg
 assets/icons/github.svg
 assets/icons/linkedin.svg
+assets/illustrations/criptoescape-door.png
 docs/preview-desktop-dark.png
 docs/preview-desktop-light.png
 docs/preview-mobile-dark.png

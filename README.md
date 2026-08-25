@@ -18,7 +18,7 @@
 <div align="center">
 <picture>
   <source media="(max-width: 480px)" srcset="./assets/generated/featured-mobile.svg">
-  <img src="./assets/generated/featured-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and cryptography education.">
+  <img src="./assets/generated/featured-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.">
 </picture>
 </div>
 
