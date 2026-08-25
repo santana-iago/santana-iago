@@ -91,6 +91,7 @@ assets/icons/github-dark.svg
 assets/icons/github.svg
 assets/icons/linkedin.svg
 assets/illustrations/criptoescape-door.png
+assets/illustrations/tmb-scan.png
 docs/preview-desktop-dark.png
 docs/preview-desktop-light.png
 docs/preview-mobile-dark.png
