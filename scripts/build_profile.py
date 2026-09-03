@@ -99,7 +99,7 @@ def _theme_rules(c: dict[str, str]) -> str:
 .arrow{{stroke:{c['arrow']};fill:{c['arrow']}}}
 .hero-headline{{font:italic 600 34px Georgia,'Times New Roman',serif;fill:{c['text']}}}
 .hero-headline-mobile{{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:{c['text']}}}
-.hero-copy{{font:400 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
+.hero-copy{{font:400 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
 .hero-copy-mobile{{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:{c['muted']}}}
 .status-label{{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:{c['label']}}}
 .status-value{{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:{c['text']}}}

@@ -2,7 +2,7 @@ meta:
   name: Iago Santana
   username: santana-iago
   headline: Investigating threats. Solving real problems.
-  introduction: CTI, Detection Engineering, LLM Security research, and practical software.
+  introduction: CTI, Threat Hunting, Detection Engineering, LLM Security research, and practical software.
 status:
 - label: WORKING
   value: SOC | CTI @ iT.EAM
