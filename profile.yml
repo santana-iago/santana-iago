@@ -97,8 +97,8 @@ current:
   description: Managing vehicle sales, marketplace publishing and commercial performance in
     one platform.
   logo: assets/brands/custodio-veiculos.svg
-  logo_width: 62
-  logo_height: 42
+  logo_width: 173
+  logo_height: 40
   url: https://github.com/santana-iago/custodio-veiculos-site
 - title: PET / COMPET
   category: TECHNOLOGY · EDUCATION · COMMUNITY
