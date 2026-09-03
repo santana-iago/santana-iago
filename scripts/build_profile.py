@@ -534,7 +534,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     lines.append("".join(featured_pictures))
     lines.extend(['</p>', '</div>', ''])
 
-    lines.append(responsive_picture("current-header", "Currently working on."))
+    lines.append(responsive_picture("current-header", "Other work."))
     lines.append('<p align="center">')
     current_pictures = [
         responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
@@ -561,7 +561,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     ])
     for item in profile["featured"]:
         lines += [f'### {item["title"]}', f'*{item["category"]}*', '', item["description"], '']
-    lines.append('## Currently working on')
+    lines.append('## Other work')
     for item in profile["current"]:
         title = f'[{item["title"]}]({item["url"]})' if item.get("url") else item["title"]
         lines += [f'### {title}', f'*{item["category"]}*', '', item["description"], '']
@@ -629,7 +629,7 @@ def generate_previews(profile: dict[str, Any]) -> None:
             contact_row,
             render_svg_string(generate_header("featured work", False, theme), 880, bg),
             featured_row,
-            render_svg_string(generate_header("currently working on", False, theme), 880, bg),
+            render_svg_string(generate_header("other work", False, theme), 880, bg),
         ]
         current_cards = [render_svg_string(generate_current_card(item, False, theme), 390, bg) for item in profile["current"]]
         for i in range(0, len(current_cards), 2):
@@ -656,7 +656,7 @@ def generate_previews(profile: dict[str, Any]) -> None:
         mobile.append(render_svg_string(generate_header("featured work", True, theme), 360, bg))
         for i, item in enumerate(profile["featured"]):
             mobile.append(render_svg_string(generate_featured_card(item, i, True, theme), 360, bg))
-        mobile.append(render_svg_string(generate_header("currently working on", True, theme), 360, bg))
+        mobile.append(render_svg_string(generate_header("other work", True, theme), 360, bg))
         for item in profile["current"]:
             mobile.append(render_svg_string(generate_current_card(item, True, theme), 360, bg))
         mobile.append(render_svg_string(generate_header("certifications", True, theme), 360, bg))
@@ -682,7 +682,7 @@ def save_generated(profile: dict[str, Any]) -> None:
             f"status-{layout}.svg": generate_status(profile, mobile, None),
             f"featured-{layout}.svg": generate_featured(profile, mobile, None),
             f"featured-header-{layout}.svg": generate_header("featured work", mobile, None),
-            f"current-header-{layout}.svg": generate_header("currently working on", mobile, None),
+            f"current-header-{layout}.svg": generate_header("other work", mobile, None),
             f"certifications-header-{layout}.svg": generate_header("certifications", mobile, None),
             f"statistics-header-{layout}.svg": generate_header("github profile statistics", mobile, None),
         }
