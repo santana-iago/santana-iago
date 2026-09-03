@@ -114,7 +114,7 @@ def _theme_rules(c: dict[str, str]) -> str:
 .title-mobile{{font-size:16px;font-weight:700;letter-spacing:-.12px}}
 .current-title{{font-size:14px;font-weight:700;letter-spacing:-.1px}}
 .current-title-mobile{{font-size:15.5px;font-weight:700;letter-spacing:-.1px}}
-.category{{font:700 7.3px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:{c['label']}}}
+.category{{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:{c['label']}}}
 .category-mobile{{font:700 7.8px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.15px;fill:{c['label']}}}
 .description{{font-size:11.3px;font-weight:400;fill:{c['muted']}}}
 .description-mobile{{font-size:12.6px;font-weight:400;fill:{c['muted']}}}
