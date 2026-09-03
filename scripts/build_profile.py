@@ -426,7 +426,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None)
     parts = svg_open(width, height, theme)
     add_image(parts, 10, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
     text_x = 84
-    title_lines = wrap_words(item["title"], 39, 2)
+    title_lines = item.get("title_lines_desktop") or wrap_words(item["title"], 39, 2)
     title_y = 31 if len(title_lines) == 1 else 23
     add_multiline(parts, text_x, title_y, title_lines, "ui current-title", 16)
     add_multiline(parts, text_x, 54, category_lines, "category", 11)

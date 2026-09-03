@@ -64,6 +64,9 @@ current:
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
+  title_lines_desktop:
+  - Post-Quantum Cryptography
+  - Undergraduate Research
 - title: Chemical Products Platform
   category: LABORATORY MANAGEMENT · CEFET-MG
   description: Centralizing chemical inventory and laboratory operations across CEFET-MG campuses.
