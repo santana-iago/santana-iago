@@ -20,7 +20,7 @@ contacts:
   url: mailto:iagoss949@gmail.com
   icon: assets/icons/email.svg
 featured:
-- title: SOC / CTI & Detection
+- title: Cyber Security Analyst @ iT.EAM
   category: SECURITY OPERATIONS · iT.EAM
   description: Security operations spanning detection engineering, threat hunting
     and applied CTI.
@@ -28,8 +28,8 @@ featured:
   logo_width: 44
   logo_height: 44
   title_lines:
-  - SOC / CTI & Detection
-  - Engineering
+  - Cyber Security
+  - "Analyst @ iT.EAM"
 - title: LLM Security Undergraduate Research
   category: AI SECURITY · CEFET-MG
   description: Undergraduate research into attack surfaces and safer design for
@@ -57,20 +57,6 @@ featured:
   - CriptoEscape
   - Cryptography Education
 current:
-- title: Cybersecurity @ iT.EAM
-  category: CTI · THREAT HUNTING · DETECTION ENGINEERING
-  description: Improving detections and investigations through threat hunting, SIEM engineering
-    and intelligence.
-  logo: assets/brands/iteam-symbol.svg
-  logo_width: 44
-  logo_height: 44
-- title: LLM Security Undergraduate Research
-  category: AI SECURITY · CEFET-MG
-  description: Studying attack surfaces and defensive patterns for LLM agents, tools and MCP-based
-    systems.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
 - title: Post-Quantum Cryptography Undergraduate Research
   category: CRYPTOGRAPHY · CEFET-MG
   description: Exploring elliptic-curve systems, real attacks and quantum-resistant approaches
