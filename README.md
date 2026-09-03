@@ -38,7 +38,7 @@
   <img src="./assets/generated/certifications-header-desktop.svg" width="100%" alt="Certifications I&#x27;m pursuing.">
 </picture>
 <p align="center">
-<a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" alt="CompTIA Security+"></picture></a><a href="https://www.cambridgeenglish.org/br/exams-and-tests/first/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" alt="Cambridge B2 First"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" alt="CompTIA Security+"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" alt="Cambridge B2 First"></picture>
 </p>
 
 <picture>
