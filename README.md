@@ -35,7 +35,7 @@
 
 <picture>
   <source media="(max-width: 480px)" srcset="./assets/generated/certifications-header-mobile.svg">
-  <img src="./assets/generated/certifications-header-desktop.svg" width="100%" alt="Certifications.">
+  <img src="./assets/generated/certifications-header-desktop.svg" width="100%" alt="Certifications I&#x27;m pursuing.">
 </picture>
 <p align="center">
 <a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" alt="CompTIA Security+"></picture></a><a href="https://www.cambridgeenglish.org/br/exams-and-tests/first/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" alt="Cambridge B2 First"></picture></a>
@@ -88,7 +88,7 @@ Turning physical assessments and progress data into structured analysis and prof
 Managing vehicle sales, marketplace publishing and commercial performance in one platform.
 
 ### INASIM Management System
-*FRONTEND · CEFET-MG EXTENSION PROJECT*
+*FRONTEND DEV · CEFET-MG*
 
 Building the frontend of a management platform for a nonprofit, as a CEFET-MG extension project.
 
@@ -97,7 +97,7 @@ Building the frontend of a management platform for a nonprofit, as a CEFET-MG ex
 
 Creating technical events, educational initiatives and collaborative engineering projects.
 
-## Certifications
+## Certifications I'm pursuing
 - [CompTIA Security+](https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf) — SY0-701 · Target: 2026/2 — **PREPARING**
 - [Cambridge B2 First](https://www.cambridgeenglish.org/br/exams-and-tests/first/) — Grade A · CEFR C1 target · 2026/2 — **PREPARING**
 
