@@ -88,7 +88,14 @@ current:
   logo: assets/brands/custodio-veiculos.svg
   logo_width: 173
   logo_height: 40
-  url: https://github.com/santana-iago/custodio-veiculos-site
+  url: https://custodioveiculos.com.br
+- title: INASIM Management System
+  category: FRONTEND · CEFET-MG EXTENSION PROJECT
+  description: Building the frontend of a management platform for a nonprofit, as a CEFET-MG
+    extension project.
+  logo: assets/brands/inasim.svg
+  logo_width: 64
+  logo_height: 36
 - title: PET / COMPET
   category: TECHNOLOGY · EDUCATION · COMMUNITY
   description: Creating technical events, educational initiatives and collaborative engineering
