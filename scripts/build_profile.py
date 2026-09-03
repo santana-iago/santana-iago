@@ -390,7 +390,7 @@ def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme
     return svg_close(parts)
 
 
-def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None, index: int = 0, total: int = 0) -> str:
     if mobile:
         width = 360
         title_lines = wrap_words(item["title"], 34, 2)
@@ -434,6 +434,8 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None)
     if item.get("url"):
         add_arrow(parts, 371, 18)
     add_line(parts, 0, bottom_y, width, bottom_y)
+    if index % 2 == 0 and index + 1 < total:
+        add_line(parts, width - 1, 0, width - 1, bottom_y, True)
     return svg_close(parts)
 
 
@@ -631,7 +633,7 @@ def generate_previews(profile: dict[str, Any]) -> None:
             featured_row,
             render_svg_string(generate_header("other work", False, theme), 880, bg),
         ]
-        current_cards = [render_svg_string(generate_current_card(item, False, theme), 390, bg) for item in profile["current"]]
+        current_cards = [render_svg_string(generate_current_card(item, False, theme, i, len(profile["current"])), 390, bg) for i, item in enumerate(profile["current"])]
         for i in range(0, len(current_cards), 2):
             row = Image.new("RGB", (880, 139), bg)
             row.paste(current_cards[i], (0, 0))
@@ -690,9 +692,10 @@ def save_generated(profile: dict[str, Any]) -> None:
             outputs[f"featured-card-{i}-{layout}.svg"] = generate_featured_card(item, i, mobile, None)
         for item in profile["contacts"]:
             outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
+        current_total = len(profile["current"])
         for i, item in enumerate(profile["current"]):
             current_name = item.get("generated_name", f"current-{i}")
-            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None)
+            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None, i, current_total)
         for i, item in enumerate(profile["certifications"]):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():
