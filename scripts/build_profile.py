@@ -449,19 +449,21 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) ->
         add_text(parts, text_x, 31, item["title"], "ui cert-title-mobile")
         add_text(parts, text_x, 55, item["subtitle"], "ui cert-subtitle-mobile")
         add_text(parts, text_x, 76, item["status"], "cert-status")
-        add_arrow(parts, 337, 20)
         return svg_close(parts)
     # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
-    # row without an HTML width attribute (see responsive_linked_picture).
+    # row without an HTML width attribute (see responsive_linked_picture). The
+    # card-bg rect stops well short of the SVG's own width so the two cards
+    # get a visible gap between them in the rendered README, since adjacent
+    # <picture> tags are joined with no markup space between them.
     width, height = 390, 84
+    card_width = 376
     parts = svg_open(width, height, theme)
-    parts.append(f'<rect class="card-bg card-border" x="1" y="5" width="{width-2}" height="74" rx="9"/>')
+    parts.append(f'<rect class="card-bg card-border" x="1" y="5" width="{card_width}" height="74" rx="9"/>')
     add_image(parts, 15, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
     text_x = 130
     add_text(parts, text_x, 32, wrap_words(item["title"], 26, 1)[0], "ui cert-title")
     add_text(parts, text_x, 53, wrap_words(item["subtitle"], 38, 1)[0], "ui cert-subtitle")
     add_text(parts, text_x, 71, item["status"], "cert-status")
-    add_arrow(parts, width - 20, 21)
     return svg_close(parts)
 
 
@@ -546,7 +548,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     lines.extend(['</p>', '', responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
 
     cert_pictures = [
-        responsive_linked_picture(f"cert-{i}", item["title"], item["url"])
+        responsive_linked_picture(f"cert-{i}", item["title"], None)
         for i, item in enumerate(profile["certifications"])
     ]
     lines.append("".join(cert_pictures))
