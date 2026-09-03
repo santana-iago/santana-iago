@@ -21,16 +21,16 @@
   <img src="./assets/generated/featured-header-desktop.svg" width="100%" alt="Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.">
 </picture>
 <p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-0-mobile.svg"><img src="./assets/generated/featured-card-0-desktop.svg" alt="SOC / CTI &amp; Detection"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-1-mobile.svg"><img src="./assets/generated/featured-card-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><a href="https://criptoescape.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-2-mobile.svg"><img src="./assets/generated/featured-card-2-desktop.svg" alt="CriptoEscape"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-0-mobile.svg"><img src="./assets/generated/featured-card-0-desktop.svg" alt="Cyber Security Analyst @ iT.EAM"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-1-mobile.svg"><img src="./assets/generated/featured-card-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><a href="https://criptoescape.com"><picture><source media="(max-width: 480px)" srcset="./assets/generated/featured-card-2-mobile.svg"><img src="./assets/generated/featured-card-2-desktop.svg" alt="CriptoEscape"></picture></a>
 </p>
 </div>
 
 <picture>
   <source media="(max-width: 480px)" srcset="./assets/generated/current-header-mobile.svg">
-  <img src="./assets/generated/current-header-desktop.svg" width="100%" alt="Currently working on.">
+  <img src="./assets/generated/current-header-desktop.svg" width="100%" alt="Other work.">
 </picture>
 <p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Cybersecurity @ iT.EAM"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="LLM Security Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-tmb-scan-mobile.svg"><img src="./assets/generated/current-tmb-scan-desktop.svg" alt="TMB Scan"></picture><a href="https://github.com/santana-iago/custodio-veiculos-site"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="PET / COMPET"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-tmb-scan-mobile.svg"><img src="./assets/generated/current-tmb-scan-desktop.svg" alt="TMB Scan"></picture><a href="https://custodioveiculos.com.br"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Custódio Veículos"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" alt="INASIM Management System"></picture><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="PET / COMPET"></picture></a>
 </p>
 
 <picture>
@@ -51,7 +51,7 @@
 <summary>Accessible text version</summary>
 
 ## Featured work
-### SOC / CTI & Detection
+### Cyber Security Analyst @ iT.EAM
 *SECURITY OPERATIONS · iT.EAM*
 
 Security operations spanning detection engineering, threat hunting and applied CTI.
@@ -66,17 +66,7 @@ Undergraduate research into attack surfaces and safer design for LLM-based agent
 
 Educational, cryptography-themed escape room platform designed to teach cryptographic concepts through puzzles.
 
-## Currently working on
-### Cybersecurity @ iT.EAM
-*CTI · THREAT HUNTING · DETECTION ENGINEERING*
-
-Improving detections and investigations through threat hunting, SIEM engineering and intelligence.
-
-### LLM Security Undergraduate Research
-*AI SECURITY · CEFET-MG*
-
-Studying attack surfaces and defensive patterns for LLM agents, tools and MCP-based systems.
-
+## Other work
 ### Post-Quantum Cryptography Undergraduate Research
 *CRYPTOGRAPHY · CEFET-MG*
 
@@ -92,10 +82,15 @@ Centralizing chemical inventory and laboratory operations across CEFET-MG campus
 
 Turning physical assessments and progress data into structured analysis and professional reports.
 
-### [Custódio Veículos](https://github.com/santana-iago/custodio-veiculos-site)
+### [Custódio Veículos](https://custodioveiculos.com.br)
 *AUTOMOTIVE SALES TECHNOLOGY*
 
 Managing vehicle sales, marketplace publishing and commercial performance in one platform.
+
+### INASIM Management System
+*FRONTEND · CEFET-MG EXTENSION PROJECT*
+
+Building the frontend of a management platform for a nonprofit, as a CEFET-MG extension project.
 
 ### [PET / COMPET](https://compet.vercel.app/)
 *TECHNOLOGY · EDUCATION · COMMUNITY*

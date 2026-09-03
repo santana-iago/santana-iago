@@ -23,9 +23,9 @@
 .git/logs/HEAD
 .git/logs/refs/heads/main
 .git/logs/refs/remotes/origin/main
-.git/objects/pack/pack-a286e994b60f5b38dad753a59a0672c9b583ec2f.idx
-.git/objects/pack/pack-a286e994b60f5b38dad753a59a0672c9b583ec2f.pack
-.git/objects/pack/pack-a286e994b60f5b38dad753a59a0672c9b583ec2f.rev
+.git/objects/pack/pack-623f28e3e4d9ac814918d15748a6372e41e20bc9.idx
+.git/objects/pack/pack-623f28e3e4d9ac814918d15748a6372e41e20bc9.pack
+.git/objects/pack/pack-623f28e3e4d9ac814918d15748a6372e41e20bc9.rev
 .git/refs/heads/main
 .git/refs/remotes/origin/main
 .gitattributes
@@ -46,6 +46,7 @@ assets/brands/compet.svg
 assets/brands/comptia.svg
 assets/brands/custodio-veiculos-dark.svg
 assets/brands/custodio-veiculos.svg
+assets/brands/inasim.svg
 assets/brands/iteam-symbol.svg
 assets/brands/tmb-scan-dark.svg
 assets/brands/tmb-scan.svg
@@ -63,14 +64,12 @@ assets/generated/current-0-desktop.svg
 assets/generated/current-0-mobile.svg
 assets/generated/current-1-desktop.svg
 assets/generated/current-1-mobile.svg
-assets/generated/current-2-desktop.svg
-assets/generated/current-2-mobile.svg
 assets/generated/current-3-desktop.svg
 assets/generated/current-3-mobile.svg
+assets/generated/current-4-desktop.svg
+assets/generated/current-4-mobile.svg
 assets/generated/current-5-desktop.svg
 assets/generated/current-5-mobile.svg
-assets/generated/current-6-desktop.svg
-assets/generated/current-6-mobile.svg
 assets/generated/current-header-desktop.svg
 assets/generated/current-header-mobile.svg
 assets/generated/current-tmb-scan-desktop.svg
