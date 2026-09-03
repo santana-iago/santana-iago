@@ -417,7 +417,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None)
     # description position/height are both computed from actual line counts
     # rather than assumed to always be 1 and 3 lines respectively.
     width = 390
-    category_lines = wrap_words(item["category"], 32, 2)
+    category_lines = wrap_words(item["category"], 38, 2)
     desc_y = 54 + 11 * len(category_lines) + 11
     desc_lines = wrap_words(item["description"], 38, 3)
     desc_line_height = 15
