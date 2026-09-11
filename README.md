@@ -30,7 +30,7 @@
   <img src="./assets/generated/current-header-desktop.svg" width="100%" alt="Other work.">
 </picture>
 <p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-tmb-scan-mobile.svg"><img src="./assets/generated/current-tmb-scan-desktop.svg" alt="TMB Scan"></picture><a href="https://custodioveiculos.com.br"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Custódio Veículos"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-4-mobile.svg"><img src="./assets/generated/current-4-desktop.svg" alt="INASIM Management System"></picture><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="PET / COMPET"></picture></a>
+<picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="Algorithms &amp; Data Structures I"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Computer Programming I"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-tmb-scan-mobile.svg"><img src="./assets/generated/current-tmb-scan-desktop.svg" alt="TMB Scan"></picture><a href="https://custodioveiculos.com.br"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="INASIM Management System"></picture><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-7-mobile.svg"><img src="./assets/generated/current-7-desktop.svg" alt="PET / COMPET"></picture></a>
 </p>
 
 <picture>
@@ -52,50 +52,60 @@
 
 ## Featured work
 ### Cyber Security Analyst @ iT.EAM
-*SECURITY OPERATIONS · iT.EAM*
+*CTI · THREAT HUNTING · THREAT DETECTION*
 
-Security operations spanning detection engineering, threat hunting and applied CTI.
+Building detections, hunting threats, and turning cyber threat intelligence into practical security operations.
 
 ### LLM Security Undergraduate Research
-*AI SECURITY · CEFET-MG*
+*AI SECURITY · LLM AGENTS · RESEARCH*
 
-Undergraduate research into attack surfaces and safer design for LLM-based agents.
+Researching attack surfaces, adversarial behavior, and safer design for LLM-based agents.
 
 ### CriptoEscape
-*ESCAPE ROOM · CEFET-MG*
+*CRYPTOGRAPHY · EDUCATION · FULL STACK*
 
-Educational, cryptography-themed escape room platform designed to teach cryptographic concepts through puzzles.
+Teaching cryptography through an interactive escape-room platform built around hands-on challenges.
 
 ## Other work
 ### Post-Quantum Cryptography Undergraduate Research
-*CRYPTOGRAPHY · CEFET-MG*
+*POST-QUANTUM CRYPTOGRAPHY · RESEARCH*
 
-Exploring elliptic-curve systems, real attacks and quantum-resistant approaches for emerging security.
+Exploring post-quantum cryptography, practical attacks, and the transition beyond classical public-key systems.
 
 ### Chemical Products Platform
-*LABORATORY MANAGEMENT · CEFET-MG*
+*FULL STACK · CEFET-MG*
 
-Centralizing chemical inventory and laboratory operations across CEFET-MG campuses.
+Building a platform for chemical inventory and laboratory operations across CEFET-MG campuses.
+
+### Algorithms & Data Structures I
+*UNDERGRADUATE TEACHING ASSISTANT · CEFET-MG*
+
+Selected through CEFET-MG's program, teaching algorithms, complexity, and data structures across languages.
+
+### Computer Programming I
+*UNDERGRADUATE TEACHING ASSISTANT · PYTHON · CEFET-MG*
+
+Selected through CEFET-MG's program, teaching programming fundamentals and problem solving in Python.
 
 ### TMB Scan
-*PHYSICAL ASSESSMENT TECHNOLOGY*
+*PHYSICAL ASSESSMENT TECHNOLOGY · CLIENT PROJECT*
 
-Turning physical assessments and progress data into structured analysis and professional reports.
+Building a real-world platform for a fitness business: assessments, progress tracking, and reporting.
 
 ### [Custódio Veículos](https://custodioveiculos.com.br)
-*AUTOMOTIVE SALES TECHNOLOGY*
+*AUTOMOTIVE SALES TECHNOLOGY · CLIENT PROJECT*
 
-Managing vehicle sales, marketplace publishing and commercial performance in one platform.
+Building a production platform for a real automotive client: inventory, marketplace publishing, and sales.
 
 ### INASIM Management System
-*FRONTEND DEV · CEFET-MG*
+*FRONTEND DEVELOPMENT · NONPROFIT*
 
-Building the frontend of a management platform for a nonprofit, as a CEFET-MG extension project.
+Building the frontend of a management platform for an education-focused nonprofit and its community programs.
 
 ### [PET / COMPET](https://compet.vercel.app/)
-*TECHNOLOGY · EDUCATION · COMMUNITY*
+*ENGINEERING · EDUCATION · COMMUNITY*
 
-Creating technical events, educational initiatives and collaborative engineering projects.
+Creating technical events, educational initiatives, and collaborative engineering projects at CEFET-MG.
 
 ## Certifications I'm pursuing
 - [CompTIA Security+](https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf) — SY0-701 · Target: 2026/2 — **PREPARING**
