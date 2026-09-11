@@ -390,7 +390,11 @@ def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme
     return svg_close(parts)
 
 
-def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None, index: int = 0, total: int = 0) -> str:
+def _current_title_lines_desktop(item: dict[str, Any]) -> list[str]:
+    return item.get("title_lines_desktop") or wrap_words(item["title"], 39, 2)
+
+
+def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None, index: int = 0, total: int = 0, row_title_lines: int = 1) -> str:
     if mobile:
         width = 360
         title_lines = wrap_words(item["title"], 34, 2)
@@ -417,8 +421,20 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
     # description position/height are both computed from actual line counts
     # rather than assumed to always be 1 and 3 lines respectively.
     width = 390
+    title_lines = _current_title_lines_desktop(item)
+    title_y = 31 if len(title_lines) == 1 else 23
+    # A 2-line title needs the same clearance below its second line that a
+    # 1-line title has below its only line (23px, from title_y=31 to
+    # category_y=54) — otherwise the category tag crowds the title's second
+    # line instead of the card growing to make room for it. row_title_lines
+    # (the max title-line count across both cards sharing this row) keeps
+    # both cards in a row at the same category_y/height even when only one
+    # of them actually needs two lines, so paired cards stay level instead
+    # of the short-titled one looking shorter/emptier than its neighbor.
+    effective_title_lines = max(len(title_lines), row_title_lines)
+    category_y = 54 if effective_title_lines == 1 else 31 + 16 + 23
     category_lines = wrap_words(item["category"], 38, 2)
-    desc_y = 54 + 11 * len(category_lines) + 11
+    desc_y = category_y + 11 * len(category_lines) + 11
     desc_lines = wrap_words(item["description"], 38, 3)
     desc_line_height = 15
     bottom_y = desc_y + desc_line_height * (len(desc_lines) - 1) + 13
@@ -426,10 +442,8 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
     parts = svg_open(width, height, theme)
     add_image(parts, 10, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
     text_x = 84
-    title_lines = item.get("title_lines_desktop") or wrap_words(item["title"], 39, 2)
-    title_y = 31 if len(title_lines) == 1 else 23
     add_multiline(parts, text_x, title_y, title_lines, "ui current-title", 16)
-    add_multiline(parts, text_x, 54, category_lines, "category", 11)
+    add_multiline(parts, text_x, category_y, category_lines, "category", 11)
     add_multiline(parts, text_x, desc_y, desc_lines, "ui description", desc_line_height)
     if item.get("url"):
         add_arrow(parts, 371, 18)
@@ -635,12 +649,20 @@ def generate_previews(profile: dict[str, Any]) -> None:
             featured_row,
             render_svg_string(generate_header("other work", False, theme), 880, bg),
         ]
-        current_cards = [render_svg_string(generate_current_card(item, False, theme, i, len(profile["current"])), 390, bg) for i, item in enumerate(profile["current"])]
-        for i in range(0, len(current_cards), 2):
-            row = Image.new("RGB", (880, 139), bg)
-            row.paste(current_cards[i], (0, 0))
-            if i + 1 < len(current_cards):
-                row.paste(current_cards[i + 1], (410, 0))
+        current_items = profile["current"]
+        current_total = len(current_items)
+        for i in range(0, current_total, 2):
+            row_items = current_items[i:i + 2]
+            row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
+            row_cards = [
+                render_svg_string(generate_current_card(item, False, theme, i + offset, current_total, row_title_lines), 390, bg)
+                for offset, item in enumerate(row_items)
+            ]
+            row_height = max(card.height for card in row_cards)
+            row = Image.new("RGB", (880, row_height), bg)
+            row.paste(row_cards[0], (0, 0))
+            if len(row_cards) > 1:
+                row.paste(row_cards[1], (410, 0))
             desktop.append(row)
         desktop.append(render_svg_string(generate_header("certifications i'm pursuing", False, theme), 880, bg))
         cert_row = Image.new("RGB", (880, 84), bg)
@@ -695,9 +717,15 @@ def save_generated(profile: dict[str, Any]) -> None:
         for item in profile["contacts"]:
             outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
         current_total = len(profile["current"])
-        for i, item in enumerate(profile["current"]):
+        current_items = profile["current"]
+        for i, item in enumerate(current_items):
             current_name = item.get("generated_name", f"current-{i}")
-            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None, i, current_total)
+            row_title_lines = 1
+            if not mobile:
+                row_start = i - (i % 2)
+                row_items = current_items[row_start:row_start + 2]
+                row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
+            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None, i, current_total, row_title_lines)
         for i, item in enumerate(profile["certifications"]):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():
