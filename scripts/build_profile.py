@@ -5,7 +5,6 @@ import argparse
 import base64
 import html
 import io
-import re
 import shutil
 from pathlib import Path
 from typing import Any
@@ -21,85 +20,6 @@ GENERATED = ROOT / "assets" / "generated"
 # computer window never accidentally matches it — only phones should.
 MOBILE_BREAKPOINT = 480
 DOCS = ROOT / "docs"
-
-# Sections keyed by stable `id` in profile.yml (translation overlays match by
-# this id, never by array position or by the translatable title text itself,
-# so reordering/adding/removing a card in profile.yml can't silently shift a
-# translation onto the wrong item).
-ID_KEYED_SECTIONS = ("featured", "current", "certifications")
-# Sections keyed by a fixed semantic name (status/contacts have no natural
-# id field of their own; label/type is stable and known ahead of time).
-NAMED_SECTIONS = {
-    "status": lambda item: item["label"].lower(),
-    "contacts": lambda item: item["label"].lower(),
-}
-
-LANGUAGES = {
-    "en": {
-        "translation": None,
-        "generated": GENERATED,
-        "readme": ROOT / "README.md",
-    },
-    "pt-BR": {
-        "translation": ROOT / "profile.pt-BR.yml",
-        "generated": GENERATED / "pt-BR",
-        "readme": ROOT / "README.pt-BR.md",
-    },
-}
-
-UI_STRINGS = {
-    "en": {
-        "hero_alt": "Iago Santana. Investigating threats. Solving real problems.",
-        "status_alt": "Working in SOC and CTI at iT.EAM, researching LLM Security and studying Computer Engineering at CEFET-MG.",
-        "featured_header": "featured work",
-        "featured_header_alt": "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research.",
-        "other_work_header": "other work",
-        "other_work_alt": "Other work.",
-        "certifications_header": "certifications i'm pursuing",
-        "certifications_alt": "Certifications I'm pursuing.",
-        "statistics_header": "github profile statistics",
-        "statistics_alt": "GitHub profile statistics.",
-        "statistics_img_alt": "GitHub profile statistics",
-        "accessible_version_summary": "Accessible text version",
-        "featured_work_heading": "Featured work",
-        "other_work_heading": "Other work",
-        "certifications_heading": "Certifications I'm pursuing",
-        "generated_comment": "<!-- Generated from profile.yml. Edit profile.yml, then run python scripts/build_profile.py. -->",
-    },
-    "pt-BR": {
-        "hero_alt": "Iago Santana. Investigando ameaças. Resolvendo problemas reais.",
-        "status_alt": "Trabalhando em SOC e CTI na iT.EAM, pesquisando LLM Security e estudando Engenharia da Computação no CEFET-MG.",
-        "featured_header": "trabalhos em destaque",
-        "featured_header_alt": "Trabalhos em destaque em SOC e CTI, LLM Security e pesquisa em criptografia pós-quântica.",
-        "other_work_header": "outros trabalhos",
-        "other_work_alt": "Outros trabalhos.",
-        "certifications_header": "certificações em andamento",
-        "certifications_alt": "Certificações em andamento.",
-        "statistics_header": "estatísticas do perfil no github",
-        "statistics_alt": "Estatísticas do perfil no GitHub.",
-        "statistics_img_alt": "Estatísticas do perfil no GitHub",
-        "accessible_version_summary": "Versão em texto acessível",
-        "featured_work_heading": "Trabalhos em destaque",
-        "other_work_heading": "Outros trabalhos",
-        "certifications_heading": "Certificações em andamento",
-        "generated_comment": "<!-- Gerado a partir de profile.yml e profile.pt-BR.yml. Edite esses arquivos e rode python scripts/build_profile.py. -->",
-    },
-}
-
-LANGUAGE_SELECTOR = {
-    "en": (
-        '<p align="right">\n'
-        '  <strong><kbd>EN</kbd></strong>\n'
-        '  <a href="./README.pt-BR.md"><kbd>PT-BR</kbd></a>\n'
-        '</p>'
-    ),
-    "pt-BR": (
-        '<p align="right">\n'
-        '  <a href="./README.md"><kbd>EN</kbd></a>\n'
-        '  <strong><kbd>PT-BR</kbd></strong>\n'
-        '</p>'
-    ),
-}
 
 THEMES = {
     "light": {
@@ -131,113 +51,6 @@ THEMES = {
 
 def load_profile() -> dict[str, Any]:
     return yaml.safe_load((ROOT / "profile.yml").read_text(encoding="utf-8"))
-
-
-def load_translation(path: Path) -> dict[str, Any]:
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
-
-
-# Translatable text fields per section. Any other field on an item (logo,
-# url, widths, generated_name, row_height, ...) is structural and must come
-# from profile.yml only — a translation overlay is never allowed to set it.
-TRANSLATABLE_FIELDS = {
-    "meta": {"headline", "introduction"},
-    "status": {"label", "value"},
-    "contacts": {"label", "value"},
-    "featured": {"title", "title_lines", "category", "category_lines", "description"},
-    "current": {"title", "title_lines_desktop", "category", "description"},
-    "certifications": {"title", "subtitle", "status"},
-}
-
-# Fields that hold a manual line-break override rather than plain text. Each
-# is always optional in a translation overlay (the generator auto-wraps the
-# corresponding plain-text field — title/category — when absent), and one
-# language's override must never leak into another's merged item (see
-# localize()) since it's tied to that language's exact wording.
-LINE_OVERRIDE_FIELDS = {"title_lines", "title_lines_desktop", "category_lines"}
-
-
-def _section_key(section: str, item: dict[str, Any], index: int) -> str:
-    if section in ID_KEYED_SECTIONS:
-        item_id = item.get("id")
-        if not item_id:
-            raise ValueError(f"profile.yml: {section}[{index}] is missing a required 'id' field")
-        return item_id
-    return NAMED_SECTIONS[section](item)
-
-
-def validate_translation(profile: dict[str, Any], translation: dict[str, Any], lang: str) -> None:
-    errors: list[str] = []
-
-    for field in TRANSLATABLE_FIELDS["meta"]:
-        if field not in translation.get("meta", {}):
-            errors.append(f"[{lang}] meta.{field} is missing a translation")
-
-    for section, fields in TRANSLATABLE_FIELDS.items():
-        if section == "meta":
-            continue
-        base_items = profile.get(section, [])
-        base_keys = [_section_key(section, item, i) for i, item in enumerate(base_items)]
-        seen = set()
-        for key in base_keys:
-            if key in seen:
-                errors.append(f"[{lang}] {section}: duplicate identifier '{key}' in profile.yml")
-            seen.add(key)
-
-        overlay = translation.get(section, {})
-        if not isinstance(overlay, dict):
-            errors.append(f"[{lang}] {section}: translation must be a mapping keyed by id/label, not a list")
-            continue
-
-        unknown = set(overlay) - set(base_keys)
-        for key in sorted(unknown):
-            errors.append(f"[{lang}] {section}.{key}: translation references an id that does not exist in profile.yml")
-
-        for key in base_keys:
-            entry = overlay.get(key)
-            if entry is None:
-                errors.append(f"[{lang}] {section}.{key}: missing translation entry")
-                continue
-            for field in fields:
-                if field in LINE_OVERRIDE_FIELDS:
-                    continue
-                if field not in entry:
-                    errors.append(f"[{lang}] {section}.{key}.{field}: missing required translated field")
-
-    if errors:
-        raise ValueError("Translation validation failed:\n" + "\n".join(f"  - {e}" for e in errors))
-
-
-def localize(profile: dict[str, Any], translation: dict[str, Any] | None, lang: str) -> dict[str, Any]:
-    if translation is None:
-        return profile
-
-    validate_translation(profile, translation, lang)
-
-    localized: dict[str, Any] = {
-        "meta": {**profile["meta"], **translation["meta"]},
-        "statistics": profile["statistics"],
-    }
-    for section, fields in TRANSLATABLE_FIELDS.items():
-        if section == "meta":
-            continue
-        overlay = translation.get(section, {})
-        localized[section] = []
-        for index, item in enumerate(profile[section]):
-            key = _section_key(section, item, index)
-            entry = overlay[key]
-            merged = dict(item)
-            for field in fields:
-                if field in entry:
-                    merged[field] = entry[field]
-                elif field in LINE_OVERRIDE_FIELDS:
-                    # Never let a translation silently inherit another
-                    # language's manual line-break override — drop it so the
-                    # generator falls back to auto word-wrap of the
-                    # (correctly localized) plain text instead.
-                    merged.pop(field, None)
-            localized[section].append(merged)
-    return localized
 
 
 def esc(value: str) -> str:
@@ -496,7 +309,7 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
     return svg_close(parts)
 
 
-def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None, ui: dict[str, str]) -> str:
+def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["featured"]
     if mobile:
         width = 360
@@ -504,7 +317,7 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None, 
         row_heights = [int(item.get("row_height", 146)) for item in items]
         height = start + sum(row_heights) + 5
         parts = svg_open(width, height, theme)
-        section_header(parts, ui["featured_header"], width, True)
+        section_header(parts, "featured work", width, True)
         y = start
         for i, item in enumerate(items):
             row_h = row_heights[i]
@@ -521,7 +334,7 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None, 
         return svg_close(parts)
     width, height = 880, 232
     parts = svg_open(width, height, theme)
-    section_header(parts, ui["featured_header"], width, False)
+    section_header(parts, "featured work", width, False)
     gap = 24
     col_w = (880 - 2 * gap) / 3
     top = 54
@@ -662,7 +475,7 @@ def generate_header(title: str, mobile: bool, theme: str | None) -> str:
     return svg_close(parts)
 
 
-def responsive_picture(name: str, alt: str, asset_base: str = "./assets/generated") -> str:
+def responsive_picture(name: str, alt: str) -> str:
     # Only ever gated on width. Theme is handled *inside* each SVG via a native
     # prefers-color-scheme media query (see style()) — not here. GitHub wraps
     # README <picture> elements in its own <themed-picture> custom element to
@@ -672,15 +485,16 @@ def responsive_picture(name: str, alt: str, asset_base: str = "./assets/generate
     # combined with a color-scheme condition on the same <source>, regardless of
     # how explicitly both are qualified. Giving it nothing color-scheme-related
     # to look at sidesteps that entirely.
+    base = "./assets/generated"
     return (
         '<picture>\n'
-        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{asset_base}/{name}-mobile.svg">\n'
-        f'  <img src="{asset_base}/{name}-desktop.svg" width="100%" alt="{esc(alt)}">\n'
+        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{name}-mobile.svg">\n'
+        f'  <img src="{base}/{name}-desktop.svg" width="100%" alt="{esc(alt)}">\n'
         '</picture>'
     )
 
 
-def responsive_linked_picture(path_base: str, alt: str, url: str | None, asset_base: str = "./assets/generated") -> str:
+def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
     # Deliberately no width attribute on the desktop <img> — setting one
     # (tried as a percentage, to get 3 contact cards / 2 current-cert cards
     # sharing a row regardless of GitHub's exact content-column width) broke
@@ -689,22 +503,21 @@ def responsive_linked_picture(path_base: str, alt: str, url: str | None, asset_b
     # image rendered instead, scaled down. Row-fit on desktop is handled by
     # sizing each card's own SVG small enough to fit, not by an HTML width
     # attribute on the <picture>.
+    base = "./assets/generated"
     picture = (
         '<picture>'
-        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{asset_base}/{path_base}-mobile.svg">'
-        f'<img src="{asset_base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
+        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile.svg">'
+        f'<img src="{base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
         '</picture>'
     )
     return f'<a href="{esc(url)}">{picture}</a>' if url else picture
 
 
-def generate_readme(profile: dict[str, Any], lang: str, asset_base: str) -> str:
-    ui = UI_STRINGS[lang]
+def generate_readme(profile: dict[str, Any]) -> str:
     lines: list[str] = [
-        LANGUAGE_SELECTOR[lang],
         '<div align="center">',
-        responsive_picture("hero", ui["hero_alt"], asset_base),
-        responsive_picture("status", ui["status_alt"], asset_base),
+        responsive_picture("hero", "Iago Santana. Investigating threats. Solving real problems."),
+        responsive_picture("status", "Working in SOC and CTI at iT.EAM, researching LLM Security and studying Computer Engineering at CEFET-MG."),
         '</div>',
         '',
         '<br>',
@@ -713,53 +526,53 @@ def generate_readme(profile: dict[str, Any], lang: str, asset_base: str) -> str:
     ]
 
     contact_pictures = [
-        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"], asset_base)
+        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"])
         for item in profile["contacts"]
     ]
     lines.append("&#8195;&#8195;".join(contact_pictures))
-    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", ui["featured_header_alt"], asset_base), '<p align="center">'])
+    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '<p align="center">'])
     featured_pictures = [
-        responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"), asset_base)
+        responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
         for item_index, item in enumerate(profile["featured"])
     ]
     lines.append("".join(featured_pictures))
     lines.extend(['</p>', '</div>', ''])
 
-    lines.append(responsive_picture("current-header", ui["other_work_alt"], asset_base))
+    lines.append(responsive_picture("current-header", "Other work."))
     lines.append('<p align="center">')
     current_pictures = [
-        responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"), asset_base)
+        responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
         for item_index, item in enumerate(profile["current"])
     ]
     lines.append("".join(current_pictures))
-    lines.extend(['</p>', '', responsive_picture("certifications-header", ui["certifications_alt"], asset_base), '<p align="center">'])
+    lines.extend(['</p>', '', responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
 
     cert_pictures = [
-        responsive_linked_picture(f"cert-{i}", item["title"], None, asset_base)
+        responsive_linked_picture(f"cert-{i}", item["title"], None)
         for i, item in enumerate(profile["certifications"])
     ]
     lines.append("".join(cert_pictures))
     lines.extend([
         '</p>',
         '',
-        responsive_picture("statistics-header", ui["statistics_alt"], asset_base),
-        f'<img src="./{profile["statistics"]["path"]}" width="100%" alt="{esc(ui["statistics_img_alt"])}">',
+        responsive_picture("statistics-header", "GitHub profile statistics."),
+        f'<img src="./{profile["statistics"]["path"]}" width="100%" alt="GitHub profile statistics">',
         '',
         '<details>',
-        f'<summary>{ui["accessible_version_summary"]}</summary>',
+        '<summary>Accessible text version</summary>',
         '',
-        f'## {ui["featured_work_heading"]}',
+        '## Featured work',
     ])
     for item in profile["featured"]:
         lines += [f'### {item["title"]}', f'*{item["category"]}*', '', item["description"], '']
-    lines.append(f'## {ui["other_work_heading"]}')
+    lines.append('## Other work')
     for item in profile["current"]:
         title = f'[{item["title"]}]({item["url"]})' if item.get("url") else item["title"]
         lines += [f'### {title}', f'*{item["category"]}*', '', item["description"], '']
-    lines.append(f'## {ui["certifications_heading"]}')
+    lines.append("## Certifications I'm pursuing")
     for item in profile["certifications"]:
         lines.append(f'- [{item["title"]}]({item["url"]}) — {item["subtitle"]} — **{item["status"]}**')
-    lines += ['', '</details>', '', ui["generated_comment"], '']
+    lines += ['', '</details>', '', '<!-- Generated from profile.yml. Edit profile.yml, then run python scripts/build_profile.py. -->', '']
     return "\n".join(lines)
 
 
@@ -863,20 +676,19 @@ def update_contents() -> None:
     (ROOT / "REPOSITORY-CONTENTS.txt").write_text("\n".join(files) + "\n", encoding="utf-8")
 
 
-def save_generated(profile: dict[str, Any], lang: str, generated_dir: Path, readme_path: Path, asset_base: str) -> None:
-    ui = UI_STRINGS[lang]
-    if generated_dir.exists():
-        shutil.rmtree(generated_dir)
-    generated_dir.mkdir(parents=True, exist_ok=True)
+def save_generated(profile: dict[str, Any]) -> None:
+    if GENERATED.exists():
+        shutil.rmtree(GENERATED)
+    GENERATED.mkdir(parents=True, exist_ok=True)
     for mobile, layout in ((False, "desktop"), (True, "mobile")):
         outputs = {
             f"hero-{layout}.svg": generate_hero(profile, mobile, None),
             f"status-{layout}.svg": generate_status(profile, mobile, None),
-            f"featured-{layout}.svg": generate_featured(profile, mobile, None, ui),
-            f"featured-header-{layout}.svg": generate_header(ui["featured_header"], mobile, None),
-            f"current-header-{layout}.svg": generate_header(ui["other_work_header"], mobile, None),
-            f"certifications-header-{layout}.svg": generate_header(ui["certifications_header"], mobile, None),
-            f"statistics-header-{layout}.svg": generate_header(ui["statistics_header"], mobile, None),
+            f"featured-{layout}.svg": generate_featured(profile, mobile, None),
+            f"featured-header-{layout}.svg": generate_header("featured work", mobile, None),
+            f"current-header-{layout}.svg": generate_header("other work", mobile, None),
+            f"certifications-header-{layout}.svg": generate_header("certifications i'm pursuing", mobile, None),
+            f"statistics-header-{layout}.svg": generate_header("github profile statistics", mobile, None),
         }
         for i, item in enumerate(profile["featured"]):
             outputs[f"featured-card-{i}-{layout}.svg"] = generate_featured_card(item, i, mobile, None)
@@ -889,35 +701,9 @@ def save_generated(profile: dict[str, Any], lang: str, generated_dir: Path, read
         for i, item in enumerate(profile["certifications"]):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():
-            (generated_dir / name).write_text(content, encoding="utf-8")
+            (GENERATED / name).write_text(content, encoding="utf-8")
 
-    readme_path.write_text(generate_readme(profile, lang, asset_base), encoding="utf-8")
-
-
-# generate_featured() renders a combined all-cards-in-one-file variant of the
-# featured-work row that predates generate_featured_card() (which the README
-# actually links to, one card at a time, so each can carry its own <a> URL).
-# The combined file is still produced — used by nothing in the README — and
-# fixing that is out of scope here; the orphan check below intentionally
-# excludes it rather than flagging pre-existing, unrelated behavior.
-KNOWN_UNREFERENCED_ASSETS = {"featured-desktop.svg", "featured-mobile.svg"}
-
-
-def validate_readme_references(readme_path: Path, generated_dir: Path) -> list[str]:
-    errors: list[str] = []
-    readme = readme_path.read_text(encoding="utf-8")
-    for reference in re.findall(r'(?:src|srcset)="(\./[^"]+)"', readme):
-        local = ROOT / reference.removeprefix("./")
-        if not local.exists():
-            errors.append(f"{readme_path.relative_to(ROOT)} references missing file: {reference}")
-    for svg in generated_dir.glob("*.svg"):
-        if svg.name in KNOWN_UNREFERENCED_ASSETS:
-            continue
-        # Every other generated asset should be referenced by its README —
-        # an orphaned file usually means a naming mismatch between languages.
-        if svg.name not in readme:
-            errors.append(f"{svg.relative_to(ROOT)} was generated but is not referenced by {readme_path.relative_to(ROOT)}")
-    return errors
+    (ROOT / "README.md").write_text(generate_readme(profile), encoding="utf-8")
 
 
 def main() -> None:
@@ -925,21 +711,9 @@ def main() -> None:
     parser.add_argument("--no-preview", action="store_true")
     args = parser.parse_args()
     profile = load_profile()
-
-    errors: list[str] = []
-    for lang, config in LANGUAGES.items():
-        translation = load_translation(config["translation"]) if config["translation"] else None
-        localized_profile = localize(profile, translation, lang)
-        generated_dir = config["generated"]
-        asset_base = "./" + generated_dir.relative_to(ROOT).as_posix()
-        save_generated(localized_profile, lang, generated_dir, config["readme"], asset_base)
-        errors += validate_readme_references(config["readme"], generated_dir)
-        if lang == "en" and not args.no_preview:
-            generate_previews(localized_profile)
-
-    if errors:
-        raise SystemExit("Build validation failed:\n" + "\n".join(f"  - {e}" for e in errors))
-
+    save_generated(profile)
+    if not args.no_preview:
+        generate_previews(profile)
     update_contents()
     print("Profile generated successfully.")
 
