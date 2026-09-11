@@ -21,9 +21,12 @@ contacts:
   icon: assets/icons/email.svg
 featured:
 - title: Cyber Security Analyst @ iT.EAM
-  category: SECURITY OPERATIONS · iT.EAM
-  description: Security operations spanning detection engineering, threat hunting
-    and applied CTI.
+  category: CTI · THREAT HUNTING · THREAT DETECTION
+  category_lines:
+  - CTI · THREAT HUNTING
+  - THREAT DETECTION
+  description: Building detections, hunting threats, and turning cyber threat intelligence
+    into practical security operations.
   logo: assets/brands/iteam-symbol.svg
   logo_width: 44
   logo_height: 44
@@ -31,9 +34,12 @@ featured:
   - Cyber Security
   - "Analyst @ iT.EAM"
 - title: LLM Security Undergraduate Research
-  category: AI SECURITY · CEFET-MG
-  description: Undergraduate research into attack surfaces and safer design for
-    LLM-based agents.
+  category: AI SECURITY · LLM AGENTS · RESEARCH
+  category_lines:
+  - AI SECURITY · LLM AGENTS
+  - RESEARCH
+  description: Researching attack surfaces, adversarial behavior, and safer design
+    for LLM-based agents.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
@@ -41,11 +47,12 @@ featured:
   - LLM Security
   - Undergraduate Research
 - title: CriptoEscape
-  category: ESCAPE ROOM · CEFET-MG
+  category: CRYPTOGRAPHY · EDUCATION · FULL STACK
   category_lines:
-  - ESCAPE ROOM · CEFET-MG
-  description: Educational, cryptography-themed escape room platform designed to teach cryptographic
-    concepts through puzzles.
+  - CRYPTOGRAPHY · EDUCATION
+  - FULL STACK
+  description: Teaching cryptography through an interactive escape-room platform
+    built around hands-on challenges.
   logo: assets/illustrations/criptoescape-door.png
   logo_width: 44
   logo_height: 44
@@ -58,9 +65,9 @@ featured:
   - Cryptography Education
 current:
 - title: Post-Quantum Cryptography Undergraduate Research
-  category: CRYPTOGRAPHY · CEFET-MG
-  description: Exploring elliptic-curve systems, real attacks and quantum-resistant approaches
-    for emerging security.
+  category: POST-QUANTUM CRYPTOGRAPHY · RESEARCH
+  description: Exploring post-quantum cryptography, practical attacks, and the
+    transition beyond classical public-key systems.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
@@ -68,38 +75,55 @@ current:
   - Post-Quantum Cryptography
   - Undergraduate Research
 - title: Chemical Products Platform
-  category: LABORATORY MANAGEMENT · CEFET-MG
-  description: Centralizing chemical inventory and laboratory operations across CEFET-MG campuses.
+  category: FULL STACK · CEFET-MG
+  description: Building a platform for chemical inventory and laboratory operations
+    across CEFET-MG campuses.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+- title: Algorithms & Data Structures I
+  category: UNDERGRADUATE TEACHING ASSISTANT · CEFET-MG
+  description: Selected through CEFET-MG's program, teaching algorithms, complexity,
+    and data structures across languages.
+  logo: assets/brands/cefetmg.svg
+  logo_width: 54
+  logo_height: 35
+  title_lines_desktop:
+  - Algorithms & Data Structures I
+- title: Computer Programming I
+  category: UNDERGRADUATE TEACHING ASSISTANT · PYTHON · CEFET-MG
+  description: Selected through CEFET-MG's program, teaching programming fundamentals
+    and problem solving in Python.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
 - title: TMB Scan
-  category: PHYSICAL ASSESSMENT TECHNOLOGY
-  description: Turning physical assessments and progress data into structured analysis and professional
-    reports.
+  category: PHYSICAL ASSESSMENT TECHNOLOGY · CLIENT PROJECT
+  description: 'Building a real-world platform for a fitness business: assessments,
+    progress tracking, and reporting.'
   generated_name: current-tmb-scan
   logo: assets/illustrations/tmb-scan.png
   logo_width: 42
   logo_height: 42
 - title: Custódio Veículos
-  category: AUTOMOTIVE SALES TECHNOLOGY
-  description: Managing vehicle sales, marketplace publishing and commercial performance in
-    one platform.
+  category: AUTOMOTIVE SALES TECHNOLOGY · CLIENT PROJECT
+  description: 'Building a production platform for a real automotive client: inventory,
+    marketplace publishing, and sales.'
   logo: assets/brands/custodio-veiculos.svg
   logo_width: 68
   logo_height: 16
   url: https://custodioveiculos.com.br
 - title: INASIM Management System
-  category: FRONTEND DEV · CEFET-MG
-  description: Building the frontend of a management platform for a nonprofit, as a CEFET-MG
-    extension project.
+  category: FRONTEND DEVELOPMENT · NONPROFIT
+  description: Building the frontend of a management platform for an education-focused
+    nonprofit and its community programs.
   logo: assets/brands/inasim.svg
   logo_width: 44
   logo_height: 44
 - title: PET / COMPET
-  category: TECHNOLOGY · EDUCATION · COMMUNITY
-  description: Creating technical events, educational initiatives and collaborative engineering
-    projects.
+  category: ENGINEERING · EDUCATION · COMMUNITY
+  description: Creating technical events, educational initiatives, and collaborative
+    engineering projects at CEFET-MG.
   logo: assets/brands/compet.svg
   logo_width: 46
   logo_height: 46
