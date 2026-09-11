@@ -4,11 +4,14 @@ meta:
   headline: Investigating threats. Solving real problems.
   introduction: CTI, Threat Hunting, Detection Engineering, LLM Security research, and practical software.
 status:
-- label: WORKING
+- id: working
+  label: WORKING
   value: SOC | CTI @ iT.EAM
-- label: RESEARCHING
+- id: researching
+  label: RESEARCHING
   value: LLM Security
-- label: STUDYING
+- id: studying
+  label: STUDYING
   value: Computer Engineering @ CEFET-MG
 contacts:
 - label: LINKEDIN
@@ -20,7 +23,8 @@ contacts:
   url: mailto:iagoss949@gmail.com
   icon: assets/icons/email.svg
 featured:
-- title: Cyber Security Analyst @ iT.EAM
+- id: cyber-security-iteam
+  title: Cyber Security Analyst @ iT.EAM
   category: CTI · THREAT HUNTING · THREAT DETECTION
   category_lines:
   - CTI · THREAT HUNTING
@@ -33,7 +37,8 @@ featured:
   title_lines:
   - Cyber Security
   - "Analyst @ iT.EAM"
-- title: LLM Security Undergraduate Research
+- id: llm-security-research
+  title: LLM Security Undergraduate Research
   category: AI SECURITY · LLM AGENTS · RESEARCH
   category_lines:
   - AI SECURITY · LLM AGENTS
@@ -46,7 +51,8 @@ featured:
   title_lines:
   - LLM Security
   - Undergraduate Research
-- title: CriptoEscape
+- id: criptoescape
+  title: CriptoEscape
   category: CRYPTOGRAPHY · EDUCATION · FULL STACK
   category_lines:
   - CRYPTOGRAPHY · EDUCATION
@@ -64,7 +70,8 @@ featured:
   - CriptoEscape
   - Cryptography Education
 current:
-- title: Post-Quantum Cryptography Undergraduate Research
+- id: post-quantum-cryptography-research
+  title: Post-Quantum Cryptography Undergraduate Research
   category: POST-QUANTUM CRYPTOGRAPHY · RESEARCH
   description: Exploring post-quantum cryptography, practical attacks, and the
     transition beyond classical public-key systems.
@@ -74,14 +81,16 @@ current:
   title_lines_desktop:
   - Post-Quantum Cryptography
   - Undergraduate Research
-- title: Chemical Products Platform
+- id: chemical-products-platform
+  title: Chemical Products Platform
   category: FULL STACK · CEFET-MG
   description: Building a platform for chemical inventory and laboratory operations
     across CEFET-MG campuses.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
-- title: Algorithms & Data Structures I
+- id: ta-algorithms-data-structures
+  title: Algorithms & Data Structures I
   category: UNDERGRADUATE TEACHING ASSISTANT · CEFET-MG
   description: Selected through CEFET-MG's program, teaching algorithms, complexity,
     and data structures across languages.
@@ -90,14 +99,16 @@ current:
   logo_height: 35
   title_lines_desktop:
   - Algorithms & Data Structures I
-- title: Computer Programming I
+- id: ta-computer-programming
+  title: Computer Programming I
   category: UNDERGRADUATE TEACHING ASSISTANT · PYTHON · CEFET-MG
   description: Selected through CEFET-MG's program, teaching programming fundamentals
     and problem solving in Python.
   logo: assets/brands/cefetmg.svg
   logo_width: 54
   logo_height: 35
-- title: TMB Scan
+- id: tmb-scan
+  title: TMB Scan
   category: PHYSICAL ASSESSMENT TECHNOLOGY · CLIENT PROJECT
   description: 'Building a real-world platform for a fitness business: assessments,
     progress tracking, and reporting.'
@@ -105,7 +116,8 @@ current:
   logo: assets/illustrations/tmb-scan.png
   logo_width: 42
   logo_height: 42
-- title: Custódio Veículos
+- id: custodio-veiculos
+  title: Custódio Veículos
   category: AUTOMOTIVE SALES TECHNOLOGY · CLIENT PROJECT
   description: 'Building a production platform for a real automotive client: inventory,
     marketplace publishing, and sales.'
@@ -113,14 +125,16 @@ current:
   logo_width: 68
   logo_height: 16
   url: https://custodioveiculos.com.br
-- title: INASIM Management System
+- id: inasim-management-system
+  title: INASIM Management System
   category: FRONTEND DEVELOPMENT · NONPROFIT
   description: Building the frontend of a management platform for an education-focused
     nonprofit and its community programs.
   logo: assets/brands/inasim.svg
   logo_width: 44
   logo_height: 44
-- title: PET / COMPET
+- id: pet-compet
+  title: PET / COMPET
   category: ENGINEERING · EDUCATION · COMMUNITY
   description: Creating technical events, educational initiatives, and collaborative
     engineering projects at CEFET-MG.
@@ -129,14 +143,16 @@ current:
   logo_height: 46
   url: https://compet.vercel.app/
 certifications:
-- title: CompTIA Security+
+- id: comptia-security-plus
+  title: CompTIA Security+
   subtitle: 'SY0-701 · Target: 2026/2'
   status: PREPARING
   logo: assets/brands/comptia.svg
   logo_width: 96
   logo_height: 28
   url: https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf
-- title: Cambridge B2 First
+- id: cambridge-b2-first
+  title: Cambridge B2 First
   subtitle: Grade A · CEFR C1 target · 2026/2
   status: PREPARING
   logo: assets/brands/cambridge-b2-first.svg
