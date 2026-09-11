@@ -1,3 +1,7 @@
+<p align="right">
+  <strong><kbd>EN</kbd></strong>
+  <a href="./README.pt-BR.md"><kbd>PT-BR</kbd></a>
+</p>
 <div align="center">
 <picture>
   <source media="(max-width: 480px)" srcset="./assets/generated/hero-mobile.svg">
