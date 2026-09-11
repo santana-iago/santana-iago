@@ -107,6 +107,9 @@ current:
   logo_height: 42
 - title: Custódio Veículos
   category: AUTOMOTIVE SALES TECHNOLOGY · CLIENT PROJECT
+  category_lines:
+  - AUTOMOTIVE SALES TECHNOLOGY
+  - CLIENT PROJECT
   description: 'Building a production platform for a real automotive client: inventory,
     marketplace publishing, and sales.'
   logo: assets/brands/custodio-veiculos.svg

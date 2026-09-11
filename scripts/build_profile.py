@@ -399,7 +399,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
         width = 360
         title_lines = wrap_words(item["title"], 34, 2)
         category_y = 68 if len(title_lines) == 2 else 53
-        category_lines = wrap_words(item["category"], 34, 2)
+        category_lines = item.get("category_lines") or wrap_words(item["category"], 34, 2)
         desc_y = category_y + 11 * (len(category_lines) - 1) + 25
         desc_lines = wrap_words(item["description"], 38, 3)
         bottom_y = desc_y + 17 * (len(desc_lines) - 1) + 22
@@ -433,7 +433,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
     # of the short-titled one looking shorter/emptier than its neighbor.
     effective_title_lines = max(len(title_lines), row_title_lines)
     category_y = 54 if effective_title_lines == 1 else 31 + 16 + 23
-    category_lines = wrap_words(item["category"], 38, 2)
+    category_lines = item.get("category_lines") or wrap_words(item["category"], 38, 2)
     desc_y = category_y + 11 * len(category_lines) + 11
     desc_lines = wrap_words(item["description"], 38, 3)
     desc_line_height = 15
