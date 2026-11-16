@@ -33,20 +33,6 @@
 <picture><source media="(max-width: 480px)" srcset="./assets/generated/current-0-mobile.svg"><img src="./assets/generated/current-0-desktop.svg" alt="Post-Quantum Cryptography Undergraduate Research"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-1-mobile.svg"><img src="./assets/generated/current-1-desktop.svg" alt="Chemical Products Platform"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-2-mobile.svg"><img src="./assets/generated/current-2-desktop.svg" alt="Algorithms &amp; Data Structures I"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-3-mobile.svg"><img src="./assets/generated/current-3-desktop.svg" alt="Computer Programming I"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-tmb-scan-mobile.svg"><img src="./assets/generated/current-tmb-scan-desktop.svg" alt="TMB Scan"></picture><a href="https://custodioveiculos.com.br"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-5-mobile.svg"><img src="./assets/generated/current-5-desktop.svg" alt="Custódio Veículos"></picture></a><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-6-mobile.svg"><img src="./assets/generated/current-6-desktop.svg" alt="INASIM Management System"></picture><a href="https://compet.vercel.app/"><picture><source media="(max-width: 480px)" srcset="./assets/generated/current-7-mobile.svg"><img src="./assets/generated/current-7-desktop.svg" alt="PET / COMPET"></picture></a>
 </p>
 
-<picture>
-  <source media="(max-width: 480px)" srcset="./assets/generated/certifications-header-mobile.svg">
-  <img src="./assets/generated/certifications-header-desktop.svg" width="100%" alt="Certifications I&#x27;m pursuing.">
-</picture>
-<p align="center">
-<picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-0-mobile.svg"><img src="./assets/generated/cert-0-desktop.svg" alt="CompTIA Security+"></picture><picture><source media="(max-width: 480px)" srcset="./assets/generated/cert-1-mobile.svg"><img src="./assets/generated/cert-1-desktop.svg" alt="Cambridge B2 First"></picture>
-</p>
-
-<picture>
-  <source media="(max-width: 480px)" srcset="./assets/generated/statistics-header-mobile.svg">
-  <img src="./assets/generated/statistics-header-desktop.svg" width="100%" alt="GitHub profile statistics.">
-</picture>
-<img src="./profile-summary-card-output/github_dark/0-profile-details.svg" width="100%" alt="GitHub profile statistics">
-
 <details>
 <summary>Accessible text version</summary>
 
@@ -106,10 +92,6 @@ Building the frontend of a management platform for an education-focused nonprofi
 *ENGINEERING · EDUCATION · COMMUNITY*
 
 Creating technical events, educational initiatives, and collaborative engineering projects at CEFET-MG.
-
-## Certifications I'm pursuing
-- [CompTIA Security+](https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf) — SY0-701 · Target: 2026/2 — **PREPARING**
-- [Cambridge B2 First](https://www.cambridgeenglish.org/br/exams-and-tests/first/) — Grade A · CEFR C1 target · 2026/2 — **PREPARING**
 
 </details>
 

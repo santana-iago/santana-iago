@@ -559,19 +559,22 @@ def generate_readme(profile: dict[str, Any]) -> str:
         for item_index, item in enumerate(profile["current"])
     ]
     lines.append("".join(current_pictures))
-    lines.extend(['</p>', '', responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
-
-    cert_pictures = [
-        responsive_linked_picture(f"cert-{i}", item["title"], None)
-        for i, item in enumerate(profile["certifications"])
-    ]
-    lines.append("".join(cert_pictures))
+    lines.extend(['</p>', ''])
+    if profile.get("certifications"):
+        lines.extend([responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
+        cert_pictures = [
+            responsive_linked_picture(f"cert-{i}", item["title"], None)
+            for i, item in enumerate(profile["certifications"])
+        ]
+        lines.append("".join(cert_pictures))
+        lines.extend(['</p>', ''])
+    if profile.get("statistics"):
+        lines.extend([
+            responsive_picture("statistics-header", "GitHub profile statistics."),
+            f'<img src="./{profile["statistics"]["path"]}" width="100%" alt="GitHub profile statistics">',
+            '',
+        ])
     lines.extend([
-        '</p>',
-        '',
-        responsive_picture("statistics-header", "GitHub profile statistics."),
-        f'<img src="./{profile["statistics"]["path"]}" width="100%" alt="GitHub profile statistics">',
-        '',
         '<details>',
         '<summary>Accessible text version</summary>',
         '',
@@ -583,9 +586,10 @@ def generate_readme(profile: dict[str, Any]) -> str:
     for item in profile["current"]:
         title = f'[{item["title"]}]({item["url"]})' if item.get("url") else item["title"]
         lines += [f'### {title}', f'*{item["category"]}*', '', item["description"], '']
-    lines.append("## Certifications I'm pursuing")
-    for item in profile["certifications"]:
-        lines.append(f'- [{item["title"]}]({item["url"]}) — {item["subtitle"]} — **{item["status"]}**')
+    if profile.get("certifications"):
+        lines.append("## Certifications I'm pursuing")
+        for item in profile["certifications"]:
+            lines.append(f'- [{item["title"]}]({item["url"]}) — {item["subtitle"]} — **{item["status"]}**')
     lines += ['', '</details>', '', '<!-- Generated from profile.yml. Edit profile.yml, then run python scripts/build_profile.py. -->', '']
     return "\n".join(lines)
 
@@ -664,13 +668,15 @@ def generate_previews(profile: dict[str, Any]) -> None:
             if len(row_cards) > 1:
                 row.paste(row_cards[1], (410, 0))
             desktop.append(row)
-        desktop.append(render_svg_string(generate_header("certifications i'm pursuing", False, theme), 880, bg))
-        cert_row = Image.new("RGB", (880, 84), bg)
-        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][0], False, theme), 390, bg), (0, 0))
-        cert_row.paste(render_svg_string(generate_cert_card(profile["certifications"][1], False, theme), 390, bg), (410, 0))
-        desktop.append(cert_row)
-        desktop.append(render_svg_string(generate_header("github profile statistics", False, theme), 880, bg))
-        desktop.append(render_svg_file(ROOT/profile["statistics"]["path"], 880, bg))
+        if profile.get("certifications"):
+            desktop.append(render_svg_string(generate_header("certifications i'm pursuing", False, theme), 880, bg))
+            cert_row = Image.new("RGB", (880, 84), bg)
+            for index, item in enumerate(profile["certifications"][:2]):
+                cert_row.paste(render_svg_string(generate_cert_card(item, False, theme), 390, bg), (index * 410, 0))
+            desktop.append(cert_row)
+        if profile.get("statistics"):
+            desktop.append(render_svg_string(generate_header("github profile statistics", False, theme), 880, bg))
+            desktop.append(render_svg_file(ROOT/profile["statistics"]["path"], 880, bg))
         stack_images(desktop, 880, 24, 12, DOCS/f"preview-desktop-{theme}.png", bg)
 
         mobile: list[Image.Image] = [
@@ -685,11 +691,13 @@ def generate_previews(profile: dict[str, Any]) -> None:
         mobile.append(render_svg_string(generate_header("other work", True, theme), 360, bg))
         for item in profile["current"]:
             mobile.append(render_svg_string(generate_current_card(item, True, theme), 360, bg))
-        mobile.append(render_svg_string(generate_header("certifications i'm pursuing", True, theme), 360, bg))
-        for item in profile["certifications"]:
-            mobile.append(render_svg_string(generate_cert_card(item, True, theme), 360, bg))
-        mobile.append(render_svg_string(generate_header("github profile statistics", True, theme), 360, bg))
-        mobile.append(render_svg_file(ROOT/profile["statistics"]["path"], 360, bg))
+        if profile.get("certifications"):
+            mobile.append(render_svg_string(generate_header("certifications i'm pursuing", True, theme), 360, bg))
+            for item in profile["certifications"]:
+                mobile.append(render_svg_string(generate_cert_card(item, True, theme), 360, bg))
+        if profile.get("statistics"):
+            mobile.append(render_svg_string(generate_header("github profile statistics", True, theme), 360, bg))
+            mobile.append(render_svg_file(ROOT/profile["statistics"]["path"], 360, bg))
         stack_images(mobile, 360, 15, 10, DOCS/f"preview-mobile-{theme}.png", bg)
 
 
@@ -709,9 +717,11 @@ def save_generated(profile: dict[str, Any]) -> None:
             f"featured-{layout}.svg": generate_featured(profile, mobile, None),
             f"featured-header-{layout}.svg": generate_header("featured work", mobile, None),
             f"current-header-{layout}.svg": generate_header("other work", mobile, None),
-            f"certifications-header-{layout}.svg": generate_header("certifications i'm pursuing", mobile, None),
-            f"statistics-header-{layout}.svg": generate_header("github profile statistics", mobile, None),
         }
+        if profile.get("certifications"):
+            outputs[f"certifications-header-{layout}.svg"] = generate_header("certifications i'm pursuing", mobile, None)
+        if profile.get("statistics"):
+            outputs[f"statistics-header-{layout}.svg"] = generate_header("github profile statistics", mobile, None)
         for i, item in enumerate(profile["featured"]):
             outputs[f"featured-card-{i}-{layout}.svg"] = generate_featured_card(item, i, mobile, None)
         for item in profile["contacts"]:
@@ -726,7 +736,7 @@ def save_generated(profile: dict[str, Any]) -> None:
                 row_items = current_items[row_start:row_start + 2]
                 row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
             outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None, i, current_total, row_title_lines)
-        for i, item in enumerate(profile["certifications"]):
+        for i, item in enumerate(profile.get("certifications", [])):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():
             (GENERATED / name).write_text(content, encoding="utf-8")

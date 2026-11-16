@@ -55,7 +55,6 @@ def main() -> int:
             GENERATED / f"current-header-{layout}.svg",
             GENERATED / f"contact-linkedin-{layout}.svg",
             GENERATED / f"current-0-{layout}.svg",
-            GENERATED / f"cert-0-{layout}.svg",
         ]
     for path in required:
         if not path.exists():
@@ -67,9 +66,10 @@ def main() -> int:
         except ET.ParseError as exc:
             error(f"Invalid SVG {svg.relative_to(ROOT)}: {exc}")
 
-    stats_path = ROOT / profile.get("statistics", {}).get("path", "")
-    if not stats_path.exists():
-        error(f"Missing statistics asset: {stats_path.relative_to(ROOT) if stats_path != ROOT else 'path'}")
+    if profile.get("statistics"):
+        stats_path = ROOT / profile["statistics"]["path"]
+        if not stats_path.exists():
+            error(f"Missing statistics asset: {stats_path.relative_to(ROOT)}")
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
     for reference in re.findall(r'(?:src|srcset)="(\./[^\"]+)"', readme):
@@ -79,7 +79,16 @@ def main() -> int:
 
     if "generated-v" in readme:
         error("README references a legacy versioned generated directory")
-    for name in ("hero", "status", "current-header", "certifications-header", "statistics-header"):
+    if not profile.get("certifications") and ("certifications-header" in readme or "## Certifications I'm pursuing" in readme):
+        error("README includes certifications although the section is disabled")
+    if not profile.get("statistics") and ("statistics-header" in readme or "profile-summary-card-output/" in readme):
+        error("README includes profile statistics although the section is disabled")
+    header_names = ["hero", "status", "current-header"]
+    if profile.get("certifications"):
+        header_names.append("certifications-header")
+    if profile.get("statistics"):
+        header_names.append("statistics-header")
+    for name in header_names:
         if f"{name}-mobile.svg" not in readme or f"{name}-desktop.svg" not in readme:
             error(f"README is missing an explicit mobile/desktop <picture> source for {name}")
     if "featured-header-mobile.svg" not in readme or "featured-header-desktop.svg" not in readme:

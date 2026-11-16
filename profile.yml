@@ -131,21 +131,3 @@ current:
   logo_width: 46
   logo_height: 46
   url: https://compet.vercel.app/
-certifications:
-- title: CompTIA Security+
-  subtitle: 'SY0-701 · Target: 2026/2'
-  status: PREPARING
-  logo: assets/brands/comptia.svg
-  logo_width: 96
-  logo_height: 28
-  url: https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf
-- title: Cambridge B2 First
-  subtitle: Grade A · CEFR C1 target · 2026/2
-  status: PREPARING
-  logo: assets/brands/cambridge-b2-first.svg
-  logo_width: 96
-  logo_height: 24
-  url: https://www.cambridgeenglish.org/br/exams-and-tests/first/
-statistics:
-  theme: github_dark
-  path: profile-summary-card-output/github_dark/0-profile-details.svg
