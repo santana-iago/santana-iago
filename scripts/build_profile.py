@@ -15,10 +15,9 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "assets" / "generated"
-# Below this viewport width, the mobile SVG variant is served. Kept well under
-# typical desktop widths (even scaled down by OS display scaling) so a real
-# computer window never accidentally matches it — only phones should.
-MOBILE_BREAKPOINT = 480
+MOBILE_WIDTH = 336
+# Some mobile WebViews use a 980px layout viewport before applying zoom.
+DESKTOP_BREAKPOINT = 1024
 DOCS = ROOT / "docs"
 
 THEMES = {
@@ -91,6 +90,7 @@ def data_uri(relative: str, theme: str) -> str:
 
 def _theme_rules(c: dict[str, str]) -> str:
     return f"""
+.surface{{fill:{c['preview_bg']}}}
 .card-bg{{fill:{c['card']}}}
 .card-border{{stroke:{c['card_border']}}}
 .line{{stroke:{c['line']}}}
@@ -98,9 +98,9 @@ def _theme_rules(c: dict[str, str]) -> str:
 .icon-disc{{fill:{c['icon_disc']};stroke:{c['card_border']}}}
 .arrow{{stroke:{c['arrow']};fill:{c['arrow']}}}
 .hero-headline{{font:italic 600 34px Georgia,'Times New Roman',serif;fill:{c['text']}}}
-.hero-headline-mobile{{font:italic 600 12px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:{c['text']}}}
+.hero-headline-mobile{{font:italic 600 21px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:{c['text']}}}
 .hero-copy{{font:400 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:{c['muted']}}}
-.hero-copy-mobile{{font:400 9.5px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:{c['muted']}}}
+.hero-copy-mobile{{font:400 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:{c['muted']}}}
 .status-label{{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:{c['label']}}}
 .status-value{{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:{c['text']}}}
 .status-value-mobile{{font:500 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:{c['text']}}}
@@ -111,13 +111,12 @@ def _theme_rules(c: dict[str, str]) -> str:
 .section{{font-size:15px;font-weight:500;letter-spacing:-.1px}}
 .section-mobile{{font-size:18px;font-weight:600;letter-spacing:-.2px}}
 .title{{font-size:14px;font-weight:700;letter-spacing:-.1px}}
-.title-mobile{{font-size:16px;font-weight:700;letter-spacing:-.12px}}
+.title-mobile{{font-size:17px;font-weight:700;letter-spacing:-.12px}}
 .current-title{{font-size:14px;font-weight:700;letter-spacing:-.1px}}
-.current-title-mobile{{font-size:15.5px;font-weight:700;letter-spacing:-.1px}}
 .category{{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:{c['label']}}}
-.category-mobile{{font:700 7.8px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.15px;fill:{c['label']}}}
+.category-mobile{{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.8px;fill:{c['label']}}}
 .description{{font-size:11.3px;font-weight:400;fill:{c['muted']}}}
-.description-mobile{{font-size:12.6px;font-weight:400;fill:{c['muted']}}}
+.description-mobile{{font-size:14.5px;font-weight:400;fill:{c['muted']}}}
 .cert-title{{font-size:15px;font-weight:700;letter-spacing:-.12px}}
 .cert-title-mobile{{font-size:15.5px;font-weight:700;letter-spacing:-.12px}}
 .cert-subtitle{{font-size:10.5px;font-weight:400;fill:{c['muted']}}}
@@ -127,28 +126,23 @@ def _theme_rules(c: dict[str, str]) -> str:
 
 
 def style(theme: str | None) -> str:
-    # theme="light"/"dark" renders a single fixed palette, unconditionally — used
-    # only to rasterize the local preview PNGs (docs/), where nothing evaluates
-    # `prefers-color-scheme` for us.
-    #
-    # theme=None (the real, shipped files) embeds BOTH palettes in one file: light
-    # values are the default rules, dark values live inside a native
-    # `@media (prefers-color-scheme: dark)` block. This is evaluated by the
-    # browser while it rasterizes the SVG image itself, so it works regardless of
-    # how GitHub's own theme-switching machinery treats the <picture>/<source>
-    # elements around it — that machinery is only ever given a single, theme-
-    # agnostic image URL per breakpoint (see responsive_picture()).
+    # Artwork paints the page surface and its text together. The light palette
+    # remains readable if the host chooses a dark page but the image renderer
+    # does not evaluate prefers-color-scheme.
     if theme in ("light", "dark"):
         return _theme_rules(THEMES[theme])
     dark_block = _theme_rules(THEMES["dark"]) + ".theme-light-only{display:none}.theme-dark-only{display:block}"
     return _theme_rules(THEMES["light"]) + ".theme-dark-only{display:none}" + f"@media (prefers-color-scheme: dark){{{dark_block}}}"
 
 
-def svg_open(width: int, height: int, theme: str | None) -> list[str]:
-    return [
+def svg_open(width: int, height: int, theme: str | None, *, surface: bool = True) -> list[str]:
+    parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         f'<style>{style(theme)}</style>',
     ]
+    if surface:
+        parts.append(f'<rect class="surface" width="{width}" height="{height}"/>')
+    return parts
 
 
 def svg_close(parts: list[str]) -> str:
@@ -193,7 +187,7 @@ def add_arrow(parts: list[str], x: float, y: float) -> None:
     )
 
 
-def wrap_words(value: str, max_chars: int, max_lines: int) -> list[str]:
+def wrap_words(value: str, max_chars: int, max_lines: int | None = None) -> list[str]:
     words = value.split()
     lines: list[str] = []
     current: list[str] = []
@@ -206,7 +200,7 @@ def wrap_words(value: str, max_chars: int, max_lines: int) -> list[str]:
             current.append(word)
     if current:
         lines.append(" ".join(current))
-    if len(lines) > max_lines:
+    if max_lines is not None and len(lines) > max_lines:
         lines = lines[:max_lines]
         lines[-1] = lines[-1].rstrip(" .") + "…"
     return lines or [""]
@@ -228,19 +222,19 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> s
     # lines wrap defensively instead of relying on an exact single-line fit.
     meta = profile["meta"]
     if mobile:
-        width = 360
-        headline_line_height, copy_line_height = 15, 12
-        headline_lines = wrap_words(meta["headline"], max_chars=46, max_lines=2)
-        copy_lines = wrap_words(meta["introduction"], max_chars=24, max_lines=4)
-        headline_y = 30
-        copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 20
+        width = MOBILE_WIDTH
+        headline_line_height, copy_line_height = 25, 18
+        headline_lines = wrap_words(meta["headline"], max_chars=25)
+        copy_lines = wrap_words(meta["introduction"], max_chars=36)
+        headline_y = 32
+        copy_y = headline_y + headline_line_height * (len(headline_lines) - 1) + 23
         bottom_y = copy_y + copy_line_height * (len(copy_lines) - 1) + 16
         height = bottom_y + 5
         parts = svg_open(width, height, theme)
-        add_line(parts, 16, 4, 344, 4)
+        add_line(parts, 16, 4, width - 16, 4)
         add_multiline(parts, 16, headline_y, headline_lines, "hero-headline-mobile", headline_line_height)
         add_multiline(parts, 16, copy_y, copy_lines, "hero-copy-mobile", copy_line_height)
-        add_line(parts, 16, bottom_y, 344, bottom_y)
+        add_line(parts, 16, bottom_y, width - 16, bottom_y)
         return svg_close(parts)
     width = 880
     headline_line_height, copy_line_height = 34, 16
@@ -261,14 +255,14 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> s
 def generate_status(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["status"]
     if mobile:
-        width, height = 360, 188
+        width, height = MOBILE_WIDTH, 188
         parts = svg_open(width, height, theme)
-        add_line(parts, 16, 2, 344, 2)
+        add_line(parts, 16, 2, width - 16, 2)
         for i, item in enumerate(items):
             y = 13 + i * 60
             add_text(parts, 16, y + 13, item["label"], "status-label")
             add_text(parts, 16, y + 39, item["value"], "status-value-mobile")
-            add_line(parts, 16, y + 51, 344, y + 51)
+            add_line(parts, 16, y + 51, width - 16, y + 51)
         return svg_close(parts)
     width, height = 880, 72
     parts = svg_open(width, height, theme)
@@ -287,8 +281,8 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
     # Desktop is narrower than before (280 -> 265) so 3 cards reliably share one
     # row without an HTML width attribute (see responsive_linked_picture). The
     # value wraps defensively instead of assuming it always fits one line.
-    width, height = (360, 78) if mobile else (265, 76)
-    parts = svg_open(width, height, theme)
+    width, height = (MOBILE_WIDTH, 78) if mobile else (265, 76)
+    parts = svg_open(width, height, theme, surface=False)
     parts.append(f'<rect class="card-bg card-border" x=".5" y=".5" width="{width-1}" height="{height-1}" rx="10"/>')
     cy = height / 2
     label = item["label"].upper()
@@ -312,25 +306,15 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
 def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
     items = profile["featured"]
     if mobile:
-        width = 360
-        start = 57
-        row_heights = [int(item.get("row_height", 146)) for item in items]
-        height = start + sum(row_heights) + 5
-        parts = svg_open(width, height, theme)
-        section_header(parts, "featured work", width, True)
-        y = start
-        for i, item in enumerate(items):
-            row_h = row_heights[i]
-            add_image(parts, 18, y + 19, item["logo_width"] + 6, item["logo_height"] + 6, item["logo"], theme)
-            add_multiline(parts, 92, y + 29, item["title_lines"], "ui title-mobile", 20)
-            category_lines = item.get("category_lines", [item["category"]])
-            add_multiline(parts, 92, y + 73, category_lines, "category-mobile", 11)
-            description_lines = wrap_words(item["description"], 35, int(item.get("description_max_lines", 3)))
-            add_multiline(parts, 92, y + 98 + 11 * (len(category_lines) - 1), description_lines, "ui description-mobile", 17)
-            if item.get("url"):
-                add_arrow(parts, 337, y + 18)
-            add_line(parts, 16, y + row_h - 4, 344, y + row_h - 4)
-            y += row_h
+        rows = [mobile_project_row(item, theme) for item in items]
+        y = 53
+        parts = svg_open(MOBILE_WIDTH, y + sum(height for height, _ in rows), theme)
+        section_header(parts, "featured work", MOBILE_WIDTH, True)
+        for height, row in rows:
+            parts.append(f'<g transform="translate(0 {y})">')
+            parts.extend(row)
+            parts.append('</g>')
+            y += height
         return svg_close(parts)
     width, height = 880, 232
     parts = svg_open(width, height, theme)
@@ -353,22 +337,30 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
     return svg_close(parts)
 
 
+def mobile_project_row(item: dict[str, Any], theme: str | None) -> tuple[int, list[str]]:
+    parts: list[str] = []
+    title_lines = item.get("title_lines") or wrap_words(item["title"], 26)
+    category_lines = wrap_words(item["category"], 43)
+    description_lines = wrap_words(item["description"], 40)
+    title_y = 37 if len(title_lines) == 1 else 28
+    category_y = max(69, title_y + 20 * (len(title_lines) - 1) + 21)
+    description_y = category_y + 14 * (len(category_lines) - 1) + 23
+    bottom = description_y + 20 * (len(description_lines) - 1) + 18
+    add_image(parts, 16, 11, 49, 42, item["logo"], theme)
+    add_multiline(parts, 76, title_y, title_lines, "ui title-mobile", 20)
+    add_multiline(parts, 16, category_y, category_lines, "category-mobile", 14)
+    add_multiline(parts, 16, description_y, description_lines, "ui description-mobile", 20)
+    if item.get("url"):
+        add_arrow(parts, MOBILE_WIDTH - 20, 24)
+    add_line(parts, 16, bottom, MOBILE_WIDTH - 16, bottom)
+    return bottom + 6, parts
+
+
 def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme: str | None) -> str:
     """Render one featured-work card so it can be wrapped in its own link."""
     if mobile:
-        width = 360
-        row_h = int(item.get("row_height", 146))
-        parts = svg_open(width, row_h, theme)
-        add_image(parts, 18, 19, item["logo_width"] + 6, item["logo_height"] + 6, item["logo"], theme)
-        add_multiline(parts, 92, 29, item["title_lines"], "ui title-mobile", 20)
-        category_lines = item.get("category_lines", [item["category"]])
-        add_multiline(parts, 92, 73, category_lines, "category-mobile", 11)
-        description_lines = wrap_words(item["description"], 35, int(item.get("description_max_lines", 3)))
-        add_multiline(parts, 92, 98 + 11 * (len(category_lines) - 1), description_lines, "ui description-mobile", 17)
-        if item.get("url"):
-            add_arrow(parts, 337, 18)
-        add_line(parts, 16, row_h - 4, 344, row_h - 4)
-        return svg_close(parts)
+        height, row = mobile_project_row(item, theme)
+        return svg_close(svg_open(MOBILE_WIDTH, height, theme) + row)
 
     col_w = (880 - 48) / 3
     # Keep all three linked images on one line in GitHub's rendered README.
@@ -396,24 +388,8 @@ def _current_title_lines_desktop(item: dict[str, Any]) -> list[str]:
 
 def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None, index: int = 0, total: int = 0, row_title_lines: int = 1) -> str:
     if mobile:
-        width = 360
-        title_lines = wrap_words(item["title"], 34, 2)
-        category_y = 68 if len(title_lines) == 2 else 53
-        category_lines = item.get("category_lines") or wrap_words(item["category"], 34, 2)
-        desc_y = category_y + 11 * (len(category_lines) - 1) + 25
-        desc_lines = wrap_words(item["description"], 38, 3)
-        bottom_y = desc_y + 17 * (len(desc_lines) - 1) + 22
-        height = bottom_y + 5
-        parts = svg_open(width, height, theme)
-        add_image(parts, 16, 29, item["logo_width"] + 4, item["logo_height"] + 4, item["logo"], theme)
-        text_x = 92
-        add_multiline(parts, text_x, 28, title_lines, "ui current-title-mobile", 18)
-        add_multiline(parts, text_x, category_y, category_lines, "category-mobile", 11)
-        add_multiline(parts, text_x, desc_y, desc_lines, "ui description-mobile", 17)
-        if item.get("url"):
-            add_arrow(parts, 337, 18)
-        add_line(parts, 16, bottom_y, 344, bottom_y)
-        return svg_close(parts)
+        height, row = mobile_project_row(item, theme)
+        return svg_close(svg_open(MOBILE_WIDTH, height, theme) + row)
     # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
     # row without an HTML width attribute (see responsive_linked_picture). The
     # description now wraps across up to 3 (tighter) lines instead of 2 wider
@@ -455,9 +431,9 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
 
 def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
     if mobile:
-        width, height = 360, 92
+        width, height = MOBILE_WIDTH, 92
         parts = svg_open(width, height, theme)
-        parts.append('<rect class="card-bg card-border" x=".5" y="4.5" width="359" height="83" rx="10"/>')
+        parts.append(f'<rect class="card-bg card-border" x=".5" y="4.5" width="{width - 1}" height="83" rx="10"/>')
         add_image(parts, 16, 31, item["logo_width"] + 8, item["logo_height"] + 3, item["logo"], theme)
         text_x = 137
         add_text(parts, text_x, 31, item["title"], "ui cert-title-mobile")
@@ -482,7 +458,7 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) ->
 
 
 def generate_header(title: str, mobile: bool, theme: str | None) -> str:
-    width = 360 if mobile else 880
+    width = MOBILE_WIDTH if mobile else 880
     height = 52 if mobile else 42
     parts = svg_open(width, height, theme)
     section_header(parts, title, width, mobile)
@@ -490,48 +466,29 @@ def generate_header(title: str, mobile: bool, theme: str | None) -> str:
 
 
 def responsive_picture(name: str, alt: str) -> str:
-    # Only ever gated on width. Theme is handled *inside* each SVG via a native
-    # prefers-color-scheme media query (see style()) — not here. GitHub wraps
-    # README <picture> elements in its own <themed-picture> custom element to
-    # drive dark/light from the site's theme setting; empirically (checked via
-    # a live browser: window.innerWidth confirmed at 1920px, yet it still served
-    # the mobile-breakpoint source) it does not reliably honour a width bound
-    # combined with a color-scheme condition on the same <source>, regardless of
-    # how explicitly both are qualified. Giving it nothing color-scheme-related
-    # to look at sidesteps that entirely.
+    # Clients that discard <source> still get the legible, single-column art.
+    # The source only checks width so GitHub's theme wrapper does not pick a layout.
+    # The images keep their intrinsic widths so project cards can wrap naturally.
     base = "./assets/generated"
     return (
-        '<picture>\n'
-        f'  <source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{name}-mobile.svg">\n'
-        f'  <img src="{base}/{name}-desktop.svg" width="100%" alt="{esc(alt)}">\n'
+        '<picture>'
+        f'<source media="(min-width: {DESKTOP_BREAKPOINT}px)" srcset="{base}/{name}-desktop.svg">'
+        f'<img src="{base}/{name}-mobile.svg" alt="{esc(alt)}">'
         '</picture>'
     )
 
 
 def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
-    # Deliberately no width attribute on the desktop <img> — setting one
-    # (tried as a percentage, to get 3 contact cards / 2 current-cert cards
-    # sharing a row regardless of GitHub's exact content-column width) broke
-    # mobile source selection: confirmed live, in both the GitHub app and
-    # mobile Safari, the mobile <source> stopped being picked and the desktop
-    # image rendered instead, scaled down. Row-fit on desktop is handled by
-    # sizing each card's own SVG small enough to fit, not by an HTML width
-    # attribute on the <picture>.
-    base = "./assets/generated"
-    picture = (
-        '<picture>'
-        f'<source media="(max-width: {MOBILE_BREAKPOINT}px)" srcset="{base}/{path_base}-mobile.svg">'
-        f'<img src="{base}/{path_base}-desktop.svg" alt="{esc(alt)}">'
-        '</picture>'
-    )
+    picture = responsive_picture(path_base, alt)
     return f'<a href="{esc(url)}">{picture}</a>' if url else picture
 
 
 def generate_readme(profile: dict[str, Any]) -> str:
+    status_alt = ". ".join(item["value"].replace(" @ ", " at ") for item in profile["status"])
     lines: list[str] = [
         '<div align="center">',
         responsive_picture("hero", "Iago Santana. Investigating threats. Solving real problems."),
-        responsive_picture("status", "Working in SOC and CTI at iT.EAM, researching LLM Security and studying Computer Engineering at CEFET-MG."),
+        responsive_picture("status", status_alt),
         '</div>',
         '',
         '<br>',
@@ -544,7 +501,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
         for item in profile["contacts"]
     ]
     lines.append("&#8195;&#8195;".join(contact_pictures))
-    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work in SOC and CTI, LLM Security and post-quantum cryptography research."), '<p align="center">'])
+    lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work."), '<p align="center">'])
     featured_pictures = [
         responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
         for item_index, item in enumerate(profile["featured"])
@@ -552,14 +509,15 @@ def generate_readme(profile: dict[str, Any]) -> str:
     lines.append("".join(featured_pictures))
     lines.extend(['</p>', '</div>', ''])
 
-    lines.append(responsive_picture("current-header", "Other work."))
-    lines.append('<p align="center">')
+    lines.extend(['<div align="center">', responsive_picture("current-header", "Other work.")])
     current_pictures = [
         responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
         for item_index, item in enumerate(profile["current"])
     ]
-    lines.append("".join(current_pictures))
-    lines.extend(['</p>', ''])
+    for row_start in range(0, len(current_pictures), 2):
+        row = "".join(current_pictures[row_start:row_start + 2])
+        lines.append(f'<div align="center">{row}</div>')
+    lines.extend(['</div>', ''])
     if profile.get("certifications"):
         lines.extend([responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
         cert_pictures = [
@@ -664,9 +622,10 @@ def generate_previews(profile: dict[str, Any]) -> None:
             ]
             row_height = max(card.height for card in row_cards)
             row = Image.new("RGB", (880, row_height), bg)
-            row.paste(row_cards[0], (0, 0))
-            if len(row_cards) > 1:
-                row.paste(row_cards[1], (410, 0))
+            card_x = (row.width - sum(card.width for card in row_cards)) // 2
+            for card in row_cards:
+                row.paste(card, (card_x, 0))
+                card_x += card.width
             desktop.append(row)
         if profile.get("certifications"):
             desktop.append(render_svg_string(generate_header("certifications i'm pursuing", False, theme), 880, bg))
@@ -680,30 +639,34 @@ def generate_previews(profile: dict[str, Any]) -> None:
         stack_images(desktop, 880, 24, 12, DOCS/f"preview-desktop-{theme}.png", bg)
 
         mobile: list[Image.Image] = [
-            render_svg_string(generate_hero(profile, True, theme), 360, bg),
-            render_svg_string(generate_status(profile, True, theme), 360, bg),
+            render_svg_string(generate_hero(profile, True, theme), MOBILE_WIDTH, bg),
+            render_svg_string(generate_status(profile, True, theme), MOBILE_WIDTH, bg),
         ]
         for item in profile["contacts"]:
-            mobile.append(render_svg_string(generate_contact_card(item, True, theme), 360, bg))
-        mobile.append(render_svg_string(generate_header("featured work", True, theme), 360, bg))
+            mobile.append(render_svg_string(generate_contact_card(item, True, theme), MOBILE_WIDTH, bg))
+        mobile.append(render_svg_string(generate_header("featured work", True, theme), MOBILE_WIDTH, bg))
         for i, item in enumerate(profile["featured"]):
-            mobile.append(render_svg_string(generate_featured_card(item, i, True, theme), 360, bg))
-        mobile.append(render_svg_string(generate_header("other work", True, theme), 360, bg))
+            mobile.append(render_svg_string(generate_featured_card(item, i, True, theme), MOBILE_WIDTH, bg))
+        mobile.append(render_svg_string(generate_header("other work", True, theme), MOBILE_WIDTH, bg))
         for item in profile["current"]:
-            mobile.append(render_svg_string(generate_current_card(item, True, theme), 360, bg))
+            mobile.append(render_svg_string(generate_current_card(item, True, theme), MOBILE_WIDTH, bg))
         if profile.get("certifications"):
-            mobile.append(render_svg_string(generate_header("certifications i'm pursuing", True, theme), 360, bg))
+            mobile.append(render_svg_string(generate_header("certifications i'm pursuing", True, theme), MOBILE_WIDTH, bg))
             for item in profile["certifications"]:
-                mobile.append(render_svg_string(generate_cert_card(item, True, theme), 360, bg))
+                mobile.append(render_svg_string(generate_cert_card(item, True, theme), MOBILE_WIDTH, bg))
         if profile.get("statistics"):
-            mobile.append(render_svg_string(generate_header("github profile statistics", True, theme), 360, bg))
-            mobile.append(render_svg_file(ROOT/profile["statistics"]["path"], 360, bg))
-        stack_images(mobile, 360, 15, 10, DOCS/f"preview-mobile-{theme}.png", bg)
+            mobile.append(render_svg_string(generate_header("github profile statistics", True, theme), MOBILE_WIDTH, bg))
+            mobile.append(render_svg_file(ROOT/profile["statistics"]["path"], MOBILE_WIDTH, bg))
+        stack_images(mobile, MOBILE_WIDTH, 15, 10, DOCS/f"preview-mobile-{theme}.png", bg)
 
 
 def update_contents() -> None:
-    files = sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc")
-    (ROOT / "REPOSITORY-CONTENTS.txt").write_text("\n".join(files) + "\n", encoding="utf-8")
+    paths = (path.relative_to(ROOT) for path in ROOT.rglob("*") if path.is_file())
+    files = sorted(
+        path.as_posix() for path in paths
+        if path.parts[0] != ".git" and "__pycache__" not in path.parts and path.suffix != ".pyc"
+    )
+    (ROOT / "REPOSITORY-CONTENTS.txt").write_text("\n".join(files) + "\n", encoding="utf-8", newline="\n")
 
 
 def save_generated(profile: dict[str, Any]) -> None:
@@ -739,9 +702,9 @@ def save_generated(profile: dict[str, Any]) -> None:
         for i, item in enumerate(profile.get("certifications", [])):
             outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
         for name, content in outputs.items():
-            (GENERATED / name).write_text(content, encoding="utf-8")
+            (GENERATED / name).write_text(content, encoding="utf-8", newline="\n")
 
-    (ROOT / "README.md").write_text(generate_readme(profile), encoding="utf-8")
+    (ROOT / "README.md").write_text(generate_readme(profile), encoding="utf-8", newline="\n")
 
 
 def main() -> None:

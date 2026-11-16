@@ -9,7 +9,7 @@ status:
 - label: RESEARCHING
   value: LLM Security
 - label: STUDYING
-  value: Computer Engineering @ CEFET-MG
+  value: Computer Engineering @ UFCIMG
 contacts:
 - label: LINKEDIN
   value: santana-iago
@@ -21,10 +21,7 @@ contacts:
   icon: assets/icons/email.svg
 featured:
 - title: Cyber Security Analyst @ iT.EAM
-  category: CTI · THREAT HUNTING · THREAT DETECTION
-  category_lines:
-  - CTI · THREAT HUNTING
-  - THREAT DETECTION
+  category: CTI · THREAT HUNTING
   description: Building detections, hunting threats, and turning cyber threat intelligence
     into practical security operations.
   logo: assets/brands/iteam-symbol.svg
@@ -34,30 +31,23 @@ featured:
   - Cyber Security
   - "Analyst @ iT.EAM"
 - title: LLM Security Undergraduate Research
-  category: AI SECURITY · LLM AGENTS · RESEARCH
-  category_lines:
-  - AI SECURITY · LLM AGENTS
-  - RESEARCH
+  category: AI SECURITY · LLM AGENTS
   description: Researching attack surfaces, adversarial behavior, and safer design
     for LLM-based agents.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
   title_lines:
   - LLM Security
   - Undergraduate Research
 - title: CriptoEscape
-  category: CRYPTOGRAPHY · EDUCATION · FULL STACK
-  category_lines:
-  - CRYPTOGRAPHY · EDUCATION
-  - FULL STACK
+  category: CRYPTOGRAPHY EDUCATION
   description: Teaching cryptography through an interactive escape-room platform
     built around hands-on challenges.
   logo: assets/illustrations/criptoescape-door.png
   logo_width: 44
   logo_height: 44
   url: https://criptoescape.com
-  row_height: 180
   description_max_lines: 4
   description_max_chars: 42
   title_lines:
@@ -65,40 +55,68 @@ featured:
   - Cryptography Education
 current:
 - title: Post-Quantum Cryptography Undergraduate Research
-  category: POST-QUANTUM CRYPTOGRAPHY · RESEARCH
+  category: POST-QUANTUM RESEARCH
   description: Exploring post-quantum cryptography, practical attacks, and the
     transition beyond classical public-key systems.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
   title_lines_desktop:
   - Post-Quantum Cryptography
   - Undergraduate Research
+- title: HackatOhm 2026 Winner
+  category: ELOGROUP CHALLENGE
+  description: Co-created Aptus, the winning solution for EloGroup’s challenge at UFCIMG’s
+    hackathon.
+  generated_name: current-aptus
+  logo: assets/brands/hackatohm.svg
+  logo_width: 44
+  logo_height: 44
+  url: https://github.com/santana-iago/hackatohm
 - title: Chemical Products Platform
-  category: FULL STACK · CEFET-MG
+  category: FULL STACK · UFCIMG
   description: Building a platform for chemical inventory and laboratory operations
-    across CEFET-MG campuses.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+    across UFCIMG campuses.
+  generated_name: current-1
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
+- title: Campus Parking System
+  category: SOFTWARE ENGINEERING
+  description: Built the parking management system for use across UFCIMG campuses using
+    computer vision.
+  generated_name: current-campus-parking
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
 - title: Algorithms & Data Structures I
-  category: UNDERGRADUATE TEACHING ASSISTANT · CEFET-MG
-  description: Selected through CEFET-MG's program, teaching algorithms, complexity,
+  category: TEACHING ASSISTANT · UFCIMG
+  description: Selected through UFCIMG's program, teaching algorithms, complexity,
     and data structures across languages.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+  generated_name: current-2
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
   title_lines_desktop:
   - Algorithms & Data Structures I
 - title: Computer Programming I
-  category: UNDERGRADUATE TEACHING ASSISTANT · PYTHON · CEFET-MG
-  description: Selected through CEFET-MG's program, teaching programming fundamentals
+  category: TEACHING ASSISTANT · UFCIMG
+  description: Selected through UFCIMG's program, teaching programming fundamentals
     and problem solving in Python.
-  logo: assets/brands/cefetmg.svg
-  logo_width: 54
-  logo_height: 35
+  generated_name: current-3
+  logo: assets/brands/ufcimg.svg
+  logo_width: 44
+  logo_height: 44
+- title: INASIM Management System
+  category: FRONTEND · APPSEC
+  description: Built the frontend and implemented application security for an education
+    nonprofit’s management platform.
+  generated_name: current-6
+  logo: assets/brands/inasim.svg
+  logo_width: 44
+  logo_height: 44
 - title: TMB Scan
-  category: PHYSICAL ASSESSMENT TECHNOLOGY · CLIENT PROJECT
+  category: FITNESS TECH
   description: 'Building a real-world platform for a fitness business: assessments,
     progress tracking, and reporting.'
   generated_name: current-tmb-scan
@@ -106,28 +124,11 @@ current:
   logo_width: 42
   logo_height: 42
 - title: Custódio Veículos
-  category: AUTOMOTIVE SALES TECHNOLOGY · CLIENT PROJECT
-  category_lines:
-  - AUTOMOTIVE SALES TECHNOLOGY
-  - CLIENT PROJECT
+  category: AUTOMOTIVE SALES
   description: 'Building a production platform for a real automotive client: inventory,
     marketplace publishing, and sales.'
+  generated_name: current-5
   logo: assets/brands/custodio-veiculos.svg
   logo_width: 68
   logo_height: 16
   url: https://custodioveiculos.com.br
-- title: INASIM Management System
-  category: FRONTEND DEVELOPMENT · NONPROFIT
-  description: Building the frontend of a management platform for an education-focused
-    nonprofit and its community programs.
-  logo: assets/brands/inasim.svg
-  logo_width: 44
-  logo_height: 44
-- title: PET / COMPET
-  category: ENGINEERING · EDUCATION · COMMUNITY
-  description: Creating technical events, educational initiatives, and collaborative
-    engineering projects at CEFET-MG.
-  logo: assets/brands/compet.svg
-  logo_width: 46
-  logo_height: 46
-  url: https://compet.vercel.app/

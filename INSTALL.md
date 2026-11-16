@@ -50,4 +50,4 @@ The README references only `assets/generated/`. The build replaces this director
 
 ## Appearance
 
-The README selects the desktop or mobile SVG through `<picture>`, gated only on viewport width. Light/dark is handled *inside* each SVG via a native `prefers-color-scheme` media query, evaluated by the browser while it renders the image — not through `<picture>`. GitHub wraps README `<picture>` elements in its own theme-switching custom element, which does not reliably honour a `<source>` combining a width bound with `prefers-color-scheme`; keeping theme entirely out of the `<picture>` markup avoids that. The statistics card uses the `github_dark` theme in both appearances.
+The `<img>` in each README `<picture>` points to the mobile SVG. A width-only source selects the desktop SVG on wide screens. Each SVG paints its own background and switches its palette and logo variants together using `prefers-color-scheme`. Clients that ignore the SVG theme query get the complete light palette, including the light background.

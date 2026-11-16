@@ -7,6 +7,4 @@ Every visual section has descriptive alternative text. Logos are decorative with
 
 ## Color schemes
 
-All generated interface SVGs include light and dark color palettes. Brand marks use dedicated dark-appearance SVG variants when additional contrast is required.
-
-The GitHub profile statistics card is a deliberate exception: it always renders with the `github_dark` theme, in both light and dark appearance modes. This is an intentional visual choice (it reads as a fixed "terminal" panel) rather than an oversight — all contrast ratios for its text against its own dark background were verified independently of the surrounding page theme.
+The generated SVGs paint their own background with the matching light or dark text palette. Brand marks use dedicated dark-appearance variants where additional contrast is required. Clients that skip the desktop source in `<picture>` still display the mobile composition, with larger type and project descriptions that wrap across the card.

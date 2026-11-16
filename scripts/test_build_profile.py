@@ -3,8 +3,44 @@
 from __future__ import annotations
 
 import unittest
+import xml.etree.ElementTree as ET
 
-from build_profile import wrap_words
+from build_profile import (
+    generate_current_card,
+    generate_hero,
+    load_profile,
+    responsive_linked_picture,
+    responsive_picture,
+    wrap_words,
+)
+
+
+class ProfileRenderingTests(unittest.TestCase):
+    def test_picture_defaults_to_mobile_without_a_matching_source(self):
+        for markup in (
+            responsive_picture("status", "Status"),
+            responsive_linked_picture("current-0", "Project", None),
+        ):
+            with self.subTest(markup=markup):
+                self.assertRegex(markup, r'<img\s+src="[^"]+-mobile\.svg"')
+                self.assertRegex(markup, r'<source\s+media="\(min-width: \d+px\)" srcset="[^"]+-desktop\.svg"')
+
+    def test_hero_paints_its_own_background_in_both_palettes(self):
+        svg = ET.fromstring(generate_hero(load_profile(), True, None))
+        self.assertEqual(svg[1].tag, "{http://www.w3.org/2000/svg}rect")
+        self.assertEqual(svg[1].attrib["class"], "surface")
+        self.assertIn(".surface{fill:#ffffff}", svg[0].text)
+        self.assertIn(".surface{fill:#0d1117}", svg[0].text)
+
+    def test_mobile_project_shows_full_description(self):
+        profile = load_profile()
+        item = {**profile["current"][0], "description": (
+            "Building a tool to monitor campus parking availability and help staff review "
+            "occupancy across the car park throughout the day."
+        )}
+        svg = ET.fromstring(generate_current_card(item, True, "light"))
+        descriptions = svg.findall(".//{*}text[@class='ui description-mobile']/{*}tspan")
+        self.assertEqual(" ".join(line.text for line in descriptions), item["description"])
 
 
 class WrapWordsTests(unittest.TestCase):
