@@ -23,9 +23,9 @@
 .git/logs/HEAD
 .git/logs/refs/heads/main
 .git/logs/refs/remotes/origin/main
-.git/objects/pack/pack-1341959205eb0cf2443b84d806f6a7491972f78a.idx
-.git/objects/pack/pack-1341959205eb0cf2443b84d806f6a7491972f78a.pack
-.git/objects/pack/pack-1341959205eb0cf2443b84d806f6a7491972f78a.rev
+.git/objects/pack/pack-de5dd893f4fce2161d36e54ad3b46befab9cb3c5.idx
+.git/objects/pack/pack-de5dd893f4fce2161d36e54ad3b46befab9cb3c5.pack
+.git/objects/pack/pack-de5dd893f4fce2161d36e54ad3b46befab9cb3c5.rev
 .git/refs/heads/main
 .git/refs/remotes/origin/main
 .gitattributes
@@ -50,12 +50,6 @@ assets/brands/inasim.svg
 assets/brands/iteam-symbol.svg
 assets/brands/tmb-scan-dark.svg
 assets/brands/tmb-scan.svg
-assets/generated/cert-0-desktop.svg
-assets/generated/cert-0-mobile.svg
-assets/generated/cert-1-desktop.svg
-assets/generated/cert-1-mobile.svg
-assets/generated/certifications-header-desktop.svg
-assets/generated/certifications-header-mobile.svg
 assets/generated/contact-email-desktop.svg
 assets/generated/contact-email-mobile.svg
 assets/generated/contact-linkedin-desktop.svg
@@ -90,8 +84,6 @@ assets/generated/featured-header-mobile.svg
 assets/generated/featured-mobile.svg
 assets/generated/hero-desktop.svg
 assets/generated/hero-mobile.svg
-assets/generated/statistics-header-desktop.svg
-assets/generated/statistics-header-mobile.svg
 assets/generated/status-desktop.svg
 assets/generated/status-mobile.svg
 assets/icons/email-dark.svg

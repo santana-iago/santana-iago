@@ -93,6 +93,7 @@ Building the frontend of a management platform for an education-focused nonprofi
 
 Creating technical events, educational initiatives, and collaborative engineering projects at CEFET-MG.
 
+
 </details>
 
 <!-- Generated from profile.yml. Edit profile.yml, then run python scripts/build_profile.py. -->
