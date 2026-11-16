@@ -16,16 +16,25 @@ from build_profile import (
 
 class ProfileRenderingTests(unittest.TestCase):
     def test_picture_defaults_to_mobile_without_a_matching_source(self):
-        for markup in (
-            responsive_picture("status", "Status"),
-            responsive_picture("current-0", "Project", "https://example.com/project"),
+        for url in (
+            None,
+            "https://example.com/project",
         ):
+            markup = responsive_picture("current-0", "Project", url)
             for theme in ("light", "dark"):
-                with self.subTest(markup=markup, theme=theme):
+                with self.subTest(url=url, theme=theme):
                     marker = f"#gh-{theme}-mode-only"
                     self.assertRegex(markup, rf'<img\s+src="[^"]+-mobile-{theme}\.svg{marker}"')
                     self.assertRegex(markup, rf'<source\s+media="\(min-width: \d+px\)" srcset="[^"]+-desktop-{theme}\.svg{marker}"')
-                    self.assertRegex(markup, rf'<a href="[^"]+{marker}"><picture>')
+
+    def test_picture_only_links_to_a_page_when_a_destination_is_configured(self):
+        decorative = responsive_picture("current-0", "Project")
+        linked = responsive_picture("current-0", "Project", "https://example.com/project")
+        for theme in ("light", "dark"):
+            with self.subTest(theme=theme):
+                marker = f"#gh-{theme}-mode-only"
+                self.assertIn(f'<a href="{marker}" tabindex="-1"><picture>', decorative)
+                self.assertIn(f'<a href="https://example.com/project{marker}"><picture>', linked)
 
     def test_hero_paints_its_own_background_with_a_fixed_palette(self):
         for theme, color in [("light", "#ffffff"), ("dark", "#0d1117")]:

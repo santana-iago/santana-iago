@@ -90,7 +90,7 @@ def main() -> int:
         desktop = re.escape(f"./assets/generated/{name}-desktop-{theme}.svg{fragment}")
         mobile = re.escape(f"./assets/generated/{name}-mobile-{theme}.svg{fragment}")
         pattern = (
-            rf'<a href="[^"\n]+{fragment}"><picture>'
+            rf'<a (?:href="{fragment}" tabindex="-1"|href="(?:https?://|mailto:)[^"\n]+{fragment}")><picture>'
             rf'<source media="\(min-width: \d+px\)" srcset="{desktop}">'
             rf'<img src="{mobile}" alt="[^"\n]*"></picture></a>'
         )

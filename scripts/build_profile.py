@@ -468,9 +468,13 @@ def responsive_picture(name: str, alt: str, url: str | None = None) -> str:
         marker = f"#gh-{theme}-mode-only"
         desktop = f"{base}/{name}-desktop-{theme}.svg"
         mobile = f"{base}/{name}-mobile-{theme}.svg"
-        destination = urldefrag(url).url if url else desktop
+        # For artwork without a destination, the fragment stays on the README.
+        if url:
+            anchor = f'<a href="{esc(urldefrag(url).url)}{marker}">'
+        else:
+            anchor = f'<a href="{marker}" tabindex="-1">'
         pictures.append(
-            f'<a href="{esc(destination)}{marker}"><picture>'
+            f'{anchor}<picture>'
             f'<source media="(min-width: {DESKTOP_BREAKPOINT}px)" srcset="{desktop}{marker}">'
             f'<img src="{mobile}{marker}" alt="{esc(alt)}">'
             '</picture></a>'
