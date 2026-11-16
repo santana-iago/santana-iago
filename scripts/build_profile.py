@@ -6,8 +6,10 @@ import base64
 import html
 import io
 import shutil
+from itertools import product
 from pathlib import Path
 from typing import Any
+from urllib.parse import urldefrag
 
 import cairosvg
 import yaml
@@ -16,6 +18,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "assets" / "generated"
 MOBILE_WIDTH = 336
+RASTER_EMBED_MAX_SIZE = 144
 # Some mobile WebViews use a 980px layout viewport before applying zoom.
 DESKTOP_BREAKPOINT = 1024
 DOCS = ROOT / "docs"
@@ -76,6 +79,16 @@ def data_uri(relative: str, theme: str) -> str:
             png_bytes = cairosvg.svg2png(bytestring=raw_text.encode("utf-8"), output_width=144)
             return f"data:image/png;base64,{base64.b64encode(png_bytes).decode('ascii')}"
     raw = path.read_bytes()
+    if path.suffix.lower() == ".png":
+        with Image.open(io.BytesIO(raw)) as source:
+            if max(source.size) > RASTER_EMBED_MAX_SIZE:
+                # Project marks render at roughly 44px. Keep about 3x that
+                # resolution for dense displays without embedding the full source.
+                artwork = source.convert("RGBA")
+                artwork.thumbnail((RASTER_EMBED_MAX_SIZE, RASTER_EMBED_MAX_SIZE), Image.Resampling.LANCZOS)
+                with io.BytesIO() as compact:
+                    artwork.save(compact, format="PNG", optimize=True)
+                    raw = compact.getvalue()
     mime = {
         ".svg": "image/svg+xml",
         ".png": "image/png",
@@ -114,7 +127,7 @@ def _theme_rules(c: dict[str, str]) -> str:
 .title-mobile{{font-size:17px;font-weight:700;letter-spacing:-.12px}}
 .current-title{{font-size:14px;font-weight:700;letter-spacing:-.1px}}
 .category{{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:{c['label']}}}
-.category-mobile{{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.8px;fill:{c['label']}}}
+.category-mobile{{font:700 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.8px;fill:{c['label']}}}
 .description{{font-size:11.3px;font-weight:400;fill:{c['muted']}}}
 .description-mobile{{font-size:14.5px;font-weight:400;fill:{c['muted']}}}
 .cert-title{{font-size:15px;font-weight:700;letter-spacing:-.12px}}
@@ -125,20 +138,10 @@ def _theme_rules(c: dict[str, str]) -> str:
 """
 
 
-def style(theme: str | None) -> str:
-    # Artwork paints the page surface and its text together. The light palette
-    # remains readable if the host chooses a dark page but the image renderer
-    # does not evaluate prefers-color-scheme.
-    if theme in ("light", "dark"):
-        return _theme_rules(THEMES[theme])
-    dark_block = _theme_rules(THEMES["dark"]) + ".theme-light-only{display:none}.theme-dark-only{display:block}"
-    return _theme_rules(THEMES["light"]) + ".theme-dark-only{display:none}" + f"@media (prefers-color-scheme: dark){{{dark_block}}}"
-
-
-def svg_open(width: int, height: int, theme: str | None, *, surface: bool = True) -> list[str]:
+def svg_open(width: int, height: int, theme: str, *, surface: bool = True) -> list[str]:
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        f'<style>{style(theme)}</style>',
+        f'<style>{_theme_rules(THEMES[theme])}</style>',
     ]
     if surface:
         parts.append(f'<rect class="surface" width="{width}" height="{height}"/>')
@@ -162,18 +165,9 @@ def add_multiline(parts: list[str], x: float, y: float, lines: list[str], cls: s
     parts.append("</text>")
 
 
-def add_image(parts: list[str], x: float, y: float, width: float, height: float, relative: str, theme: str | None) -> None:
-    path = ROOT / relative
-    has_dark = path.with_name(f"{path.stem}-dark{path.suffix}").exists()
+def add_image(parts: list[str], x: float, y: float, width: float, height: float, relative: str, theme: str) -> None:
     attrs = f'x="{x}" y="{y}" width="{width}" height="{height}" preserveAspectRatio="xMidYMid meet"'
-    if theme in ("light", "dark") or not has_dark:
-        pick = "dark" if (theme == "dark" and has_dark) else "light"
-        parts.append(f'<image href="{data_uri(relative, pick)}" {attrs}/>')
-        return
-    # Theme-agnostic file: embed both, toggled by the same native media query
-    # used for the rest of the palette (see style()).
-    parts.append(f'<g class="theme-light-only"><image href="{data_uri(relative, "light")}" {attrs}/></g>')
-    parts.append(f'<g class="theme-dark-only"><image href="{data_uri(relative, "dark")}" {attrs}/></g>')
+    parts.append(f'<image href="{data_uri(relative, theme)}" {attrs}/>')
 
 
 def add_line(parts: list[str], x1: float, y1: float, x2: float, y2: float, soft: bool = False) -> None:
@@ -213,7 +207,7 @@ def section_header(parts: list[str], title: str, width: int, mobile: bool) -> No
     add_line(parts, left, 43 if mobile else 35, right, 43 if mobile else 35)
 
 
-def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_hero(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     # Both lines are rendered in fonts that GitHub's real renderer substitutes per-OS
     # (e.g. Consolas/Courier New on Windows for the monospace stack, or a wider
     # Georgia fallback for the headline) — measurably wider than what the font used
@@ -252,7 +246,7 @@ def generate_hero(profile: dict[str, Any], mobile: bool, theme: str | None) -> s
     return svg_close(parts)
 
 
-def generate_status(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_status(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     items = profile["status"]
     if mobile:
         width, height = MOBILE_WIDTH, 188
@@ -277,9 +271,9 @@ def generate_status(profile: dict[str, Any], mobile: bool, theme: str | None) ->
     return svg_close(parts)
 
 
-def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
     # Desktop is narrower than before (280 -> 265) so 3 cards reliably share one
-    # row without an HTML width attribute (see responsive_linked_picture). The
+    # row without an HTML width attribute (see responsive_picture). The
     # value wraps defensively instead of assuming it always fits one line.
     width, height = (MOBILE_WIDTH, 78) if mobile else (265, 76)
     parts = svg_open(width, height, theme, surface=False)
@@ -303,7 +297,7 @@ def generate_contact_card(item: dict[str, Any], mobile: bool, theme: str | None)
     return svg_close(parts)
 
 
-def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_featured(profile: dict[str, Any], mobile: bool, theme: str) -> str:
     items = profile["featured"]
     if mobile:
         rows = [mobile_project_row(item, theme) for item in items]
@@ -337,10 +331,10 @@ def generate_featured(profile: dict[str, Any], mobile: bool, theme: str | None) 
     return svg_close(parts)
 
 
-def mobile_project_row(item: dict[str, Any], theme: str | None) -> tuple[int, list[str]]:
+def mobile_project_row(item: dict[str, Any], theme: str) -> tuple[int, list[str]]:
     parts: list[str] = []
     title_lines = item.get("title_lines") or wrap_words(item["title"], 26)
-    category_lines = wrap_words(item["category"], 43)
+    category_lines = wrap_words(item["category"], 40)
     description_lines = wrap_words(item["description"], 40)
     title_y = 37 if len(title_lines) == 1 else 28
     category_y = max(69, title_y + 20 * (len(title_lines) - 1) + 21)
@@ -356,7 +350,7 @@ def mobile_project_row(item: dict[str, Any], theme: str | None) -> tuple[int, li
     return bottom + 6, parts
 
 
-def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme: str | None) -> str:
+def generate_featured_card(item: dict[str, Any], index: int, mobile: bool, theme: str) -> str:
     """Render one featured-work card so it can be wrapped in its own link."""
     if mobile:
         height, row = mobile_project_row(item, theme)
@@ -386,12 +380,12 @@ def _current_title_lines_desktop(item: dict[str, Any]) -> list[str]:
     return item.get("title_lines_desktop") or wrap_words(item["title"], 39, 2)
 
 
-def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None, index: int = 0, total: int = 0, row_title_lines: int = 1) -> str:
+def generate_current_card(item: dict[str, Any], mobile: bool, theme: str, index: int = 0, total: int = 0, row_title_lines: int = 1) -> str:
     if mobile:
         height, row = mobile_project_row(item, theme)
         return svg_close(svg_open(MOBILE_WIDTH, height, theme) + row)
     # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
-    # row without an HTML width attribute (see responsive_linked_picture). The
+    # row without an HTML width attribute (see responsive_picture). The
     # description now wraps across up to 3 (tighter) lines instead of 2 wider
     # ones, so per-line width doesn't have to shrink as much. Category and
     # description position/height are both computed from actual line counts
@@ -429,7 +423,7 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str | None,
     return svg_close(parts)
 
 
-def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) -> str:
+def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str) -> str:
     if mobile:
         width, height = MOBILE_WIDTH, 92
         parts = svg_open(width, height, theme)
@@ -441,7 +435,7 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) ->
         add_text(parts, text_x, 76, item["status"], "cert-status")
         return svg_close(parts)
     # Desktop is narrower than before (425 -> 390) so 2 cards reliably share a
-    # row without an HTML width attribute (see responsive_linked_picture). The
+    # row without an HTML width attribute (see responsive_picture). The
     # card-bg rect stops well short of the SVG's own width so the two cards
     # get a visible gap between them in the rendered README, since adjacent
     # <picture> tags are joined with no markup space between them.
@@ -457,7 +451,7 @@ def generate_cert_card(item: dict[str, Any], mobile: bool, theme: str | None) ->
     return svg_close(parts)
 
 
-def generate_header(title: str, mobile: bool, theme: str | None) -> str:
+def generate_header(title: str, mobile: bool, theme: str) -> str:
     width = MOBILE_WIDTH if mobile else 880
     height = 52 if mobile else 42
     parts = svg_open(width, height, theme)
@@ -465,22 +459,23 @@ def generate_header(title: str, mobile: bool, theme: str | None) -> str:
     return svg_close(parts)
 
 
-def responsive_picture(name: str, alt: str) -> str:
-    # Clients that discard <source> still get the legible, single-column art.
-    # The source only checks width so GitHub's theme wrapper does not pick a layout.
-    # The images keep their intrinsic widths so project cards can wrap naturally.
+def responsive_picture(name: str, alt: str, url: str | None = None) -> str:
+    # GitHub web filters the links by fragment. The image URLs also carry the
+    # marker for the mobile app, where <img> is the single-column fallback.
     base = "./assets/generated"
-    return (
-        '<picture>'
-        f'<source media="(min-width: {DESKTOP_BREAKPOINT}px)" srcset="{base}/{name}-desktop.svg">'
-        f'<img src="{base}/{name}-mobile.svg" alt="{esc(alt)}">'
-        '</picture>'
-    )
-
-
-def responsive_linked_picture(path_base: str, alt: str, url: str | None) -> str:
-    picture = responsive_picture(path_base, alt)
-    return f'<a href="{esc(url)}">{picture}</a>' if url else picture
+    pictures = []
+    for theme in THEMES:
+        marker = f"#gh-{theme}-mode-only"
+        desktop = f"{base}/{name}-desktop-{theme}.svg"
+        mobile = f"{base}/{name}-mobile-{theme}.svg"
+        destination = urldefrag(url).url if url else desktop
+        pictures.append(
+            f'<a href="{esc(destination)}{marker}"><picture>'
+            f'<source media="(min-width: {DESKTOP_BREAKPOINT}px)" srcset="{desktop}{marker}">'
+            f'<img src="{mobile}{marker}" alt="{esc(alt)}">'
+            '</picture></a>'
+        )
+    return "".join(pictures)
 
 
 def generate_readme(profile: dict[str, Any]) -> str:
@@ -497,13 +492,13 @@ def generate_readme(profile: dict[str, Any]) -> str:
     ]
 
     contact_pictures = [
-        responsive_linked_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"])
+        responsive_picture(f'contact-{item["label"].lower()}', item["label"].title(), item["url"])
         for item in profile["contacts"]
     ]
     lines.append("&#8195;&#8195;".join(contact_pictures))
     lines.extend(['</p>', '', '<div align="center">', responsive_picture("featured-header", "Featured work."), '<p align="center">'])
     featured_pictures = [
-        responsive_linked_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
+        responsive_picture(f"featured-card-{item_index}", item["title"], item.get("url"))
         for item_index, item in enumerate(profile["featured"])
     ]
     lines.append("".join(featured_pictures))
@@ -511,7 +506,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
 
     lines.extend(['<div align="center">', responsive_picture("current-header", "Other work.")])
     current_pictures = [
-        responsive_linked_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
+        responsive_picture(item.get("generated_name", f"current-{item_index}"), item["title"], item.get("url"))
         for item_index, item in enumerate(profile["current"])
     ]
     for row_start in range(0, len(current_pictures), 2):
@@ -521,7 +516,7 @@ def generate_readme(profile: dict[str, Any]) -> str:
     if profile.get("certifications"):
         lines.extend([responsive_picture("certifications-header", "Certifications I'm pursuing."), '<p align="center">'])
         cert_pictures = [
-            responsive_linked_picture(f"cert-{i}", item["title"], None)
+            responsive_picture(f"cert-{i}", item["title"])
             for i, item in enumerate(profile["certifications"])
         ]
         lines.append("".join(cert_pictures))
@@ -673,22 +668,23 @@ def save_generated(profile: dict[str, Any]) -> None:
     if GENERATED.exists():
         shutil.rmtree(GENERATED)
     GENERATED.mkdir(parents=True, exist_ok=True)
-    for mobile, layout in ((False, "desktop"), (True, "mobile")):
+    for (mobile, layout), theme in product(((False, "desktop"), (True, "mobile")), THEMES):
+        suffix = f"-{layout}-{theme}.svg"
         outputs = {
-            f"hero-{layout}.svg": generate_hero(profile, mobile, None),
-            f"status-{layout}.svg": generate_status(profile, mobile, None),
-            f"featured-{layout}.svg": generate_featured(profile, mobile, None),
-            f"featured-header-{layout}.svg": generate_header("featured work", mobile, None),
-            f"current-header-{layout}.svg": generate_header("other work", mobile, None),
+            "hero": generate_hero(profile, mobile, theme),
+            "status": generate_status(profile, mobile, theme),
+            "featured": generate_featured(profile, mobile, theme),
+            "featured-header": generate_header("featured work", mobile, theme),
+            "current-header": generate_header("other work", mobile, theme),
         }
         if profile.get("certifications"):
-            outputs[f"certifications-header-{layout}.svg"] = generate_header("certifications i'm pursuing", mobile, None)
+            outputs["certifications-header"] = generate_header("certifications i'm pursuing", mobile, theme)
         if profile.get("statistics"):
-            outputs[f"statistics-header-{layout}.svg"] = generate_header("github profile statistics", mobile, None)
+            outputs["statistics-header"] = generate_header("github profile statistics", mobile, theme)
         for i, item in enumerate(profile["featured"]):
-            outputs[f"featured-card-{i}-{layout}.svg"] = generate_featured_card(item, i, mobile, None)
+            outputs[f"featured-card-{i}"] = generate_featured_card(item, i, mobile, theme)
         for item in profile["contacts"]:
-            outputs[f'contact-{item["label"].lower()}-{layout}.svg'] = generate_contact_card(item, mobile, None)
+            outputs[f'contact-{item["label"].lower()}'] = generate_contact_card(item, mobile, theme)
         current_total = len(profile["current"])
         current_items = profile["current"]
         for i, item in enumerate(current_items):
@@ -698,11 +694,11 @@ def save_generated(profile: dict[str, Any]) -> None:
                 row_start = i - (i % 2)
                 row_items = current_items[row_start:row_start + 2]
                 row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
-            outputs[f"{current_name}-{layout}.svg"] = generate_current_card(item, mobile, None, i, current_total, row_title_lines)
+            outputs[current_name] = generate_current_card(item, mobile, theme, i, current_total, row_title_lines)
         for i, item in enumerate(profile.get("certifications", [])):
-            outputs[f"cert-{i}-{layout}.svg"] = generate_cert_card(item, mobile, None)
+            outputs[f"cert-{i}"] = generate_cert_card(item, mobile, theme)
         for name, content in outputs.items():
-            (GENERATED / name).write_text(content, encoding="utf-8", newline="\n")
+            (GENERATED / f"{name}{suffix}").write_text(content, encoding="utf-8", newline="\n")
 
     (ROOT / "README.md").write_text(generate_readme(profile), encoding="utf-8", newline="\n")
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 import re
 import sys
 import xml.etree.ElementTree as ET
+from itertools import product
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -47,15 +48,16 @@ def main() -> int:
             ROOT / f"docs/preview-desktop-{theme}.png",
             ROOT / f"docs/preview-mobile-{theme}.png",
         ]
-    for layout in ("desktop", "mobile"):
-        required += [
-            GENERATED / f"hero-{layout}.svg",
-            GENERATED / f"status-{layout}.svg",
-            GENERATED / f"featured-{layout}.svg",
-            GENERATED / f"current-header-{layout}.svg",
-            GENERATED / f"contact-linkedin-{layout}.svg",
-            GENERATED / f"current-0-{layout}.svg",
-        ]
+    picture_names = ["hero", "status", "featured-header", "current-header"]
+    picture_names += [f'contact-{item["label"].lower()}' for item in profile.get("contacts", [])]
+    picture_names += [f"featured-card-{i}" for i, _ in enumerate(profile.get("featured", []))]
+    picture_names += [item.get("generated_name", f"current-{i}") for i, item in enumerate(profile.get("current", []))]
+    if profile.get("certifications"):
+        picture_names += ["certifications-header"] + [f"cert-{i}" for i, _ in enumerate(profile["certifications"])]
+    if profile.get("statistics"):
+        picture_names.append("statistics-header")
+    for name, layout, theme in product(picture_names + ["featured"], ("desktop", "mobile"), ("light", "dark")):
+        required.append(GENERATED / f"{name}-{layout}-{theme}.svg")
     for path in required:
         if not path.exists():
             error(f"Required file is missing: {path.relative_to(ROOT)}")
@@ -73,7 +75,7 @@ def main() -> int:
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
     for reference in re.findall(r'(?:src|srcset)="(\./[^\"]+)"', readme):
-        local = ROOT / reference.removeprefix("./")
+        local = ROOT / urlparse(reference).path
         if not local.exists():
             error(f"README references missing file: {reference}")
 
@@ -83,32 +85,24 @@ def main() -> int:
         error("README includes certifications although the section is disabled")
     if not profile.get("statistics") and ("statistics-header" in readme or "profile-summary-card-output/" in readme):
         error("README includes profile statistics although the section is disabled")
-    header_names = ["hero", "status", "current-header"]
-    if profile.get("certifications"):
-        header_names.append("certifications-header")
-    if profile.get("statistics"):
-        header_names.append("statistics-header")
-    for name in header_names:
-        if f"{name}-mobile.svg" not in readme or f"{name}-desktop.svg" not in readme:
-            error(f"README is missing an explicit mobile/desktop <picture> source for {name}")
-    if "featured-header-mobile.svg" not in readme or "featured-header-desktop.svg" not in readme:
-        error("README is missing an explicit mobile/desktop <picture> source for featured-header")
-    for index in range(len(profile.get("featured", []))):
-        if f"featured-card-{index}-mobile.svg" not in readme or f"featured-card-{index}-desktop.svg" not in readme:
-            error(f"README is missing an explicit mobile/desktop <picture> source for featured-card-{index}")
+    for name, theme in product(picture_names, ("light", "dark")):
+        fragment = f"#gh-{theme}-mode-only"
+        desktop = re.escape(f"./assets/generated/{name}-desktop-{theme}.svg{fragment}")
+        mobile = re.escape(f"./assets/generated/{name}-mobile-{theme}.svg{fragment}")
+        pattern = (
+            rf'<a href="[^"\n]+{fragment}"><picture>'
+            rf'<source media="\(min-width: \d+px\)" srcset="{desktop}">'
+            rf'<img src="{mobile}" alt="[^"\n]*"></picture></a>'
+        )
+        if not re.search(pattern, readme):
+            error(f"Missing matching desktop and mobile sources for {name} in the {theme} theme")
 
-    # GitHub wraps README <picture> elements in its own theme-switching custom
-    # element, which (confirmed against a live page) does not reliably honour a
-    # <source media="..."> that combines a width bound with prefers-color-scheme
-    # — it must never reappear in the generated markup. Theme instead lives
-    # inside each SVG file as a native prefers-color-scheme media query, which
-    # the browser evaluates itself while rendering the image.
     if "prefers-color-scheme" in readme:
-        error("README <picture> markup must not combine width and prefers-color-scheme in the same source")
+        error("README must leave color selection to GitHub's theme fragments")
     for svg in GENERATED.glob("*.svg"):
         content = svg.read_text(encoding="utf-8")
-        if "prefers-color-scheme" not in content:
-            error(f"Generated SVG is missing an embedded prefers-color-scheme rule: {svg.relative_to(ROOT)}")
+        if "prefers-color-scheme" in content:
+            error(f"Generated SVG must have a fixed palette: {svg.relative_to(ROOT)}")
 
     legacy = [p for p in (ROOT / "assets").glob("generated-v*") if p.is_dir()]
     if legacy:

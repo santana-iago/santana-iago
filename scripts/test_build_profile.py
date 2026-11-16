@@ -9,7 +9,6 @@ from build_profile import (
     generate_current_card,
     generate_hero,
     load_profile,
-    responsive_linked_picture,
     responsive_picture,
     wrap_words,
 )
@@ -19,18 +18,23 @@ class ProfileRenderingTests(unittest.TestCase):
     def test_picture_defaults_to_mobile_without_a_matching_source(self):
         for markup in (
             responsive_picture("status", "Status"),
-            responsive_linked_picture("current-0", "Project", None),
+            responsive_picture("current-0", "Project", "https://example.com/project"),
         ):
-            with self.subTest(markup=markup):
-                self.assertRegex(markup, r'<img\s+src="[^"]+-mobile\.svg"')
-                self.assertRegex(markup, r'<source\s+media="\(min-width: \d+px\)" srcset="[^"]+-desktop\.svg"')
+            for theme in ("light", "dark"):
+                with self.subTest(markup=markup, theme=theme):
+                    marker = f"#gh-{theme}-mode-only"
+                    self.assertRegex(markup, rf'<img\s+src="[^"]+-mobile-{theme}\.svg{marker}"')
+                    self.assertRegex(markup, rf'<source\s+media="\(min-width: \d+px\)" srcset="[^"]+-desktop-{theme}\.svg{marker}"')
+                    self.assertRegex(markup, rf'<a href="[^"]+{marker}"><picture>')
 
-    def test_hero_paints_its_own_background_in_both_palettes(self):
-        svg = ET.fromstring(generate_hero(load_profile(), True, None))
-        self.assertEqual(svg[1].tag, "{http://www.w3.org/2000/svg}rect")
-        self.assertEqual(svg[1].attrib["class"], "surface")
-        self.assertIn(".surface{fill:#ffffff}", svg[0].text)
-        self.assertIn(".surface{fill:#0d1117}", svg[0].text)
+    def test_hero_paints_its_own_background_with_a_fixed_palette(self):
+        for theme, color in [("light", "#ffffff"), ("dark", "#0d1117")]:
+            with self.subTest(theme=theme):
+                svg = ET.fromstring(generate_hero(load_profile(), True, theme))
+                self.assertEqual(svg[1].tag, "{http://www.w3.org/2000/svg}rect")
+                self.assertEqual(svg[1].attrib["class"], "surface")
+                self.assertIn(f".surface{{fill:{color}}}", svg[0].text)
+                self.assertNotIn("prefers-color-scheme", svg[0].text)
 
     def test_mobile_project_shows_full_description(self):
         profile = load_profile()

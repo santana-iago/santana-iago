@@ -7,4 +7,4 @@ Every visual section has descriptive alternative text. Logos are decorative with
 
 ## Color schemes
 
-The generated SVGs paint their own background with the matching light or dark text palette. Brand marks use dedicated dark-appearance variants where additional contrast is required. Clients that skip the desktop source in `<picture>` still display the mobile composition, with larger type and project descriptions that wrap across the card.
+The generated SVGs use separate fixed palettes for light and dark. GitHub selects the appropriate palette for the page. Brand marks use dedicated dark variants where additional contrast is required. The mobile fallback uses larger type and project descriptions that wrap across the card.

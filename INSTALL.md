@@ -50,4 +50,4 @@ The README references only `assets/generated/`. The build replaces this director
 
 ## Appearance
 
-The `<img>` in each README `<picture>` points to the mobile SVG. A width-only source selects the desktop SVG on wide screens. Each SVG paints its own background and switches its palette and logo variants together using `prefers-color-scheme`. Clients that ignore the SVG theme query get the complete light palette, including the light background.
+Each card has separate light and dark SVGs for desktop and mobile. GitHub selects the palette with its theme URL fragments. Within that palette, `<picture>` selects the desktop artwork on wide screens and falls back to the mobile artwork. The SVGs use fixed colors so clients can cache them without mixing palettes.

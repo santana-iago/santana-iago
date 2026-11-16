@@ -82,7 +82,7 @@ current:
   logo_width: 44
   logo_height: 44
 - title: Campus Parking System
-  category: SOFTWARE ENGINEERING
+  category: APPLIED COMPUTER VISION
   description: Built the parking management system for use across UFCIMG campuses using
     computer vision.
   generated_name: current-campus-parking

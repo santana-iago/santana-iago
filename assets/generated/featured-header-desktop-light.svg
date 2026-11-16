@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="42" viewBox="0 0 880 42"><style>
+.surface{fill:#ffffff}
+.card-bg{fill:#f6f8fa}
+.card-border{stroke:#d0d7de}
+.line{stroke:#d0d7de}
+.soft-line{stroke:#eaeef2}
+.icon-disc{fill:#ffffff;stroke:#d0d7de}
+.arrow{stroke:#656d76;fill:#656d76}
+.hero-headline{font:italic 600 34px Georgia,'Times New Roman',serif;fill:#1f2328}
+.hero-headline-mobile{font:italic 600 21px Georgia,'Times New Roman',serif;letter-spacing:-.1px;fill:#1f2328}
+.hero-copy{font:400 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#57606a}
+.hero-copy-mobile{font:400 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08px;fill:#57606a}
+.status-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;fill:#656d76}
+.status-value{font:500 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.status-value-mobile{font:500 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.contact-label{font:600 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.45px;fill:#656d76}
+.contact-value{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.contact-value-mobile{font:600 13.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1f2328}
+.ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#1f2328}
+.section{font-size:15px;font-weight:500;letter-spacing:-.1px}
+.section-mobile{font-size:18px;font-weight:600;letter-spacing:-.2px}
+.title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.title-mobile{font-size:17px;font-weight:700;letter-spacing:-.12px}
+.current-title{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.category{font:700 10px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.2px;fill:#656d76}
+.category-mobile{font:700 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.8px;fill:#656d76}
+.description{font-size:11.3px;font-weight:400;fill:#57606a}
+.description-mobile{font-size:14.5px;font-weight:400;fill:#57606a}
+.cert-title{font-size:15px;font-weight:700;letter-spacing:-.12px}
+.cert-title-mobile{font-size:15.5px;font-weight:700;letter-spacing:-.12px}
+.cert-subtitle{font-size:10.5px;font-weight:400;fill:#57606a}
+.cert-subtitle-mobile{font-size:11px;font-weight:400;fill:#57606a}
+.cert-status{font:700 7.4px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1.4px;fill:#656d76}
+</style><rect class="surface" width="880" height="42"/><text x="2" y="22" class="ui section">featured work</text><line class="line" x1="2" y1="35" x2="878" y2="35"/></svg>
