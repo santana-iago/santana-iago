@@ -56,7 +56,7 @@ featured:
 current:
 - title: Post-Quantum Cryptography Undergraduate Research
   category: POST-QUANTUM RESEARCH
-  description: Exploring post-quantum cryptography, practical attacks, and the
+  description: Explored post-quantum cryptography, practical attacks, and the
     transition beyond classical public-key systems.
   logo: assets/brands/ufcimg.svg
   logo_width: 44
@@ -73,10 +73,10 @@ current:
   logo_width: 44
   logo_height: 44
   url: https://github.com/santana-iago/hackatohm
-- title: Chemical Products Platform
-  category: FULL STACK · UFCIMG
-  description: Building a platform for chemical inventory and laboratory operations
-    across UFCIMG campuses.
+- title: Controlled Chemicals Management System
+  category: FULL STACK · APPSEC
+  description: Built and secured the system for all chemistry labs. It was deployed
+    across all UFCIMG campuses.
   generated_name: current-1
   logo: assets/brands/ufcimg.svg
   logo_width: 44
@@ -125,8 +125,8 @@ current:
   logo_height: 42
 - title: Custódio Veículos
   category: AUTOMOTIVE SALES
-  description: 'Building a production platform for a real automotive client: inventory,
-    marketplace publishing, and sales.'
+  description: Built a production platform for an automotive client to manage inventory,
+    marketplace listings, and sales.
   generated_name: current-5
   logo: assets/brands/custodio-veiculos.svg
   logo_width: 68
