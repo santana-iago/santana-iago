@@ -123,6 +123,7 @@ current:
   logo: assets/illustrations/tmb-scan.png
   logo_width: 42
   logo_height: 42
+  url: https://trainingmindbody.com
 - title: Custódio Veículos
   category: AUTOMOTIVE SALES
   description: Built a production platform for an automotive client to manage inventory,
@@ -131,4 +132,4 @@ current:
   logo: assets/brands/custodio-veiculos.svg
   logo_width: 68
   logo_height: 16
-  url: https://custodioveiculos.com.br
+  url: https://custodioveiculos.com
