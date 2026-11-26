@@ -19,6 +19,8 @@ assets/brands/iteam-symbol.svg
 assets/brands/tmb-scan-dark.svg
 assets/brands/tmb-scan.svg
 assets/brands/ufcimg.svg
+assets/brands/usal-sello-dark.png
+assets/brands/usal-sello.png
 assets/generated/contact-email-desktop-dark.svg
 assets/generated/contact-email-desktop-light.svg
 assets/generated/contact-email-mobile-dark.svg
@@ -63,6 +65,10 @@ assets/generated/current-header-desktop-dark.svg
 assets/generated/current-header-desktop-light.svg
 assets/generated/current-header-mobile-dark.svg
 assets/generated/current-header-mobile-light.svg
+assets/generated/current-salamanca-desktop-dark.svg
+assets/generated/current-salamanca-desktop-light.svg
+assets/generated/current-salamanca-mobile-dark.svg
+assets/generated/current-salamanca-mobile-light.svg
 assets/generated/current-tmb-scan-desktop-dark.svg
 assets/generated/current-tmb-scan-desktop-light.svg
 assets/generated/current-tmb-scan-mobile-dark.svg

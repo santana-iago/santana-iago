@@ -55,6 +55,22 @@ class ProfileRenderingTests(unittest.TestCase):
         descriptions = svg.findall(".//{*}text[@class='ui description-mobile']/{*}tspan")
         self.assertEqual(" ".join(line.text for line in descriptions), item["description"])
 
+    def test_extended_project_description_fits_in_both_layouts_and_themes(self):
+        item = next(
+            item for item in load_profile()["current"]
+            if item.get("generated_name") == "current-salamanca"
+        )
+        for mobile in (False, True):
+            for theme in ("light", "dark"):
+                with self.subTest(mobile=mobile, theme=theme):
+                    svg = ET.fromstring(generate_current_card(item, mobile, theme))
+                    description_class = "ui description-mobile" if mobile else "ui description"
+                    description = svg.find(f".//{{*}}text[@class='{description_class}']")
+                    self.assertEqual(" ".join(line.text for line in description), item["description"])
+                    image = svg.find("{*}image")
+                    self.assertEqual(float(image.attrib["width"]), 44)
+                    self.assertEqual(float(image.attrib["height"]), 44)
+
 
 class WrapWordsTests(unittest.TestCase):
     def test_short_text_fits_on_one_line(self):

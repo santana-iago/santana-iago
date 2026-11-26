@@ -81,6 +81,14 @@ current:
   logo: assets/brands/ufcimg.svg
   logo_width: 44
   logo_height: 44
+- title: INASIM Management System
+  category: FRONTEND · APPSEC
+  description: Built the frontend and implemented application security for an education
+    nonprofit’s management platform.
+  generated_name: current-6
+  logo: assets/brands/inasim.svg
+  logo_width: 44
+  logo_height: 44
 - title: Campus Parking System
   category: APPLIED COMPUTER VISION
   description: Built the parking management system for use across UFCIMG campuses using
@@ -89,6 +97,17 @@ current:
   logo: assets/brands/ufcimg.svg
   logo_width: 44
   logo_height: 44
+- title: Salamanca Pollen Recognition
+  category: APPLIED COMPUTER VISION
+  description: Developed a neural network to classify pollen grains in microscopy images
+    with 100% accuracy as part of a research partnership with the Universidad de Salamanca.
+  generated_name: current-salamanca
+  logo: assets/brands/usal-sello.png
+  logo_width: 44
+  logo_height: 44
+  logo_width_mobile: 44
+  logo_height_mobile: 44
+  description_max_lines: 5
 - title: Algorithms & Data Structures I
   category: TEACHING ASSISTANT · UFCIMG
   description: Selected through UFCIMG's program, teaching algorithms, complexity,
@@ -105,14 +124,6 @@ current:
     and problem solving in Python.
   generated_name: current-3
   logo: assets/brands/ufcimg.svg
-  logo_width: 44
-  logo_height: 44
-- title: INASIM Management System
-  category: FRONTEND · APPSEC
-  description: Built the frontend and implemented application security for an education
-    nonprofit’s management platform.
-  generated_name: current-6
-  logo: assets/brands/inasim.svg
   logo_width: 44
   logo_height: 44
 - title: TMB Scan

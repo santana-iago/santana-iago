@@ -114,9 +114,15 @@ def main() -> int:
     for asset in (ROOT / "assets/brands").glob("*"):
         if not asset.is_file():
             continue
-        if asset.suffix.lower() != ".svg":
-            error(f"Brand asset must be SVG: {asset.relative_to(ROOT)}")
+        if asset.suffix.lower() not in {".svg", ".png"}:
+            error(f"Brand asset must be SVG or PNG: {asset.relative_to(ROOT)}")
             continue
+        if asset.suffix.lower() == ".png":
+            try:
+                with Image.open(asset) as image:
+                    image.verify()
+            except OSError as exc:
+                error(f"Invalid brand image {asset.relative_to(ROOT)}: {exc}")
         size = asset.stat().st_size
         if size > BRAND_ASSET_MAX_BYTES:
             error(

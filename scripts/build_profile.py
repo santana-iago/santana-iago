@@ -340,7 +340,9 @@ def mobile_project_row(item: dict[str, Any], theme: str) -> tuple[int, list[str]
     category_y = max(69, title_y + 20 * (len(title_lines) - 1) + 21)
     description_y = category_y + 14 * (len(category_lines) - 1) + 23
     bottom = description_y + 20 * (len(description_lines) - 1) + 18
-    add_image(parts, 16, 11, 49, 42, item["logo"], theme)
+    logo_width = item.get("logo_width_mobile", 49)
+    logo_height = item.get("logo_height_mobile", 42)
+    add_image(parts, 16, 11, logo_width, logo_height, item["logo"], theme)
     add_multiline(parts, 76, title_y, title_lines, "ui title-mobile", 20)
     add_multiline(parts, 16, category_y, category_lines, "category-mobile", 14)
     add_multiline(parts, 16, description_y, description_lines, "ui description-mobile", 20)
@@ -380,7 +382,19 @@ def _current_title_lines_desktop(item: dict[str, Any]) -> list[str]:
     return item.get("title_lines_desktop") or wrap_words(item["title"], 39, 2)
 
 
-def generate_current_card(item: dict[str, Any], mobile: bool, theme: str, index: int = 0, total: int = 0, row_title_lines: int = 1) -> str:
+def _current_description_lines_desktop(item: dict[str, Any]) -> list[str]:
+    return wrap_words(item["description"], 38, item.get("description_max_lines", 3))
+
+
+def generate_current_card(
+    item: dict[str, Any],
+    mobile: bool,
+    theme: str,
+    index: int = 0,
+    total: int = 0,
+    row_title_lines: int = 1,
+    row_description_lines: int = 1,
+) -> str:
     if mobile:
         height, row = mobile_project_row(item, theme)
         return svg_close(svg_open(MOBILE_WIDTH, height, theme) + row)
@@ -405,9 +419,10 @@ def generate_current_card(item: dict[str, Any], mobile: bool, theme: str, index:
     category_y = 54 if effective_title_lines == 1 else 31 + 16 + 23
     category_lines = item.get("category_lines") or wrap_words(item["category"], 38, 2)
     desc_y = category_y + 11 * len(category_lines) + 11
-    desc_lines = wrap_words(item["description"], 38, 3)
+    desc_lines = _current_description_lines_desktop(item)
     desc_line_height = 15
-    bottom_y = desc_y + desc_line_height * (len(desc_lines) - 1) + 13
+    description_rows = max(len(desc_lines), row_description_lines)
+    bottom_y = desc_y + desc_line_height * (description_rows - 1) + 13
     height = bottom_y + 9
     parts = svg_open(width, height, theme)
     add_image(parts, 10, 28, item["logo_width"], item["logo_height"], item["logo"], theme)
@@ -615,8 +630,14 @@ def generate_previews(profile: dict[str, Any]) -> None:
         for i in range(0, current_total, 2):
             row_items = current_items[i:i + 2]
             row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
+            row_description_lines = max(len(_current_description_lines_desktop(row_item)) for row_item in row_items)
             row_cards = [
-                render_svg_string(generate_current_card(item, False, theme, i + offset, current_total, row_title_lines), 390, bg)
+                render_svg_string(
+                    generate_current_card(
+                        item, False, theme, i + offset, current_total, row_title_lines, row_description_lines
+                    ),
+                    390, bg,
+                )
                 for offset, item in enumerate(row_items)
             ]
             row_height = max(card.height for card in row_cards)
@@ -694,11 +715,15 @@ def save_generated(profile: dict[str, Any]) -> None:
         for i, item in enumerate(current_items):
             current_name = item.get("generated_name", f"current-{i}")
             row_title_lines = 1
+            row_description_lines = 1
             if not mobile:
                 row_start = i - (i % 2)
                 row_items = current_items[row_start:row_start + 2]
                 row_title_lines = max(len(_current_title_lines_desktop(row_item)) for row_item in row_items)
-            outputs[current_name] = generate_current_card(item, mobile, theme, i, current_total, row_title_lines)
+                row_description_lines = max(len(_current_description_lines_desktop(row_item)) for row_item in row_items)
+            outputs[current_name] = generate_current_card(
+                item, mobile, theme, i, current_total, row_title_lines, row_description_lines
+            )
         for i, item in enumerate(profile.get("certifications", [])):
             outputs[f"cert-{i}"] = generate_cert_card(item, mobile, theme)
         for name, content in outputs.items():
