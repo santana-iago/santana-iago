@@ -547,6 +547,8 @@ def generate_readme(profile: dict[str, Any]) -> str:
             '',
         ])
     lines.extend([
+        '<br>',
+        '',
         '<details>',
         '<summary>Accessible text version</summary>',
         '',

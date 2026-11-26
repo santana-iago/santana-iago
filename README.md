@@ -25,6 +25,8 @@
 <div align="center"><a href="https://trainingmindbody.com#gh-light-mode-only"><picture><source media="(min-width: 1024px)" srcset="./assets/generated/current-tmb-scan-desktop-light.svg#gh-light-mode-only"><img src="./assets/generated/current-tmb-scan-mobile-light.svg#gh-light-mode-only" alt="TMB Scan"></picture></a><a href="https://trainingmindbody.com#gh-dark-mode-only"><picture><source media="(min-width: 1024px)" srcset="./assets/generated/current-tmb-scan-desktop-dark.svg#gh-dark-mode-only"><img src="./assets/generated/current-tmb-scan-mobile-dark.svg#gh-dark-mode-only" alt="TMB Scan"></picture></a><a href="https://custodioveiculos.com#gh-light-mode-only"><picture><source media="(min-width: 1024px)" srcset="./assets/generated/current-5-desktop-light.svg#gh-light-mode-only"><img src="./assets/generated/current-5-mobile-light.svg#gh-light-mode-only" alt="Custódio Veículos"></picture></a><a href="https://custodioveiculos.com#gh-dark-mode-only"><picture><source media="(min-width: 1024px)" srcset="./assets/generated/current-5-desktop-dark.svg#gh-dark-mode-only"><img src="./assets/generated/current-5-mobile-dark.svg#gh-dark-mode-only" alt="Custódio Veículos"></picture></a></div>
 </div>
 
+<br>
+
 <details>
 <summary>Accessible text version</summary>
 
